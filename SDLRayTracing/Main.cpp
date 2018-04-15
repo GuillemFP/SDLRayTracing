@@ -1,60 +1,74 @@
-#include <iostream>
-#include <fstream>
-#include <stdlib.h>
-#include "SDL/include/SDL.h"
+#include "Application.h"
+#include "Globals.h"
 
+#include "SDL/include/SDL.h"
 #pragma comment( lib, "SDL/libx86/SDL2.lib" )
 #pragma comment( lib, "SDL/libx86/SDL2main.lib" )
 
+enum main_states
+{
+	MAIN_CREATION,
+	MAIN_START,
+	MAIN_UPDATE,
+	MAIN_FINISH,
+	MAIN_EXIT
+};
+
+Application* App = nullptr;
+
 int main(int argc, char ** argv)
 {
-	int nx = 800;
-	int ny = 600;
+	int main_return = EXIT_FAILURE;
+	int update_return = NULL;
+	main_states state = MAIN_CREATION;
 
-	SDL_Event event;
-	SDL_Renderer* renderer;
-	SDL_Window* window;
-	int i;
-
-	SDL_Init(SDL_INIT_VIDEO);
-	SDL_CreateWindowAndRenderer(nx, ny, 0, &window, &renderer);
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-	SDL_RenderClear(renderer);
-
-	std::ofstream myFile;
-	myFile.open("image.ppm");
-
-	myFile << "P3\n" << nx << " " << ny << "\n255\n";
-	for (int j = ny - 1; j >= 0; j--)
+	while (state != MAIN_EXIT)
 	{
-		for (int i = 0; i < nx; i++)
+		switch (state)
 		{
-			float r = float(i) / float(nx);
-			float g = float(j) / float(ny);
-			float b = 0.2f;
-			int ir = int(255.99*r);
-			int ig = int(255.99*g);
-			int ib = int(255.99*b);
-			myFile << ir << " " << ig << " " << ib << "\n";
-			SDL_SetRenderDrawColor(renderer, ir, ig, ib, 255);
-			SDL_RenderDrawPoint(renderer, i, j);
-		}
-	}
-
-	SDL_RenderPresent(renderer);
-	while (true)
-	{
-		if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
-		{
+		case MAIN_CREATION:
+			LOG("Application Creation ------------------");
+			App = new Application();
+			state = MAIN_START;
+			break;
+		case MAIN_START:
+			LOG("Application Init ----------------------");
+			if (App->Init() == false)
+			{
+				LOG("Application Init exits with error -----");
+				state = MAIN_FINISH;
+			}
+			else
+			{
+				LOG("Application Update --------------------");
+				state = MAIN_UPDATE;
+			}
+			break;
+		case MAIN_UPDATE:
+			update_return = App->Update();
+			if (update_return != UPDATE_CONTINUE)
+			{
+				if (update_return == UPDATE_ERROR)
+				{
+					LOG("Application Update exits with error ---");
+					state = MAIN_EXIT;
+				}
+				if (update_return == UPDATE_STOP)
+					state = MAIN_FINISH;
+			}
+			break;
+		case MAIN_FINISH:
+			LOG("Application CleanUp -------------------");
+			if (App->CleanUp() == false)
+			{
+				LOG("Application CleanUp exits with error --");
+			}
+			else
+				main_return = EXIT_SUCCESS;
+			state = MAIN_EXIT;
 			break;
 		}
 	}
 
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
-	SDL_Quit();
-
-	myFile.close();
-
-	return EXIT_SUCCESS;
+	return main_return;
 }
