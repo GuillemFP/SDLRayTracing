@@ -7,7 +7,7 @@
 #define RAD_TO_DEG 57.29577951308232087679815481410517033240547246656432155235f
 #define PI 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679f
 
-#define LOG(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__);
+#define APPLOG(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__);
 void log(const char file[], int line, const char* format, ...);
 
 enum update_status

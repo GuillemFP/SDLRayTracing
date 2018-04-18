@@ -15,11 +15,11 @@ bool ModuleWindow::Init()
 	_windowsWidth = WINDOWS_WIDTH;
 	_windowsHeight = WINDOWS_HEIGHT;
 
-	LOG("Init SDL window & surface");
+	APPLOG("Init SDL window & surface");
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		LOG("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
+		APPLOG("SDL_VIDEO could not initialize! SDL_Error: %s\n", SDL_GetError());
 		return false;
 	}
 
@@ -29,7 +29,7 @@ bool ModuleWindow::Init()
 
 	if (!_window)
 	{
-		LOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+		APPLOG("Window could not be created! SDL_Error: %s\n", SDL_GetError());
 		return false;
 	}
 
