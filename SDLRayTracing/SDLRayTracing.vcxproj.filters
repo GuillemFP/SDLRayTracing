@@ -10,6 +10,12 @@
     <Filter Include="Core Modules">
       <UniqueIdentifier>{e8709ceb-1bb1-43f2-bb83-4dde5e05fe52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3rd Party">
+      <UniqueIdentifier>{2e71ab1d-8894-4486-b1a2-83d66fbe9325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd Party\MathGeoLib">
+      <UniqueIdentifier>{74917fbf-17a8-4d69-80ce-9769f454d1ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -49,6 +55,18 @@
     </ClInclude>
     <ClInclude Include="ModuleInput.h">
       <Filter>Core Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="MathGeoLib\include\MathBuildConfig.h">
+      <Filter>3rd Party\MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="MathGeoLib\include\MathGeoLib.h">
+      <Filter>3rd Party\MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

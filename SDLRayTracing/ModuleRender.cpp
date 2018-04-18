@@ -1,9 +1,9 @@
 #include "ModuleRender.h"
 
 #include "Application.h"
+#include "Color.h"
 #include "ModuleWindow.h"
 #include "SDL/include/SDL.h"
-
 #include <iostream>
 #include <fstream>
 
@@ -47,12 +47,10 @@ bool ModuleRender::Start()
 	{
 		for (int i = 0; i < nx; i++)
 		{
-			float r = float(i) / float(nx);
-			float g = float(j) / float(ny);
-			float b = 0.2f;
-			int ir = int(255.99*r);
-			int ig = int(255.99*g);
-			int ib = int(255.99*b);
+			Color color(float(i) / float(nx), float(j) / float(ny), 0.2f);
+			int ir = int(255.99*color.r);
+			int ig = int(255.99*color.g);
+			int ib = int(255.99*color.b);
 			myFile << ir << " " << ig << " " << ib << "\n";
 			SDL_SetRenderDrawColor(_renderer, ir, ig, ib, 255);
 			SDL_RenderDrawPoint(_renderer, i, j);
