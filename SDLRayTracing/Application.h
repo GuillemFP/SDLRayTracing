@@ -9,6 +9,8 @@ class ModuleInput;
 class ModuleWindow;
 class ModuleRender;
 
+class ModuleRayTracing;
+
 class Application
 {
 public:
@@ -23,6 +25,8 @@ public:
 	ModuleInput* _input;
 	ModuleWindow* _window;
 	ModuleRender* _renderer;
+	
+	ModuleRayTracing* _rayTracing;
 
 private:
 	std::vector<Module*> _modules;

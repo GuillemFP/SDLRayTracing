@@ -2,7 +2,6 @@
 
 #include "Application.h"
 #include "Color.h"
-#include "Math.h"
 #include "ModuleWindow.h"
 #include "SDL/include/SDL.h"
 
@@ -27,26 +26,14 @@ bool ModuleRender::Init()
 		return false;
 	}
 
-	_pixelsWidth = App->_window->GetWindowsWidth();
-	_pixelsHeight = App->_window->GetWindowsHeight();
+	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
+	SDL_RenderClear(_renderer);
 
 	return true;
 }
 
 bool ModuleRender::Start()
 {
-	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
-	SDL_RenderClear(_renderer);
-	
-	for (int j = _pixelsHeight - 1; j >= 0; j--)
-	{
-		for (int i = 0; i < _pixelsWidth; i++)
-		{
-			Color color(float(i) / float(_pixelsWidth), float(j) / float(_pixelsHeight), 0.2f);
-			DrawPixel(color, i, j);
-		}
-	}
-
 	SDL_RenderPresent(_renderer);
 
 	return true;

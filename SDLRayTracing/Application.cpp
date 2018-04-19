@@ -1,14 +1,17 @@
 #include "Application.h"
 
 #include "ModuleInput.h"
-#include "ModuleWindow.h"
+#include "ModuleRayTracing.h"
 #include "ModuleRender.h"
+#include "ModuleWindow.h"
 
 Application::Application()
 {
 	_modules.push_back(_input = new ModuleInput());
 	_modules.push_back(_window = new ModuleWindow());
 	_modules.push_back(_renderer = new ModuleRender());
+
+	_modules.push_back(_rayTracing = new ModuleRayTracing());
 }
 
 Application::~Application()

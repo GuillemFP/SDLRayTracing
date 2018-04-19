@@ -19,6 +19,9 @@
     <Filter Include="Modules\Core">
       <UniqueIdentifier>{366a0d2b-fa5f-47ab-a0d9-0be326f506b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\RayTracing">
+      <UniqueIdentifier>{2c1d8bd8-d159-4996-8d48-0a72a5ef7f19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -38,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="ModuleWindow.cpp">
       <Filter>Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRayTracing.cpp">
+      <Filter>Modules\RayTracing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="ModuleWindow.h">
       <Filter>Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRayTracing.h">
+      <Filter>Modules\RayTracing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

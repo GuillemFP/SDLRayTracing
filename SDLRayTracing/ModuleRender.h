@@ -22,9 +22,6 @@ public:
 
 private:
 	SDL_Renderer* _renderer = nullptr;
-
-	int _pixelsWidth = 0;
-	int _pixelsHeight = 0;
 };
 
 #endif // !MODULERENDER_H
