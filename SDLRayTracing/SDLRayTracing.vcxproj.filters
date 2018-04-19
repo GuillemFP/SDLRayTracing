@@ -45,6 +45,12 @@
     <ClCompile Include="ModuleRayTracing.cpp">
       <Filter>Modules\RayTracing</Filter>
     </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -79,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="ModuleRayTracing.h">
       <Filter>Modules\RayTracing</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
