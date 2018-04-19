@@ -29,6 +29,9 @@ bool ModuleRender::Init()
 	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
 	SDL_RenderClear(_renderer);
 
+	_pixelsWidth = App->_window->GetWindowsWidth();
+	_pixelsHeight = App->_window->GetWindowsHeight();
+
 	return true;
 }
 
@@ -58,5 +61,5 @@ void ModuleRender::DrawPixel(const Color& color, int x, int y)
 	int ig = int(255.99*color.g);
 	int ib = int(255.99*color.b);
 	SDL_SetRenderDrawColor(_renderer, ir, ig, ib, 255);
-	SDL_RenderDrawPoint(_renderer, x, y);
+	SDL_RenderDrawPoint(_renderer, x, _pixelsHeight - y);
 }
