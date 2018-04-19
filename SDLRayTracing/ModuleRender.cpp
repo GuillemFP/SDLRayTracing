@@ -5,8 +5,6 @@
 #include "Math.h"
 #include "ModuleWindow.h"
 #include "SDL/include/SDL.h"
-#include <iostream>
-#include <fstream>
 
 ModuleRender::ModuleRender() : Module(MODULERENDER_NAME)
 {
@@ -37,13 +35,9 @@ bool ModuleRender::Init()
 
 bool ModuleRender::Start()
 {
-	std::ofstream myFile;
-	myFile.open("image.ppm");
-
 	SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 0);
 	SDL_RenderClear(_renderer);
-
-	myFile << "P3\n" << _pixelsWidth << " " << _pixelsHeight << "\n255\n";
+	
 	for (int j = _pixelsHeight - 1; j >= 0; j--)
 	{
 		for (int i = 0; i < _pixelsWidth; i++)
@@ -54,8 +48,6 @@ bool ModuleRender::Start()
 	}
 
 	SDL_RenderPresent(_renderer);
-
-	myFile.close();
 
 	return true;
 }

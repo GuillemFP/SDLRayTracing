@@ -7,14 +7,17 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{8445cf08-0757-4484-b82e-48b97be6a364}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core Modules">
-      <UniqueIdentifier>{e8709ceb-1bb1-43f2-bb83-4dde5e05fe52}</UniqueIdentifier>
-    </Filter>
     <Filter Include="3rd Party">
       <UniqueIdentifier>{2e71ab1d-8894-4486-b1a2-83d66fbe9325}</UniqueIdentifier>
     </Filter>
     <Filter Include="3rd Party\MathGeoLib">
       <UniqueIdentifier>{74917fbf-17a8-4d69-80ce-9769f454d1ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules">
+      <UniqueIdentifier>{e8709ceb-1bb1-43f2-bb83-4dde5e05fe52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Core">
+      <UniqueIdentifier>{366a0d2b-fa5f-47ab-a0d9-0be326f506b7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -24,17 +27,17 @@
     <ClCompile Include="Log.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleWindow.cpp">
-      <Filter>Core Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleRender.cpp">
-      <Filter>Core Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="ModuleInput.cpp">
-      <Filter>Core Modules</Filter>
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRender.cpp">
+      <Filter>Modules\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Modules\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -44,17 +47,8 @@
     <ClInclude Include="Module.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleWindow.h">
-      <Filter>Core Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleRender.h">
-      <Filter>Core Modules</Filter>
-    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Main</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleInput.h">
-      <Filter>Core Modules</Filter>
     </ClInclude>
     <ClInclude Include="MathGeoLib\include\MathBuildConfig.h">
       <Filter>3rd Party\MathGeoLib</Filter>
@@ -67,6 +61,15 @@
     </ClInclude>
     <ClInclude Include="Color.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRender.h">
+      <Filter>Modules\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWindow.h">
+      <Filter>Modules\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
