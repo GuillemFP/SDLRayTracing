@@ -9,8 +9,20 @@
 
 namespace
 {
+	bool hitSphere(const float3& center, float radius, const Ray& ray)
+	{
+		float3 oc = ray.pos - center;
+		float a = ray.dir.Dot(ray.dir);
+		float b = 2.0f * oc.Dot(ray.dir);
+		float c = oc.Dot(oc) - radius*radius;
+		float discriminant = b*b - 4 * a*c;
+		return (discriminant > 0);
+	}
+
 	Color calculateColor(const Ray& ray)
 	{
+		if (hitSphere(float3(1.0f, 0.0f, -4.0f), 0.5f, ray))
+			return Color(1.0f, 0.0f, 0.0f);
 		float3 direction = ray.dir;
 		float t = 0.5f * (direction.y + 1.0f);
 		return (1.0f - t) * float3::one + t * float3(0.5f, 0.7f, 1.0f);
@@ -38,8 +50,8 @@ bool ModuleRayTracing::Init()
 	float3 right = float3(1.0f, 0.0f, 0.0f);
 
 	float viewportWidth = 4.0f;
-	float viewportHeight = 2.0f;
-	float viewportDistance = 1.0f;
+	float viewportHeight = 3.0f;
+	float viewportDistance = 4.0f;
 
 	_camera = new Camera(origin, front, up, right, viewportWidth, viewportHeight, viewportDistance);
 
