@@ -10,6 +10,7 @@ class ModuleWindow;
 class ModuleRender;
 
 class ModuleCamera;
+class ModuleEntities;
 class ModuleRayTracing;
 
 class Application
@@ -28,6 +29,7 @@ public:
 	ModuleRender* _renderer;
 	
 	ModuleCamera* _camera;
+	ModuleEntities* _entities;
 	ModuleRayTracing* _rayTracing;
 
 private:

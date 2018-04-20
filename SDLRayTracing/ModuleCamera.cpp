@@ -13,10 +13,10 @@ bool ModuleCamera::Init()
 	int pixelsWidth = App->_window->GetWindowsWidth();
 	int pixelsHeight = App->_window->GetWindowsHeight();
 
-	_origin = float3::zero;
-	_front = float3(0.0f, 0.0f, -1.0f);
-	_up = float3(0.0f, 1.0f, 0.0f);
-	_right = float3(1.0f, 0.0f, 0.0f);
+	_origin = math::float3::zero;
+	_front = math::float3(0.0f, 0.0f, -1.0f);
+	_up = math::float3(0.0f, 1.0f, 0.0f);
+	_right = math::float3(1.0f, 0.0f, 0.0f);
 
 	float viewportWidth = 4.0f;
 	float viewportHeight = 3.0f;
@@ -39,9 +39,9 @@ float ModuleCamera::GetViewportDistance() const
 	return (_cornerBottomLeft - _origin).Dot(_front);
 }
 
-Ray ModuleCamera::GenerateRay(float widthFactor, float heightFactor) const
+math::Ray ModuleCamera::GenerateRay(float widthFactor, float heightFactor) const
 {
-	float3 viewportPosition = _cornerBottomLeft + _viewportWidthVector * widthFactor + _viewportHeightVector * heightFactor;
-	float3 unitVector = (viewportPosition - _origin).Normalized();
-	return Ray(_origin, unitVector);
+	math::float3 viewportPosition = _cornerBottomLeft + _viewportWidthVector * widthFactor + _viewportHeightVector * heightFactor;
+	math::float3 unitVector = (viewportPosition - _origin).Normalized();
+	return math::Ray(_origin, unitVector);
 }

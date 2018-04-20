@@ -22,6 +22,9 @@
     <Filter Include="Modules\RayTracing">
       <UniqueIdentifier>{2c1d8bd8-d159-4996-8d48-0a72a5ef7f19}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities">
+      <UniqueIdentifier>{1e739ffd-6466-4f86-9ba8-a1747b95c382}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -50,6 +53,12 @@
     </ClCompile>
     <ClCompile Include="ModuleCamera.cpp">
       <Filter>Modules\RayTracing</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEntities.cpp">
+      <Filter>Modules\RayTracing</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +97,15 @@
     </ClInclude>
     <ClInclude Include="ModuleCamera.h">
       <Filter>Modules\RayTracing</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEntities.h">
+      <Filter>Modules\RayTracing</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

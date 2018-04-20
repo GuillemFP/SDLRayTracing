@@ -16,24 +16,24 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	const float3& GetOrigin() const { return _origin; }
-	const float3& GetFront() const { return _front; }
-	const float3& GetUp() const { return _up; }
-	const float3& GetRight() const { return _right; }
+	const math::float3& GetOrigin() const { return _origin; }
+	const math::float3& GetFront() const { return _front; }
+	const math::float3& GetUp() const { return _up; }
+	const math::float3& GetRight() const { return _right; }
 
 	float GetViewportDistance() const;
 
-	Ray GenerateRay(float widthFactor, float heigthFactor) const;
+	math::Ray GenerateRay(float widthFactor, float heigthFactor) const;
 
 private:
-	float3 _origin;
-	float3 _front;
-	float3 _up;
-	float3 _right;
+	math::float3 _origin;
+	math::float3 _front;
+	math::float3 _up;
+	math::float3 _right;
 
-	float3 _cornerBottomLeft;
-	float3 _viewportWidthVector;
-	float3 _viewportHeightVector;
+	math::float3 _cornerBottomLeft;
+	math::float3 _viewportWidthVector;
+	math::float3 _viewportHeightVector;
 };
 
 #endif // !CAMERA_H

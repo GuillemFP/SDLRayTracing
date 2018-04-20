@@ -9,9 +9,9 @@
 
 namespace
 {
-	bool hitSphere(const float3& center, float radius, const Ray& ray)
+	bool hitSphere(const math::float3& center, float radius, const math::Ray& ray)
 	{
-		float3 oc = ray.pos - center;
+		math::float3 oc = ray.pos - center;
 		float a = ray.dir.Dot(ray.dir);
 		float b = 2.0f * oc.Dot(ray.dir);
 		float c = oc.Dot(oc) - radius*radius;
@@ -19,13 +19,13 @@ namespace
 		return (discriminant > 0);
 	}
 
-	Color calculateColor(const Ray& ray)
+	Color calculateColor(const math::Ray& ray)
 	{
-		if (hitSphere(float3(1.0f, 0.0f, -4.0f), 0.5f, ray))
+		if (hitSphere(math::float3(1.0f, 0.0f, -4.0f), 0.5f, ray))
 			return Color(1.0f, 0.0f, 0.0f);
-		float3 direction = ray.dir;
+		math::float3 direction = ray.dir;
 		float t = 0.5f * (direction.y + 1.0f);
-		return (1.0f - t) * float3::one + t * float3(0.5f, 0.7f, 1.0f);
+		return (1.0f - t) * math::float3::one + t * math::float3(0.5f, 0.7f, 1.0f);
 	}
 }
 
@@ -50,7 +50,7 @@ bool ModuleRayTracing::Init()
 		{
 			float u = float(i) / float(_pixelsWidth);
 			float v = float(j) / float(_pixelsHeight);
-			Ray ray = App->_camera->GenerateRay(u, v);
+			math::Ray ray = App->_camera->GenerateRay(u, v);
 			//Color color(float(i) / float(_pixelsWidth), float(j) / float(_pixelsHeight), 0.2f);
 			Color color = calculateColor(ray);
 			App->_renderer->DrawPixel(color, i, j);
