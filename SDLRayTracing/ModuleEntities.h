@@ -6,6 +6,11 @@
 #include "Module.h"
 #include <vector>
 
+namespace math
+{
+	class Ray;
+}
+
 class Entity;
 
 class ModuleEntities : public Module
@@ -16,6 +21,8 @@ public:
 
 	bool Init();
 	bool CleanUp();
+
+	bool Hit(const math::Ray& ray) const;
 
 private:
 	std::vector<Entity*> _entities;

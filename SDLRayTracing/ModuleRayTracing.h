@@ -10,7 +10,7 @@
 
 namespace math
 {
-	float3;
+	class Ray;
 }
 
 class Camera;
@@ -28,6 +28,8 @@ public:
 private:
 	void InitFile();
 	void WriteColor(const Color& color);
+
+	Color CalculateBackgroundColor(const math::Ray& ray) const;
 
 private:
 	int _pixelsWidth = 0;

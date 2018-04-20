@@ -4,30 +4,9 @@
 #include "Color.h"
 #include "Math.h"
 #include "ModuleCamera.h"
+#include "ModuleEntities.h"
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
-
-namespace
-{
-	bool hitSphere(const math::float3& center, float radius, const math::Ray& ray)
-	{
-		math::float3 oc = ray.pos - center;
-		float a = ray.dir.Dot(ray.dir);
-		float b = 2.0f * oc.Dot(ray.dir);
-		float c = oc.Dot(oc) - radius*radius;
-		float discriminant = b*b - 4 * a*c;
-		return (discriminant > 0);
-	}
-
-	Color calculateColor(const math::Ray& ray)
-	{
-		if (hitSphere(math::float3(1.0f, 0.0f, -4.0f), 0.5f, ray))
-			return Color(1.0f, 0.0f, 0.0f);
-		math::float3 direction = ray.dir;
-		float t = 0.5f * (direction.y + 1.0f);
-		return (1.0f - t) * math::float3::one + t * math::float3(0.5f, 0.7f, 1.0f);
-	}
-}
 
 ModuleRayTracing::ModuleRayTracing() : Module(MODULERAYTRACING_NAME)
 {
@@ -51,8 +30,7 @@ bool ModuleRayTracing::Init()
 			float u = float(i) / float(_pixelsWidth);
 			float v = float(j) / float(_pixelsHeight);
 			math::Ray ray = App->_camera->GenerateRay(u, v);
-			//Color color(float(i) / float(_pixelsWidth), float(j) / float(_pixelsHeight), 0.2f);
-			Color color = calculateColor(ray);
+			Color color = App->_entities->Hit(ray) ? Color(1.0f, 0.0f, 0.0f) : CalculateBackgroundColor(ray);
 			App->_renderer->DrawPixel(color, i, j);
 			//WriteColor(color);
 		}
@@ -71,6 +49,13 @@ bool ModuleRayTracing::CleanUp()
 	_ppmImage.close();
 
 	return true;
+}
+
+Color ModuleRayTracing::CalculateBackgroundColor(const math::Ray& ray) const
+{
+	math::float3 direction = ray.dir;
+	float t = 0.5f * (direction.y + 1.0f);
+	return (1.0f - t) * math::float3::one + t * math::float3(0.5f, 0.7f, 1.0f);
 }
 
 void ModuleRayTracing::InitFile()
