@@ -9,6 +9,7 @@ class ModuleInput;
 class ModuleWindow;
 class ModuleRender;
 
+class ModuleCamera;
 class ModuleRayTracing;
 
 class Application
@@ -26,6 +27,7 @@ public:
 	ModuleWindow* _window;
 	ModuleRender* _renderer;
 	
+	ModuleCamera* _camera;
 	ModuleRayTracing* _rayTracing;
 
 private:

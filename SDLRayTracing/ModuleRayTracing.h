@@ -33,7 +33,6 @@ private:
 	int _pixelsWidth = 0;
 	int _pixelsHeight = 0;
 
-	Camera* _camera;
 	std::ofstream _ppmImage;
 };
 

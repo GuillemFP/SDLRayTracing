@@ -1,14 +1,20 @@
-#ifndef CAMERA_H
-#define CAMERA_H
+#ifndef MODULECAMERA_H
+#define MODULECAMERA_H
 
+#define MODULECAMERA_NAME "ModuleCamera"
+
+#include "Module.h"
 #include "MathGeoLib\include\Math\float3.h";
 #include "MathGeoLib\include\Geometry\Ray.h"
 
-class Camera
+class ModuleCamera : public Module
 {
 public:
-	Camera(const float3& origin, const float3& front, const float3& up, const float3& right, float viewportWidth, float viewportHeight, float viewportDistance);
-	~Camera() = default;
+	ModuleCamera();
+	~ModuleCamera() = default;
+
+	bool Init();
+	bool CleanUp();
 
 	const float3& GetOrigin() const { return _origin; }
 	const float3& GetFront() const { return _front; }
@@ -18,7 +24,6 @@ public:
 	float GetViewportDistance() const;
 
 	Ray GenerateRay(float widthFactor, float heigthFactor) const;
-	float3 VectorToViewport(float widthFactor, float heightFactor) const;
 
 private:
 	float3 _origin;

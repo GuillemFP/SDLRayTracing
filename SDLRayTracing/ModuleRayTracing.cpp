@@ -1,9 +1,9 @@
 #include "ModuleRayTracing.h"
 
 #include "Application.h"
-#include "Camera.h"
 #include "Color.h"
 #include "Math.h"
+#include "ModuleCamera.h"
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
 
@@ -44,24 +44,13 @@ bool ModuleRayTracing::Init()
 
 	//InitFile();
 
-	float3 origin = float3::zero;
-	float3 front = float3(0.0f, 0.0f, -1.0f);
-	float3 up = float3(0.0f, 1.0f, 0.0f);
-	float3 right = float3(1.0f, 0.0f, 0.0f);
-
-	float viewportWidth = 4.0f;
-	float viewportHeight = 3.0f;
-	float viewportDistance = 4.0f;
-
-	_camera = new Camera(origin, front, up, right, viewportWidth, viewportHeight, viewportDistance);
-
 	for (int j = _pixelsHeight - 1; j >= 0; j--)
 	{
 		for (int i = 0; i < _pixelsWidth; i++)
 		{
 			float u = float(i) / float(_pixelsWidth);
 			float v = float(j) / float(_pixelsHeight);
-			Ray ray = _camera->GenerateRay(u, v);
+			Ray ray = App->_camera->GenerateRay(u, v);
 			//Color color(float(i) / float(_pixelsWidth), float(j) / float(_pixelsHeight), 0.2f);
 			Color color = calculateColor(ray);
 			App->_renderer->DrawPixel(color, i, j);
@@ -80,8 +69,6 @@ bool ModuleRayTracing::Start()
 bool ModuleRayTracing::CleanUp()
 {
 	_ppmImage.close();
-
-	RELEASE(_camera);
 
 	return true;
 }
