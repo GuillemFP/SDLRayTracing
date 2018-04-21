@@ -27,7 +27,7 @@ public:
 
 protected:
 	virtual float RayHitLength(const math::Ray& ray) const = 0;
-	//virtual math::float3 GetNormal(const math::float3& surfacePoint) const = 0;
+	virtual math::float3 GetNormal(const math::float3& surfacePoint) const = 0;
 
 private:
 	EntityType _type = EntityType::Unknown;

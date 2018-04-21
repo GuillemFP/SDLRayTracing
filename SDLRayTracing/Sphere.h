@@ -12,6 +12,7 @@ public:
 
 protected:
 	float RayHitLength(const math::Ray& ray) const;
+	math::float3 GetNormal(const math::float3& surfacePoint) const;
 
 private:
 	float _radius = 1.0f;

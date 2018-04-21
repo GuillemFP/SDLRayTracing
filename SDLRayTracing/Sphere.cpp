@@ -25,3 +25,8 @@ float Sphere::RayHitLength(const math::Ray& ray) const
 
 	return (-b - sqrt(discriminant)) / (2.0f * a);
 }
+
+math::float3 Sphere::GetNormal(const math::float3& surfacePoint) const
+{
+	return (surfacePoint - _center).Normalized();
+}

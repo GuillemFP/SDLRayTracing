@@ -12,7 +12,7 @@ bool Entity::Hit(const math::Ray& ray, HitInfo& hitInfo) const
 	}
 
 	hitInfo.point = ray.GetPoint(t);
-	//hitInfo.normal = GetNormal(hitInfo.point);
+	hitInfo.normal = GetNormal(hitInfo.point);
 
 	return true;
 }
