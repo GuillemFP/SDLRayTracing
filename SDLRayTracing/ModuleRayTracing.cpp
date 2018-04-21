@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "Color.h"
+#include "HitInfo.h"
 #include "Math.h"
 #include "ModuleCamera.h"
 #include "ModuleEntities.h"
@@ -30,7 +31,8 @@ bool ModuleRayTracing::Init()
 			float u = float(i) / float(_pixelsWidth);
 			float v = float(j) / float(_pixelsHeight);
 			math::Ray ray = App->_camera->GenerateRay(u, v);
-			Color color = App->_entities->Hit(ray) ? Color(1.0f, 0.0f, 0.0f) : CalculateBackgroundColor(ray);
+			HitInfo hitInfo;
+			Color color = App->_entities->Hit(ray, hitInfo) ? Color(1.0f, 0.0f, 0.0f) : CalculateBackgroundColor(ray);
 			App->_renderer->DrawPixel(color, i, j);
 			//WriteColor(color);
 		}

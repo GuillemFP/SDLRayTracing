@@ -10,12 +10,18 @@ Sphere::~Sphere()
 {
 }
 
-bool Sphere::Hit(const math::Ray& ray) const
+float Sphere::RayHitLength(const math::Ray& ray) const
 {
 	math::float3 oc = ray.pos - _center;
 	float a = ray.dir.Dot(ray.dir);
 	float b = 2.0f * oc.Dot(ray.dir);
 	float c = oc.Dot(oc) - _radius*_radius;
 	float discriminant = b*b - 4 * a*c;
-	return (discriminant > 0);
+	if (discriminant < 0.0f)
+	{
+		//No real solution -> no hit
+		return -1.0f;
+	}
+
+	return (-b - sqrt(discriminant)) / (2.0f * a);
 }

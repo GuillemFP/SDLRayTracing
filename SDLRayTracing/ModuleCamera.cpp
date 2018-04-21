@@ -20,7 +20,7 @@ bool ModuleCamera::Init()
 
 	float viewportWidth = 4.0f;
 	float viewportHeight = 3.0f;
-	float viewportDistance = 4.0f;
+	float viewportDistance = 1.0f;
 
 	_viewportWidthVector = viewportWidth * _right;
 	_viewportHeightVector = viewportHeight * _up;

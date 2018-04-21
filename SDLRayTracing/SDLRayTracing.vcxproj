@@ -114,6 +114,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Log.cpp" />
@@ -128,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="HitInfo.h" />
     <ClInclude Include="ModuleCamera.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Globals.h" />

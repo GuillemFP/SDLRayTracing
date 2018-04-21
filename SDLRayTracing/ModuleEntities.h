@@ -12,6 +12,7 @@ namespace math
 }
 
 class Entity;
+struct HitInfo;
 
 class ModuleEntities : public Module
 {
@@ -22,7 +23,7 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	bool Hit(const math::Ray& ray) const;
+	bool Hit(const math::Ray& ray, HitInfo& hitInfo) const;
 
 private:
 	std::vector<Entity*> _entities;

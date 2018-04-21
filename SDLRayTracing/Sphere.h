@@ -10,7 +10,8 @@ public:
 	Sphere(float radius, const math::float3& center);
 	~Sphere();
 
-	bool Hit(const math::Ray& ray) const;
+protected:
+	float RayHitLength(const math::Ray& ray) const;
 
 private:
 	float _radius = 1.0f;
