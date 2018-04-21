@@ -14,8 +14,8 @@ ModuleEntities::~ModuleEntities()
 
 bool ModuleEntities::Init()
 {
-	Sphere* sphere = new Sphere(0.5f, math::float3(0.0f, 0.0f, -1.0f));
-	_entities.push_back(sphere);
+	_entities.push_back(new Sphere(0.5f, math::float3(0.0f, 0.0f, -1.0f)));
+	_entities.push_back(new Sphere(100.0f, math::float3(0.0f, -100.5f, -1.0f)));
 
 	return true;
 }
@@ -28,15 +28,19 @@ bool ModuleEntities::CleanUp()
 	return true;
 }
 
-bool ModuleEntities::Hit(const math::Ray& ray, HitInfo& hitInfo) const
+bool ModuleEntities::Hit(const math::Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
 {
+	HitInfo currentHitInfo;
+	float currentMaxDistance =  maxDistance;
+
 	for (std::vector<Entity*>::const_iterator it = _entities.cbegin(); it != _entities.cend(); ++it)
 	{
-		if ((*it)->Hit(ray, hitInfo))
+		if ((*it)->Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
 		{
-			return true;
+			currentMaxDistance = currentHitInfo.distance;
+			hitInfo = currentHitInfo;
 		}
 	}
 
-	return false;
+	return hitInfo.isHit;
 }

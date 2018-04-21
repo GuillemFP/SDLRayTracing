@@ -35,6 +35,9 @@ private:
 	int _pixelsWidth = 0;
 	int _pixelsHeight = 0;
 
+	float _minDistance = 0.01f;
+	float _maxDistance = 1000.0f;
+
 	std::ofstream _ppmImage;
 };
 

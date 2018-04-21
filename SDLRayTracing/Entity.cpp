@@ -3,16 +3,17 @@
 #include "HitInfo.h"
 #include "Math.h"
 
-bool Entity::Hit(const math::Ray& ray, HitInfo& hitInfo) const
+bool Entity::Hit(const math::Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
 {
-	float t = RayHitLength(ray);
-	if (t < 0.0f)
+	hitInfo.distance = RayHitLength(ray);
+	if (hitInfo.distance < 0.0f || hitInfo.distance > maxDistance)
 	{
 		return false;
 	}
 
-	hitInfo.point = ray.GetPoint(t);
+	hitInfo.point = ray.GetPoint(hitInfo.distance);
 	hitInfo.normal = GetNormal(hitInfo.point);
+	hitInfo.isHit = true;
 
 	return true;
 }

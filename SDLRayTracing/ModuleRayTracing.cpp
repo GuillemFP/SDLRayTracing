@@ -32,7 +32,7 @@ bool ModuleRayTracing::Init()
 			float v = float(j) / float(_pixelsHeight);
 			math::Ray ray = App->_camera->GenerateRay(u, v);
 			HitInfo hitInfo;
-			Color color = App->_entities->Hit(ray, hitInfo) ? Color(0.5f * (hitInfo.normal + math::float3::one)) : CalculateBackgroundColor(ray);
+			Color color = App->_entities->Hit(ray, _minDistance, _maxDistance, hitInfo) ? Color(0.5f * (hitInfo.normal + math::float3::one)) : CalculateBackgroundColor(ray);
 			App->_renderer->DrawPixel(color, i, j);
 			//WriteColor(color);
 		}

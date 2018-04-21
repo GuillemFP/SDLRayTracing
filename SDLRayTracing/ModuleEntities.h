@@ -23,7 +23,7 @@ public:
 	bool Init();
 	bool CleanUp();
 
-	bool Hit(const math::Ray& ray, HitInfo& hitInfo) const;
+	bool Hit(const math::Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
 
 private:
 	std::vector<Entity*> _entities;

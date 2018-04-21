@@ -5,7 +5,8 @@
 
 struct HitInfo
 {
-	float t = -1.0f;
+	bool isHit = false;
+	float distance = 0.0f;
 	math::float3 point;
 	math::float3 normal;
 };

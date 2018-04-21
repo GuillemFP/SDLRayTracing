@@ -22,7 +22,7 @@ public:
 	Entity(EntityType type) : _type(type) {}
 	~Entity() = default;
 
-	bool Hit(const math::Ray& ray, HitInfo& hitInfo) const;
+	bool Hit(const math::Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
 	EntityType GetType() const;
 
 protected:
