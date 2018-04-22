@@ -52,6 +52,8 @@ private:
 	int _currentY = 0;
 	int _pixelsPerUpdate = 50;
 
+	int _currentAccumulated = 0;
+	Uint32 _accumulatedRPS = 0;
 	Uint32 _accumulatedMs = 0;
 	Uint32 _accumulatedRays = 0;
 

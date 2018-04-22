@@ -85,17 +85,19 @@ update_status ModuleRayTracing::Update()
 			}
 		}
 	}
+
 	_accumulatedMs += _frequencyTimer->GetTimeInMs();
 	_accumulatedRays += _pixelsPerUpdate * _samplesPerPixel;
 	if (_accumulatedMs >= 1000)
 	{
 		Uint32 raysPerSecond = _accumulatedRays * 1000 / _accumulatedMs;
-		APPLOG("%lu rays per second", raysPerSecond);
+		_accumulatedRPS += raysPerSecond;
+		++_currentAccumulated;
+		APPLOG("Averaged: %lu rays per second", _accumulatedRPS / _currentAccumulated);
 
 		_accumulatedMs -= 1000;
 		_accumulatedRays -= raysPerSecond;
 	}
-
 	_frequencyTimer->Stop();
 
 	return UPDATE_CONTINUE;
