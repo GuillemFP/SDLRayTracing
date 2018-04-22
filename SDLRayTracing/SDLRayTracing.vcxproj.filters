@@ -28,6 +28,9 @@
     <Filter Include="Containers">
       <UniqueIdentifier>{a5c0d564-782a-44dd-928e-661806fa682b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="3rd Party\parson">
+      <UniqueIdentifier>{7ffb912a-cce8-4c31-b69a-5f0974495a25}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -65,6 +68,12 @@
     </ClCompile>
     <ClCompile Include="Color.cpp">
       <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="parson\parson.c">
+      <Filter>3rd Party\parson</Filter>
+    </ClCompile>
+    <ClCompile Include="Config.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +126,12 @@
       <Filter>Containers</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="parson\parson.h">
+      <Filter>3rd Party\parson</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
