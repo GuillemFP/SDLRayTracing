@@ -7,6 +7,7 @@
 #include "Color.h"
 #include "MathGeoLib\include\Math\float2.h"
 #include "MathGeoLib\include\Math\float3.h"
+#include "SDL\include\SDL_stdinc.h"
 #include <iostream>
 #include <fstream>
 
@@ -17,6 +18,7 @@ namespace math
 }
 
 class Camera;
+class Timer;
 
 class ModuleRayTracing : public Module
 {
@@ -50,12 +52,18 @@ private:
 	int _currentY = 0;
 	int _pixelsPerUpdate = 50;
 
+	Uint32 _accumulatedMs = 0;
+	Uint32 _accumulatedRays = 0;
+
 	float _minDistance = 0.01f;
 	float _maxDistance = 1000.0f;
 
-	math::LCG* _randomGenerator;
+	math::LCG* _randomGenerator = nullptr;
 
 	std::ofstream _ppmImage;
+
+	Timer* _rayTracingTime = nullptr;
+	Timer* _frequencyTimer = nullptr;
 };
 
 #endif // !MODULERAYTRACING_H

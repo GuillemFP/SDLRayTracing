@@ -8,6 +8,7 @@
 #include "ModuleEntities.h"
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
+#include "Timer.h"
 
 ModuleRayTracing::ModuleRayTracing() : Module(MODULERAYTRACING_NAME)
 {
@@ -21,11 +22,17 @@ bool ModuleRayTracing::Init()
 {
 	_randomGenerator = new math::LCG();
 
+	_rayTracingTime = new Timer();
+	_frequencyTimer = new Timer();
+
 	_pixelsWidth = App->_window->GetWindowsWidth();
 	_pixelsHeight = App->_window->GetWindowsHeight();
 
 	_currentX = 0;
 	_currentY = _pixelsHeight - 1;
+
+	_samplesPerPixel = 100;
+	_pixelsPerUpdate = 50;
 
 	//InitFile();
 
@@ -34,12 +41,17 @@ bool ModuleRayTracing::Init()
 
 bool ModuleRayTracing::Start()
 {
+	_rayTracingTime->Start();
+
 	return true;
 }
 
 bool ModuleRayTracing::CleanUp()
 {
 	_ppmImage.close();
+
+	RELEASE(_rayTracingTime);
+	RELEASE(_frequencyTimer);
 
 	RELEASE(_randomGenerator);
 
@@ -53,6 +65,7 @@ update_status ModuleRayTracing::Update()
 		return UPDATE_CONTINUE;
 	}
 
+	_frequencyTimer->Start();
 	for (int i = 0; i < _pixelsPerUpdate; i++)
 	{
 		Color color = CalculatePixelColor(_currentX, _currentY);
@@ -65,10 +78,25 @@ update_status ModuleRayTracing::Update()
 			if (--_currentY < 0)
 			{
 				_screenFinished = true;
+				float seconds = _rayTracingTime->GetTimeInS();
+				APPLOG("RayTracing finished after %f seconds", seconds);
+				_rayTracingTime->Stop();
 				break;
 			}
 		}
 	}
+	_accumulatedMs += _frequencyTimer->GetTimeInMs();
+	_accumulatedRays += _pixelsPerUpdate * _samplesPerPixel;
+	if (_accumulatedMs >= 1000)
+	{
+		Uint32 raysPerSecond = _accumulatedRays * 1000 / _accumulatedMs;
+		APPLOG("%lu rays per second", raysPerSecond);
+
+		_accumulatedMs -= 1000;
+		_accumulatedRays -= raysPerSecond;
+	}
+
+	_frequencyTimer->Stop();
 
 	return UPDATE_CONTINUE;
 }

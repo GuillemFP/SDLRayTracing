@@ -116,5 +116,8 @@
     <ClInclude Include="HitInfo.h">
       <Filter>Containers</Filter>
     </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
