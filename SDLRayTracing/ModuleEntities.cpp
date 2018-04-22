@@ -12,7 +12,7 @@ ModuleEntities::~ModuleEntities()
 {
 }
 
-bool ModuleEntities::Init()
+bool ModuleEntities::Init(Config* config)
 {
 	_entities.push_back(new Sphere(0.5f, math::float3(0.0f, 0.0f, -1.0f)));
 	_entities.push_back(new Sphere(100.0f, math::float3(0.0f, -100.5f, -1.0f)));

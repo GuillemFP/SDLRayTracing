@@ -27,7 +27,7 @@ public:
 	ModuleInput();
 	~ModuleInput();
 
-	bool Init();
+	bool Init(Config* config = nullptr);
 	update_status PreUpdate();
 	bool CleanUp();
 

@@ -21,7 +21,7 @@ ModuleInput::~ModuleInput()
 	RELEASE_ARRAY(_mouseButtons);
 }
 
-bool ModuleInput::Init()
+bool ModuleInput::Init(Config* config)
 {
 	APPLOG("Init SDL input event system");
 	SDL_Init(0);

@@ -1,0 +1,28 @@
+{"Config": {
+	"ModuleInput" : {
+	},
+	"ModuleWindow" : {
+		"WindowWidth" : 400,
+		"WindowHeight" : 300
+	},
+	"ModuleRender" : {
+	},
+	"ModuleCamera" : {
+		"Origin" : [0.0, 0.0, -1.0],
+		"Front" : [0.0, 1.0, 0.0],
+		"Up" : [0.0, 1.0, 0.0],
+		"Right" : [1.0, 0.0, 0.0],
+		"Viewport" : {
+			"Width" : 4,
+			"Height" : 3,
+			"Distance" : 1
+		}
+	},
+	"ModuleEntities" : {
+	},
+	"ModuleRayTracing" : {
+		"SamplesPerPixel" : 100,
+		"PixelPerUpdate" : 50
+	}
+}
+}

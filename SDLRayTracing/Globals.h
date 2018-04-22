@@ -39,6 +39,6 @@ enum update_status
 	 }
 
 // Configuration from JSON file
-#define CONFIGJSON "config.json"
+#define CONFIGFILE "config.json"
 
 #endif // !GLOBALS_H

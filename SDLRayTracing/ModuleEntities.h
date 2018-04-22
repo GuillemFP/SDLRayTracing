@@ -3,6 +3,8 @@
 
 #define MODULEENTITIES_NAME "ModuleEntities"
 
+#define ENTITIES_CONFIGFILE "scene.json"
+
 #include "Module.h"
 #include <vector>
 
@@ -20,7 +22,7 @@ public:
 	ModuleEntities();
 	~ModuleEntities();
 
-	bool Init();
+	bool Init(Config* config = nullptr);
 	bool CleanUp();
 
 	bool Hit(const math::Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;

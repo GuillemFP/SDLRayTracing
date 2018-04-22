@@ -17,7 +17,7 @@ public:
 	ModuleWindow();
 	~ModuleWindow();
 
-	bool Init();
+	bool Init(Config* config = nullptr);
 	bool CleanUp();
 
 	int GetWindowsWidth() const

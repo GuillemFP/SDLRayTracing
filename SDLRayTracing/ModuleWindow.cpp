@@ -10,7 +10,7 @@ ModuleWindow::~ModuleWindow()
 {
 }
 
-bool ModuleWindow::Init()
+bool ModuleWindow::Init(Config* config)
 {
 	_windowsWidth = WINDOWS_WIDTH;
 	_windowsHeight = WINDOWS_HEIGHT;

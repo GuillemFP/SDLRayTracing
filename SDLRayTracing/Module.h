@@ -3,12 +3,19 @@
 
 #include "Globals.h"
 
+class Config;
+
 class Module
 {
 public:
 	Module(const char* name, bool active = true) : name(name), active(active) {}
 
 	virtual ~Module() = default;
+	
+	const char* GetName() const
+	{
+		return name;
+	}
 
 	bool IsEnabled() const
 	{
@@ -51,7 +58,7 @@ public:
 		return true;
 	}
 
-	virtual bool Init()
+	virtual bool Init(Config* config = nullptr)
 	{
 		return true;
 	}

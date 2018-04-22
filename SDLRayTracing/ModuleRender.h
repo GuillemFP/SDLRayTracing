@@ -14,7 +14,7 @@ public:
 	ModuleRender();
 	~ModuleRender();
 
-	bool Init();
+	bool Init(Config* config = nullptr);
 	bool Start();
 	bool CleanUp();
 

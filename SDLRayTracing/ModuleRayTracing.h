@@ -26,7 +26,7 @@ public:
 	ModuleRayTracing();
 	~ModuleRayTracing();
 
-	bool Init();
+	bool Init(Config* config = nullptr);
 	bool Start();
 	bool CleanUp();
 

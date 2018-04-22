@@ -8,7 +8,7 @@ ModuleCamera::ModuleCamera() : Module(MODULECAMERA_NAME)
 {
 }
 
-bool ModuleCamera::Init()
+bool ModuleCamera::Init(Config* config)
 {
 	int pixelsWidth = App->_window->GetWindowsWidth();
 	int pixelsHeight = App->_window->GetWindowsHeight();

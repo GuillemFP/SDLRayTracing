@@ -18,7 +18,7 @@ ModuleRayTracing::~ModuleRayTracing()
 {
 }
 
-bool ModuleRayTracing::Init()
+bool ModuleRayTracing::Init(Config* config)
 {
 	_randomGenerator = new math::LCG();
 

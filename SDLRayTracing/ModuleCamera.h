@@ -13,7 +13,7 @@ public:
 	ModuleCamera();
 	~ModuleCamera() = default;
 
-	bool Init();
+	bool Init(Config* config = nullptr);
 	bool CleanUp();
 
 	const math::float3& GetOrigin() const { return _origin; }

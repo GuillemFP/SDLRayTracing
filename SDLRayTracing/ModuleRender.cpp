@@ -13,7 +13,7 @@ ModuleRender::~ModuleRender()
 {
 }
 
-bool ModuleRender::Init()
+bool ModuleRender::Init(Config* config)
 {
 	APPLOG("Creating Renderer context");
 

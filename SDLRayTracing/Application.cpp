@@ -7,6 +7,8 @@
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
 
+#include "Config.h"
+
 Application::Application()
 {
 	_modules.push_back(_input = new ModuleInput());
@@ -30,8 +32,10 @@ bool Application::Init()
 {
 	bool ret = true;
 
+	Config config(CONFIGFILE);
+
 	for (std::vector<Module*>::iterator it = _modules.begin(); it != _modules.end() && ret; ++it)
-		ret = (*it)->Init();
+		ret = (*it)->Init(&(config.GetSection((*it)->GetName())));
 
 	for (std::vector<Module*>::iterator it = _modules.begin(); it != _modules.end() && ret; ++it)
 	{
