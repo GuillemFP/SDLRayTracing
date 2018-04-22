@@ -37,8 +37,6 @@ bool ModuleRender::Init()
 
 bool ModuleRender::Start()
 {
-	SDL_RenderPresent(_renderer);
-
 	return true;
 }
 
@@ -53,6 +51,13 @@ bool ModuleRender::CleanUp()
 	}
 
 	return true;
+}
+
+update_status ModuleRender::PostUpdate()
+{
+	SDL_RenderPresent(_renderer);
+
+	return UPDATE_CONTINUE;
 }
 
 void ModuleRender::DrawPixel(const Color& color, int x, int y)

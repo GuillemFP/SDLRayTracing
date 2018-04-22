@@ -18,6 +18,8 @@ public:
 	bool Start();
 	bool CleanUp();
 
+	update_status PostUpdate();
+
 	void DrawPixel(const Color& color, int x, int y);
 
 private:

@@ -24,17 +24,10 @@ bool ModuleRayTracing::Init()
 	_pixelsWidth = App->_window->GetWindowsWidth();
 	_pixelsHeight = App->_window->GetWindowsHeight();
 
-	InitFile();
+	_currentX = 0;
+	_currentY = _pixelsHeight - 1;
 
-	for (int j = _pixelsHeight - 1; j >= 0; j--)
-	{
-		for (int i = 0; i < _pixelsWidth; i++)
-		{
-			Color color = CalculatePixelColor(i, j);
-			App->_renderer->DrawPixel(color, i, j);
-			WriteColor(color);
-		}
-	}
+	//InitFile();
 
 	return true;
 }
@@ -51,6 +44,33 @@ bool ModuleRayTracing::CleanUp()
 	RELEASE(_randomGenerator);
 
 	return true;
+}
+
+update_status ModuleRayTracing::Update()
+{
+	if (_screenFinished)
+	{
+		return UPDATE_CONTINUE;
+	}
+
+	for (int i = 0; i < _pixelsPerUpdate; i++)
+	{
+		Color color = CalculatePixelColor(_currentX, _currentY);
+		App->_renderer->DrawPixel(color, _currentX, _currentY);
+		//WriteColor(color);
+
+		if (++_currentX > _pixelsWidth)
+		{
+			_currentX = 0;
+			if (--_currentY < 0)
+			{
+				_screenFinished = true;
+				break;
+			}
+		}
+	}
+
+	return UPDATE_CONTINUE;
 }
 
 Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const

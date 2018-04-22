@@ -5,6 +5,7 @@
 
 #include "Module.h"
 #include "Color.h"
+#include "MathGeoLib\include\Math\float2.h"
 #include "MathGeoLib\include\Math\float3.h"
 #include <iostream>
 #include <fstream>
@@ -27,6 +28,8 @@ public:
 	bool Start();
 	bool CleanUp();
 
+	update_status Update();
+
 private:
 	Color CalculatePixelColor(int xPixel, int yPixel) const;
 	
@@ -37,9 +40,15 @@ private:
 	void WriteColor(const Color& color);
 
 private:
+	bool _screenFinished = false;
+
 	int _pixelsWidth = 0;
 	int _pixelsHeight = 0;
 	int _samplesPerPixel = 100;
+
+	int _currentX = 0;
+	int _currentY = 0;
+	int _pixelsPerUpdate = 50;
 
 	float _minDistance = 0.01f;
 	float _maxDistance = 1000.0f;
