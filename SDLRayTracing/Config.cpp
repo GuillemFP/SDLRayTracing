@@ -72,7 +72,7 @@ int Config::GetInt(const char* name, int default_value, int index) const
 	JSON_Value* value = FindValue(name, index);
 
 	if (value && json_value_get_type(value) == JSONNumber)
-		return json_value_get_number(value) != 0;
+		return (int)json_value_get_number(value);
 
 	return default_value;
 }
@@ -82,7 +82,7 @@ int Config::GetIntRequired(const char* name, int index) const
 	JSON_Value* value = FindValue(name, index);
 
 	assert(value && json_value_get_type(value) == JSONNumber);
-	return json_value_get_number(value) != 0;
+	return (int)json_value_get_number(value);
 }
 
 float Config::GetFloat(const char* name, float default_value, int index) const
@@ -90,7 +90,7 @@ float Config::GetFloat(const char* name, float default_value, int index) const
 	JSON_Value* value = FindValue(name, index);
 
 	if (value && json_value_get_type(value) == JSONNumber)
-		return json_value_get_number(value) != 0;
+		return (float)json_value_get_number(value);
 
 	return default_value;
 }
@@ -100,7 +100,7 @@ float Config::GetFloatRequired(const char* name, int index) const
 	JSON_Value* value = FindValue(name, index);
 
 	assert(value && json_value_get_type(value) == JSONNumber);
-	return json_value_get_number(value) != 0;
+	return (float)json_value_get_number(value);
 }
 
 size_t Config::GetArrayLength(const char * name) const
@@ -216,7 +216,7 @@ int ConfigArray::GetInt(int index, int default_value, const char* name) const
 	JSON_Value* value = FindValue(index, name);
 
 	if (value && json_value_get_type(value) == JSONNumber)
-		return json_value_get_number(value) != 0;
+		return (int)json_value_get_number(value);
 
 	return default_value;
 }
@@ -226,7 +226,7 @@ int ConfigArray::GetIntRequired(int index, const char* name) const
 	JSON_Value* value = FindValue(index, name);
 
 	assert(value && json_value_get_type(value) == JSONNumber);
-	return json_value_get_number(value) != 0;
+	return (int)json_value_get_number(value);
 }
 
 float ConfigArray::GetFloat(int index, float default_value, const char* name) const
@@ -234,7 +234,7 @@ float ConfigArray::GetFloat(int index, float default_value, const char* name) co
 	JSON_Value* value = FindValue(index, name);
 
 	if (value && json_value_get_type(value) == JSONNumber)
-		return json_value_get_number(value) != 0;
+		return (float)json_value_get_number(value);
 
 	return default_value;
 }
@@ -244,7 +244,7 @@ float ConfigArray::GetFloatRequired(int index, const char* name) const
 	JSON_Value* value = FindValue(index, name);
 
 	assert(value && json_value_get_type(value) == JSONNumber);
-	return json_value_get_number(value) != 0;
+	return (float)json_value_get_number(value);
 }
 
 size_t ConfigArray::GetArrayLength() const

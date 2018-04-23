@@ -46,19 +46,19 @@ private:
 
 	int _pixelsWidth = 0;
 	int _pixelsHeight = 0;
-	int _samplesPerPixel = 100;
+	int _samplesPerPixel = 1;
 
 	int _currentX = 0;
 	int _currentY = 0;
-	int _pixelsPerUpdate = 50;
+	int _pixelsPerUpdate = 1;
 
 	int _currentAccumulated = 0;
 	Uint32 _accumulatedRPS = 0;
 	Uint32 _accumulatedMs = 0;
 	Uint32 _accumulatedRays = 0;
 
-	float _minDistance = 0.01f;
-	float _maxDistance = 1000.0f;
+	float _minDistance = 0.0f;
+	float _maxDistance = 1.0f;
 
 	math::LCG* _randomGenerator = nullptr;
 

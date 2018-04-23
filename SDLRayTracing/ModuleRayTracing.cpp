@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "Color.h"
+#include "Config.h"
 #include "HitInfo.h"
 #include "Math.h"
 #include "ModuleCamera.h"
@@ -25,14 +26,17 @@ bool ModuleRayTracing::Init(Config* config)
 	_rayTracingTime = new Timer();
 	_frequencyTimer = new Timer();
 
+	_minDistance = config->GetInt("MinDistance");
+	_maxDistance = config->GetInt("MaxDistance");
+
+	_samplesPerPixel = config->GetFloat("SamplesPerPixel");
+	_pixelsPerUpdate = config->GetFloat("PixelPerUpdate");
+
 	_pixelsWidth = App->_window->GetWindowsWidth();
 	_pixelsHeight = App->_window->GetWindowsHeight();
 
 	_currentX = 0;
 	_currentY = _pixelsHeight - 1;
-
-	_samplesPerPixel = 100;
-	_pixelsPerUpdate = 50;
 
 	//InitFile();
 

@@ -125,6 +125,7 @@
     <ClCompile Include="ModuleRayTracing.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
+    <ClCompile Include="ParseUtils.cpp" />
     <ClCompile Include="parson\parson.c" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
@@ -145,6 +146,7 @@
     <ClInclude Include="ModuleRayTracing.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleWindow.h" />
+    <ClInclude Include="ParseUtils.h" />
     <ClInclude Include="parson\parson.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Timer.h" />

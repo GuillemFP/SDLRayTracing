@@ -5,9 +5,6 @@
 
 #define MODULEWINDOW_NAME "ModuleWindow"
 
-#define WINDOWS_WIDTH 400
-#define WINDOWS_HEIGHT 300
-
 class SDL_Window;
 class SDL_Surface;
 

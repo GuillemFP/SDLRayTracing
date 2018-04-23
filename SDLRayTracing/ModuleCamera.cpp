@@ -1,8 +1,10 @@
 #include "ModuleCamera.h"
 
 #include "Application.h"
+#include "Config.h"
 #include "Math.h"
 #include "ModuleWindow.h"
+#include "ParseUtils.h"
 
 ModuleCamera::ModuleCamera() : Module(MODULECAMERA_NAME)
 {
@@ -13,14 +15,16 @@ bool ModuleCamera::Init(Config* config)
 	int pixelsWidth = App->_window->GetWindowsWidth();
 	int pixelsHeight = App->_window->GetWindowsHeight();
 
-	_origin = math::float3::zero;
-	_front = math::float3(0.0f, 0.0f, -1.0f);
-	_up = math::float3(0.0f, 1.0f, 0.0f);
-	_right = math::float3(1.0f, 0.0f, 0.0f);
+	_origin = ParseUtils::parseVector(config->GetArray("Origin"));
+	_front = ParseUtils::parseVector(config->GetArray("Front"));
+	_up = ParseUtils::parseVector(config->GetArray("Up"));
+	_right = ParseUtils::parseVector(config->GetArray("Right"));
 
-	float viewportWidth = 4.0f;
-	float viewportHeight = 3.0f;
-	float viewportDistance = 1.0f;
+	Config viewport = config->GetSection("Viewport");
+
+	float viewportWidth = viewport.GetFloat("Width");
+	float viewportHeight = viewport.GetFloat("Height");
+	float viewportDistance = viewport.GetFloat("Distance");
 
 	_viewportWidthVector = viewportWidth * _right;
 	_viewportHeightVector = viewportHeight * _up;

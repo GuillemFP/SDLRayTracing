@@ -32,10 +32,15 @@ bool Application::Init()
 {
 	bool ret = true;
 
-	Config config(CONFIGFILE);
+	Config config = Config(CONFIGFILE).GetSection("Config");
 
 	for (std::vector<Module*>::iterator it = _modules.begin(); it != _modules.end() && ret; ++it)
-		ret = (*it)->Init(&(config.GetSection((*it)->GetName())));
+	{
+		const char* name = (*it)->GetName();
+		Config section = config.GetSection(name);
+		ret = (*it)->Init(&section);
+	}
+		//ret = (*it)->Init(&(config.GetSection((*it)->GetName())));
 
 	for (std::vector<Module*>::iterator it = _modules.begin(); it != _modules.end() && ret; ++it)
 	{

@@ -1,5 +1,6 @@
 #include "ModuleWindow.h"
 
+#include "Config.h"
 #include "SDL/include/SDL.h"
 
 ModuleWindow::ModuleWindow() : Module(MODULEWINDOW_NAME)
@@ -12,8 +13,8 @@ ModuleWindow::~ModuleWindow()
 
 bool ModuleWindow::Init(Config* config)
 {
-	_windowsWidth = WINDOWS_WIDTH;
-	_windowsHeight = WINDOWS_HEIGHT;
+	_windowsWidth = config->GetIntRequired("WindowWidth");
+	_windowsHeight = config->GetIntRequired("WindowHeight");
 
 	APPLOG("Init SDL window & surface");
 
