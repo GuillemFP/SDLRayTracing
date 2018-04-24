@@ -18,7 +18,7 @@ bool Entity::Hit(const math::Ray& ray, float minDistance, float maxDistance, Hit
 	return true;
 }
 
-EntityType Entity::GetType() const
+Entity::Type Entity::GetType() const
 {
 	return _type;
 }

@@ -1,6 +1,8 @@
 #include "ModuleEntities.h"
 
+#include "Config.h"
 #include "Entity.h"
+#include "EntityData.h"
 #include "HitInfo.h"
 #include "Sphere.h"
 
@@ -14,8 +16,14 @@ ModuleEntities::~ModuleEntities()
 
 bool ModuleEntities::Init(Config* config)
 {
-	_entities.push_back(new Sphere(0.5f, math::float3(0.0f, 0.0f, -1.0f)));
-	_entities.push_back(new Sphere(100.0f, math::float3(0.0f, -100.5f, -1.0f)));
+	Config entities = Config(ENTITIES_CONFIGFILE);
+	ConfigArray entitiesArray = entities.GetArray("Entities");
+
+	for (int i = 0; i < entitiesArray.GetArrayLength(); i++)
+	{
+		EntityData data = EntityDataUtils::parseEntityData(entitiesArray.GetSection(i));
+		EntityFactory(data);
+	}
 
 	return true;
 }
@@ -43,4 +51,25 @@ bool ModuleEntities::Hit(const math::Ray& ray, float minDistance, float maxDista
 	}
 
 	return hitInfo.isHit;
+}
+
+Entity* ModuleEntities::EntityFactory(const EntityData& data)
+{
+	static_assert(Entity::Type::Unknown == 1, "Update entity factory code");
+
+	Entity* entity = nullptr;
+
+	switch (data.type)
+	{
+	case Entity::Type::Sphere:
+		entity = new Sphere(data.radius, data.position);
+		break;
+	}
+
+	if (entity)
+	{
+		_entities.push_back(entity);
+	}
+
+	return entity;
 }

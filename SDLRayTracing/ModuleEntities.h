@@ -14,6 +14,7 @@ namespace math
 }
 
 class Entity;
+struct EntityData;
 struct HitInfo;
 
 class ModuleEntities : public Module
@@ -26,6 +27,8 @@ public:
 	bool CleanUp();
 
 	bool Hit(const math::Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
+
+	Entity* EntityFactory(const EntityData& data);
 
 private:
 	std::vector<Entity*> _entities;

@@ -10,27 +10,27 @@ namespace math
 
 struct HitInfo;
 
-enum class EntityType
-{
-	Sphere,
-	Unknown
-};
-
 class Entity
 {
 public:
-	Entity(EntityType type) : _type(type) {}
+	enum Type
+	{
+		Sphere = 0,
+		Unknown
+	};
+
+	Entity(Type type) : _type(type) {}
 	~Entity() = default;
 
 	bool Hit(const math::Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
-	EntityType GetType() const;
+	Type GetType() const;
 
 protected:
 	virtual float RayHitLength(const math::Ray& ray) const = 0;
 	virtual math::float3 GetNormal(const math::float3& surfacePoint) const = 0;
 
 private:
-	EntityType _type = EntityType::Unknown;
+	Type _type = Type::Unknown;
 };
 
 #endif // !ENTITY_H

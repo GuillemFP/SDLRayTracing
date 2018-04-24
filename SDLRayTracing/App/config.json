@@ -1,30 +1,28 @@
-{"Config": {
-	"ModuleInput" : {
-	},
-	"ModuleWindow" : {
-		"WindowWidth" : 400,
-		"WindowHeight" : 300
-	},
-	"ModuleRender" : {
-	},
-	"ModuleCamera" : {
-		"Origin" : [0.0, 0.0, 0.0],
-		"Front" : [0.0, 0.0, -1.0],
-		"Up" : [0.0, 1.0, 0.0],
-		"Right" : [1.0, 0.0, 0.0],
-		"Viewport" : {
-			"Width" : 4.0,
-			"Height" : 3.0,
-			"Distance" : 1.0
+{
+	"Config": {
+		"ModuleInput": {},
+		"ModuleWindow": {
+			"WindowWidth": 400,
+			"WindowHeight": 300
+		},
+		"ModuleRender": {},
+		"ModuleCamera": {
+			"Origin": [0.0, 0.0, 0.0],
+			"Front": [0.0, 0.0, -1.0],
+			"Up": [0.0, 1.0, 0.0],
+			"Right": [1.0, 0.0, 0.0],
+			"Viewport": {
+				"Width": 4.0,
+				"Height": 3.0,
+				"Distance": 1.0
+			}
+		},
+		"ModuleEntities": {},
+		"ModuleRayTracing": {
+			"MinDistance": 0.001,
+			"MaxDistance": 1000,
+			"SamplesPerPixel": 10,
+			"PixelPerUpdate": 50
 		}
-	},
-	"ModuleEntities" : {
-	},
-	"ModuleRayTracing" : {
-		"MinDistance" : 0.001,
-		"MaxDistance" : 1000,
-		"SamplesPerPixel" : 10,
-		"PixelPerUpdate" : 50
 	}
-}
 }
