@@ -25,10 +25,10 @@ Diffuse::~Diffuse()
 {
 }
 
-bool Diffuse::Hit(const math::Ray& ray, const HitInfo& hitInfo, math::float3& attenuation, math::Ray& reflectedRay, math::LCG& randomGenerator) const
+bool Diffuse::Hit(const math::Ray& ray, const HitInfo& hitInfo, math::float3& attenuation, math::Ray& scatteredRay, math::LCG& randomGenerator) const
 {
 	math::float3 sphereTarget = hitInfo.point + hitInfo.normal + RandomPointInSphere(randomGenerator);
-	reflectedRay = math::Ray(hitInfo.point, (sphereTarget - hitInfo.point).Normalized());
+	scatteredRay = math::Ray(hitInfo.point, (sphereTarget - hitInfo.point).Normalized());
 	attenuation = _albedo;
 
 	return true;

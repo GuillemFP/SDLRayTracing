@@ -27,7 +27,7 @@ public:
 		return _type;
 	}
 
-	virtual bool Hit(const math::Ray& ray, const HitInfo& hitInfo, math::float3& attenuation, math::Ray& reflectedRay, math::LCG& randomGenerator) const = 0;
+	virtual bool Hit(const math::Ray& ray, const HitInfo& hitInfo, math::float3& attenuation, math::Ray& scatteredRay, math::LCG& randomGenerator) const = 0;
 
 private:
 	Type _type = Unknown;

@@ -11,7 +11,7 @@ public:
 	Diffuse(const math::float3& albedo);
 	~Diffuse();
 
-	bool Hit(const math::Ray& ray, const HitInfo& hitInfo, math::float3& attenuation, math::Ray& reflectedRay, math::LCG& randomGenerator) const;
+	bool Hit(const math::Ray& ray, const HitInfo& hitInfo, math::float3& attenuation, math::Ray& scatteredRay, math::LCG& randomGenerator) const;
 
 private:
 	math::float3 _albedo;
