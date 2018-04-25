@@ -24,6 +24,7 @@ bool Entity::Hit(const math::Ray& ray, float minDistance, float maxDistance, Hit
 	hitInfo.point = ray.GetPoint(hitInfo.distance);
 	hitInfo.normal = GetNormal(hitInfo.point);
 	hitInfo.isHit = true;
+	hitInfo.material = _material;
 
 	return true;
 }

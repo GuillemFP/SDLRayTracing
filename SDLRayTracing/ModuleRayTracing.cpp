@@ -5,6 +5,7 @@
 #include "Config.h"
 #include "HitInfo.h"
 #include "Math.h"
+#include "Material.h"
 #include "ModuleCamera.h"
 #include "ModuleEntities.h"
 #include "ModuleRender.h"
@@ -128,7 +129,14 @@ math::float3 ModuleRayTracing::CalculateRayColor(const math::Ray& ray) const
 
 	if (isHit)
 	{
-		return 0.5f * (hitInfo.normal + math::float3::one);
+		math::Ray reflectedRay;
+		math::float3 attenuation;
+		if (hitInfo.material->Hit(ray, hitInfo, attenuation, reflectedRay, *_randomGenerator))
+		{
+			return attenuation.Mul(CalculateRayColor(reflectedRay));
+		}
+
+		return math::float3::zero;
 	}
 	
 	return CalculateBackgroundColor(ray);

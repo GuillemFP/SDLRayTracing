@@ -2,8 +2,8 @@
 	"Config": {
 		"ModuleInput": {},
 		"ModuleWindow": {
-			"WindowWidth": 400,
-			"WindowHeight": 300
+			"WindowWidth": 800,
+			"WindowHeight": 600
 		},
 		"ModuleRender": {},
 		"ModuleCamera": {
