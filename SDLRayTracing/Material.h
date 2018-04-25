@@ -17,6 +17,7 @@ public:
 	enum Type
 	{
 		Diffuse = 0,
+		Metal,
 		Unknown
 	};
 

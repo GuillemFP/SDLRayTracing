@@ -55,6 +55,10 @@ namespace ParseUtils
 		{
 			return Material::Type::Diffuse;
 		}
+		if (type == "Metal")
+		{
+			return Material::Type::Metal;
+		}
 
 		APPLOG("Invalid material type");
 	}

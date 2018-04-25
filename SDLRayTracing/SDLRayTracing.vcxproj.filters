@@ -87,6 +87,9 @@
     <ClCompile Include="Diffuse.cpp">
       <Filter>Entities\Materials</Filter>
     </ClCompile>
+    <ClCompile Include="Metal.cpp">
+      <Filter>Entities\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="ScatterInfo.h">
       <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Metal.h">
+      <Filter>Entities\Materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

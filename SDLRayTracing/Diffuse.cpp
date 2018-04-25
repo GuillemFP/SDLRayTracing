@@ -28,10 +28,12 @@ Diffuse::~Diffuse()
 
 bool Diffuse::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
-	math::float3 sphereTarget = hitInfo.point + hitInfo.normal + RandomPointInSphere(randomGenerator);
 	scatterInfo.scatters = true;
-	scatterInfo.scatteredRay = math::Ray(hitInfo.point, (sphereTarget - hitInfo.point).Normalized());
+
+	math::float3 sphereTarget = hitInfo.point + hitInfo.normal + RandomPointInSphere(randomGenerator);
+	scatterInfo.scatteredRay.pos = hitInfo.point;
+	scatterInfo.scatteredRay.dir = (sphereTarget - hitInfo.point).Normalized();
 	scatterInfo.attenuation = _albedo;
 
-	return true;
+	return scatterInfo.scatters;
 }

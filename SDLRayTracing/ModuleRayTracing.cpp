@@ -117,13 +117,13 @@ Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 		float u = float(xPixel + _randomGenerator->Float()) / float(_pixelsWidth);
 		float v = float(yPixel + _randomGenerator->Float()) / float(_pixelsHeight);
 		math::Ray ray = App->_camera->GenerateRay(u, v);
-		color += CalculateRayColor(ray);
+		color += CalculateRayColor(ray, 0);
 	}
 	Color averagedColor(color / _samplesPerPixel);
 	return averagedColor;
 }
 
-math::float3 ModuleRayTracing::CalculateRayColor(const math::Ray& ray) const
+math::float3 ModuleRayTracing::CalculateRayColor(const math::Ray& ray, int depth) const
 {
 	HitInfo hitInfo;
 	bool isHit = App->_entities->Hit(ray, _minDistance, _maxDistance, hitInfo);
@@ -131,9 +131,9 @@ math::float3 ModuleRayTracing::CalculateRayColor(const math::Ray& ray) const
 	if (isHit)
 	{
 		ScatterInfo scatterInfo;
-		if (hitInfo.material->Scatter(ray, hitInfo, scatterInfo, *_randomGenerator))
+		if (depth < 50 && hitInfo.material->Scatter(ray, hitInfo, scatterInfo, *_randomGenerator))
 		{
-			return scatterInfo.attenuation.Mul(CalculateRayColor(scatterInfo.scatteredRay));
+			return scatterInfo.attenuation.Mul(CalculateRayColor(scatterInfo.scatteredRay, depth + 1));
 		}
 
 		return math::float3::zero;

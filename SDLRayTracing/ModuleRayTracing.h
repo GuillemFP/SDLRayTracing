@@ -35,7 +35,7 @@ public:
 private:
 	Color CalculatePixelColor(int xPixel, int yPixel) const;
 	
-	math::float3 CalculateRayColor(const math::Ray& ray) const;
+	math::float3 CalculateRayColor(const math::Ray& ray, int depth) const;
 	math::float3 CalculateBackgroundColor(const math::Ray& ray) const;
 
 	void InitFile();
