@@ -53,7 +53,7 @@ namespace ParseUtils
 	{
 		if (type == "Diffuse")
 		{
-			return Material::Type::Diffusive;
+			return Material::Type::Diffuse;
 		}
 
 		APPLOG("Invalid material type");

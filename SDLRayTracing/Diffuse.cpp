@@ -17,7 +17,7 @@ namespace
 	}
 }
 
-Diffuse::Diffuse(const math::float3& albedo) : Material(Material::Type::Diffusive), _albedo(albedo)
+Diffuse::Diffuse(const math::float3& albedo) : Material(Material::Type::Diffuse), _albedo(albedo)
 {
 }
 

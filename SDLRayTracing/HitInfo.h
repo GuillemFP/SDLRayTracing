@@ -11,7 +11,7 @@ struct HitInfo
 	float distance = 0.0f;
 	math::float3 point;
 	math::float3 normal;
-	Material* material;
+	const Material* material;
 };
 
 #endif // !HITINFO_H

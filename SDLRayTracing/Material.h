@@ -15,7 +15,7 @@ class Material
 public:
 	enum Type
 	{
-		Diffusive = 0,
+		Diffuse = 0,
 		Unknown
 	};
 

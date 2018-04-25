@@ -18,7 +18,7 @@ Material* ModuleMaterials::LoadMaterial(const MaterialData& data) const
 
 	switch (data.type)
 	{
-	case Material::Type::Diffusive:
+	case Material::Type::Diffuse:
 		return new Diffuse(data.albedo);
 	}
 }
