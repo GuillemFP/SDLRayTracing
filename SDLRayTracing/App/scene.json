@@ -2,12 +2,20 @@
 	"Entities": [{
 			"Type": "Sphere",
 			"Position": [0, 0, -1],
-			"Radius": 0.5
+			"Radius": 0.5,
+			"Material" : {
+				"Type" : "Diffuse",
+				"Albedo" : [0.5, 0.5, 0.5]
+			}
 		},
 		{
 			"Type": "Sphere",
 			"Position": [0, -100.5, -1],
-			"Radius": 100
+			"Radius": 100,
+			"Material" : {
+				"Type" : "Diffuse",
+				"Albedo" : [0.5, 0.5, 0.5]
+			}
 		}
 	]
 }

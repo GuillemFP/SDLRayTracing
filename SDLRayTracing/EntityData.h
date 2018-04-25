@@ -4,8 +4,6 @@
 #include "Entity.h"
 #include "MaterialData.h"
 
-class Config;
-
 struct EntityData
 {
 	Entity::Type type;
@@ -13,11 +11,5 @@ struct EntityData
 	float radius = 1.0f;
 	MaterialData materialData;
 };
-
-namespace EntityDataUtils
-{
-	EntityData parseEntityData(const Config& config);
-	Entity::Type typeFromString(const std::string& type);
-}
 
 #endif // !ENTITYDATA_H

@@ -8,6 +8,7 @@
 #include "Material.h"
 #include "MaterialData.h"
 #include "ModuleMaterials.h"
+#include "ParseUtils.h"
 #include "Sphere.h"
 
 ModuleEntities::ModuleEntities() : Module(MODULEENTITIES_NAME)
@@ -25,9 +26,7 @@ bool ModuleEntities::Init(Config* config)
 
 	for (int i = 0; i < entitiesArray.GetArrayLength(); i++)
 	{
-		EntityData data = EntityDataUtils::parseEntityData(entitiesArray.GetSection(i));
-		data.materialData.type = Material::Type::Diffusive;
-		data.materialData.albedo = math::float3(0.5f, 0.5f, 0.5f);
+		EntityData data = ParseUtils::parseEntityData(entitiesArray.GetSection(i));
 		EntityFactory(data);
 	}
 

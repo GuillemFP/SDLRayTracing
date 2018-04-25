@@ -81,9 +81,6 @@
     <ClCompile Include="ParseUtils.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="EntityData.cpp">
-      <Filter>Containers</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleMaterials.cpp">
       <Filter>Modules\RayTracing</Filter>
     </ClCompile>

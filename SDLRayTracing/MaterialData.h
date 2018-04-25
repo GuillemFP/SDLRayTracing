@@ -2,7 +2,6 @@
 #define MATERIALDATA_H
 
 #include "Material.h"
-#include "MathGeoLib\include\Math\float3.h"
 
 struct MaterialData
 {

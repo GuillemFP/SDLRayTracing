@@ -117,7 +117,6 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Diffuse.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="EntityData.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Log.cpp" />
