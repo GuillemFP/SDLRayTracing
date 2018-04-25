@@ -31,6 +31,9 @@
     <Filter Include="3rd Party\parson">
       <UniqueIdentifier>{7ffb912a-cce8-4c31-b69a-5f0974495a25}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\Materials">
+      <UniqueIdentifier>{0798468b-0a4e-4b68-bbed-6be77eac1424}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -80,6 +83,12 @@
     </ClCompile>
     <ClCompile Include="EntityData.cpp">
       <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleMaterials.cpp">
+      <Filter>Modules\RayTracing</Filter>
+    </ClCompile>
+    <ClCompile Include="Diffuse.cpp">
+      <Filter>Entities\Materials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +153,18 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="EntityData.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleMaterials.h">
+      <Filter>Modules\RayTracing</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Entities\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Diffuse.h">
+      <Filter>Entities\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="MaterialData.h">
       <Filter>Containers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -115,6 +115,7 @@
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Diffuse.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityData.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
@@ -123,6 +124,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ModuleEntities.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
+    <ClCompile Include="ModuleMaterials.cpp" />
     <ClCompile Include="ModuleRayTracing.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
@@ -133,9 +135,12 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="Diffuse.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityData.h" />
     <ClInclude Include="HitInfo.h" />
+    <ClInclude Include="Material.h" />
+    <ClInclude Include="MaterialData.h" />
     <ClInclude Include="ModuleCamera.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Globals.h" />
@@ -145,6 +150,7 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleEntities.h" />
     <ClInclude Include="ModuleInput.h" />
+    <ClInclude Include="ModuleMaterials.h" />
     <ClInclude Include="ModuleRayTracing.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleWindow.h" />

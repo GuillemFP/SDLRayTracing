@@ -2,7 +2,7 @@
 
 #include "Math.h"
 
-Sphere::Sphere(float radius, const math::float3& center) : Entity(Type::Sphere), _radius(radius), _center(center)
+Sphere::Sphere(Material* material, float radius, const math::float3& center) : Entity(Type::Sphere, material), _radius(radius), _center(center)
 {
 }
 

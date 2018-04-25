@@ -3,6 +3,7 @@
 #include "ModuleCamera.h"
 #include "ModuleEntities.h"
 #include "ModuleInput.h"
+#include "ModuleMaterials.h"
 #include "ModuleRayTracing.h"
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
@@ -16,6 +17,7 @@ Application::Application()
 	_modules.push_back(_renderer = new ModuleRender());
 
 	_modules.push_back(_camera = new ModuleCamera());
+	_modules.push_back(_materials = new ModuleMaterials());
 	_modules.push_back(_entities = new ModuleEntities());
 	_modules.push_back(_rayTracing = new ModuleRayTracing());
 }

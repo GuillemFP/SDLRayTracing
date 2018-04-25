@@ -7,7 +7,7 @@
 class Sphere : public Entity
 {
 public:
-	Sphere(float radius, const math::float3& center);
+	Sphere(Material* material, float radius, const math::float3& center);
 	~Sphere();
 
 protected:

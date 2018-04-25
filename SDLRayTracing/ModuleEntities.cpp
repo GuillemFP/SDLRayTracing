@@ -1,9 +1,13 @@
 #include "ModuleEntities.h"
 
+#include "Application.h"
 #include "Config.h"
 #include "Entity.h"
 #include "EntityData.h"
 #include "HitInfo.h"
+#include "Material.h"
+#include "MaterialData.h"
+#include "ModuleMaterials.h"
 #include "Sphere.h"
 
 ModuleEntities::ModuleEntities() : Module(MODULEENTITIES_NAME)
@@ -22,6 +26,8 @@ bool ModuleEntities::Init(Config* config)
 	for (int i = 0; i < entitiesArray.GetArrayLength(); i++)
 	{
 		EntityData data = EntityDataUtils::parseEntityData(entitiesArray.GetSection(i));
+		data.materialData.type = Material::Type::Diffusive;
+		data.materialData.albedo = math::float3(0.5f, 0.5f, 0.5f);
 		EntityFactory(data);
 	}
 
@@ -57,12 +63,14 @@ Entity* ModuleEntities::EntityFactory(const EntityData& data)
 {
 	static_assert(Entity::Type::Unknown == 1, "Update entity factory code");
 
+	Material* material = App->_materials->LoadMaterial(data.materialData);
+
 	Entity* entity = nullptr;
 
 	switch (data.type)
 	{
 	case Entity::Type::Sphere:
-		entity = new Sphere(data.radius, data.position);
+		entity = new Sphere(material, data.radius, data.position);
 		break;
 	}
 
