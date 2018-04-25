@@ -155,6 +155,7 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="ParseUtils.h" />
     <ClInclude Include="parson\parson.h" />
+    <ClInclude Include="ScatterInfo.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>

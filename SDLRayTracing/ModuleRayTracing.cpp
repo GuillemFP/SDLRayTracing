@@ -10,6 +10,7 @@
 #include "ModuleEntities.h"
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
+#include "ScatterInfo.h"
 #include "Timer.h"
 
 ModuleRayTracing::ModuleRayTracing() : Module(MODULERAYTRACING_NAME)
@@ -129,11 +130,10 @@ math::float3 ModuleRayTracing::CalculateRayColor(const math::Ray& ray) const
 
 	if (isHit)
 	{
-		math::Ray reflectedRay;
-		math::float3 attenuation;
-		if (hitInfo.material->Hit(ray, hitInfo, attenuation, reflectedRay, *_randomGenerator))
+		ScatterInfo scatterInfo;
+		if (hitInfo.material->Scatter(ray, hitInfo, scatterInfo, *_randomGenerator))
 		{
-			return attenuation.Mul(CalculateRayColor(reflectedRay));
+			return scatterInfo.attenuation.Mul(CalculateRayColor(scatterInfo.scatteredRay));
 		}
 
 		return math::float3::zero;

@@ -164,5 +164,8 @@
     <ClInclude Include="MaterialData.h">
       <Filter>Containers</Filter>
     </ClInclude>
+    <ClInclude Include="ScatterInfo.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

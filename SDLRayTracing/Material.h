@@ -9,6 +9,7 @@ namespace math
 }
 
 struct HitInfo;
+struct ScatterInfo;
 
 class Material
 {
@@ -27,7 +28,7 @@ public:
 		return _type;
 	}
 
-	virtual bool Hit(const math::Ray& ray, const HitInfo& hitInfo, math::float3& attenuation, math::Ray& scatteredRay, math::LCG& randomGenerator) const = 0;
+	virtual bool Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const = 0;
 
 private:
 	Type _type = Unknown;

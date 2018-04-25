@@ -2,6 +2,7 @@
 
 #include "HitInfo.h"
 #include "Math.h"
+#include "ScatterInfo.h"
 
 namespace
 {
@@ -25,11 +26,12 @@ Diffuse::~Diffuse()
 {
 }
 
-bool Diffuse::Hit(const math::Ray& ray, const HitInfo& hitInfo, math::float3& attenuation, math::Ray& scatteredRay, math::LCG& randomGenerator) const
+bool Diffuse::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
 	math::float3 sphereTarget = hitInfo.point + hitInfo.normal + RandomPointInSphere(randomGenerator);
-	scatteredRay = math::Ray(hitInfo.point, (sphereTarget - hitInfo.point).Normalized());
-	attenuation = _albedo;
+	scatterInfo.scatters = true;
+	scatterInfo.scatteredRay = math::Ray(hitInfo.point, (sphereTarget - hitInfo.point).Normalized());
+	scatterInfo.attenuation = _albedo;
 
 	return true;
 }
