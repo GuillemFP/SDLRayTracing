@@ -28,8 +28,9 @@ bool ModuleRayTracing::Init(Config* config)
 	_rayTracingTime = new Timer();
 	_frequencyTimer = new Timer();
 
-	_minDistance = config->GetInt("MinDistance");
-	_maxDistance = config->GetInt("MaxDistance");
+	_maxScatters = config->GetInt("MaxScatters");
+	_minDistance = config->GetFloat("MinDistance");
+	_maxDistance = config->GetFloat("MaxDistance");
 
 	_samplesPerPixel = config->GetFloat("SamplesPerPixel");
 	_pixelsPerUpdate = config->GetFloat("PixelPerUpdate");
@@ -131,7 +132,7 @@ math::float3 ModuleRayTracing::CalculateRayColor(const math::Ray& ray, int depth
 	if (isHit)
 	{
 		ScatterInfo scatterInfo;
-		if (depth < 50 && hitInfo.material->Scatter(ray, hitInfo, scatterInfo, *_randomGenerator))
+		if (depth < _maxScatters && hitInfo.material->Scatter(ray, hitInfo, scatterInfo, *_randomGenerator))
 		{
 			return scatterInfo.attenuation.Mul(CalculateRayColor(scatterInfo.scatteredRay, depth + 1));
 		}

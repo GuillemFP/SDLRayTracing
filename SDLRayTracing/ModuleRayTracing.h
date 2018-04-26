@@ -57,6 +57,7 @@ private:
 	Uint32 _accumulatedMs = 0;
 	Uint32 _accumulatedRays = 0;
 
+	int _maxScatters = 10;
 	float _minDistance = 0.0f;
 	float _maxDistance = 1.0f;
 

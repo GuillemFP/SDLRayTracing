@@ -19,8 +19,9 @@
 		},
 		"ModuleEntities": {},
 		"ModuleRayTracing": {
-			"MinDistance": 0.001,
+			"MinDistance": 0.01,
 			"MaxDistance": 1000,
+			"MaxScatters": 50,
 			"SamplesPerPixel": 10,
 			"PixelPerUpdate": 50
 		}
