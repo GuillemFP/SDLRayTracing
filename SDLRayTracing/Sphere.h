@@ -11,7 +11,7 @@ public:
 	~Sphere();
 
 protected:
-	float RayHitLength(const math::Ray& ray) const;
+	float RayHitLength(const math::Ray& ray, float minDistance, float maxDistance) const;
 	math::float3 GetNormal(const math::float3& surfacePoint) const;
 
 private:

@@ -27,7 +27,7 @@ public:
 	Type GetType() const;
 
 protected:
-	virtual float RayHitLength(const math::Ray& ray) const = 0;
+	virtual float RayHitLength(const math::Ray& ray, float minDistance, float maxDistance) const = 0;
 	virtual math::float3 GetNormal(const math::float3& surfacePoint) const = 0;
 
 	Material* _material = nullptr;
