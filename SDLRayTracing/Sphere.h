@@ -10,9 +10,11 @@ public:
 	Sphere(Material* material, float radius, const math::float3& center);
 	~Sphere();
 
+	bool Hit(const math::Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
+
 protected:
-	float RayHitLength(const math::Ray& ray, float minDistance, float maxDistance) const;
 	math::float3 GetNormal(const math::float3& surfacePoint) const;
+	bool CheckRoot(const math::Ray& ray, float root, float minDistance, float maxDistance, HitInfo& hitInfo) const;
 
 private:
 	float _radius = 1.0f;

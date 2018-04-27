@@ -1,5 +1,6 @@
 #include "Sphere.h"
 
+#include "HitInfo.h"
 #include "Math.h"
 
 Sphere::Sphere(Material* material, float radius, const math::float3& center) : Entity(Type::Sphere, material), _radius(radius), _center(center)
@@ -10,7 +11,7 @@ Sphere::~Sphere()
 {
 }
 
-float Sphere::RayHitLength(const math::Ray& ray, float minDistance, float maxDistance) const
+bool Sphere::Hit(const math::Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
 {
 	math::float3 oc = ray.pos - _center;
 	float a = ray.dir.Dot(ray.dir);
@@ -20,23 +21,37 @@ float Sphere::RayHitLength(const math::Ray& ray, float minDistance, float maxDis
 	if (discriminant < 0.0f)
 	{
 		//No real solution -> no hit
-		return -1.0f;
+		return false;
 	}
 
 	float squaredDiscriminant = sqrt(discriminant);
 	float negativeRoot = (-b - squaredDiscriminant) / a;
-	if (negativeRoot < maxDistance && negativeRoot > minDistance)
+	if (CheckRoot(ray, negativeRoot, minDistance, maxDistance, hitInfo))
 	{
-		return negativeRoot;
+		return true;
 	}
 
 	float positiveRoot = (-b + squaredDiscriminant) / a;
-	if (positiveRoot < maxDistance && positiveRoot > minDistance)
+	if (CheckRoot(ray, positiveRoot, minDistance, maxDistance, hitInfo))
 	{
-		return positiveRoot;
+		return true;
 	}
 
-	return -1.0f;
+	return false;
+}
+
+bool Sphere::CheckRoot(const math::Ray& ray, float root, float minDistance, float maxDistance, HitInfo& hitInfo) const
+{
+	if (root < maxDistance && root > minDistance)
+	{
+		hitInfo.point = ray.GetPoint(root);
+		hitInfo.normal = GetNormal(hitInfo.point);
+		hitInfo.isHit = true;
+		hitInfo.material = _material;
+		return true;
+	}
+
+	return false;
 }
 
 math::float3 Sphere::GetNormal(const math::float3& surfacePoint) const
