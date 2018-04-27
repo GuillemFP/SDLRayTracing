@@ -38,10 +38,10 @@ bool ModuleRayTracing::Init(Config* config)
 	_pixelsWidth = App->_window->GetWindowsWidth();
 	_pixelsHeight = App->_window->GetWindowsHeight();
 
-	_currentX = 0;
-	_currentY = _pixelsHeight - 1;
+	_currentX = GetInitialPixelX();
+	_currentY = GetInitialPixelY();
 
-	//InitFile();
+	InitFile();
 
 	return true;
 }
@@ -77,9 +77,9 @@ update_status ModuleRayTracing::Update()
 	{
 		Color color = CalculatePixelColor(_currentX, _currentY);
 		App->_renderer->DrawPixel(color, _currentX, _currentY);
-		//WriteColor(color);
+		WriteColor(color);
 
-		if (++_currentX > _pixelsWidth)
+		if (++_currentX >= _pixelsWidth)
 		{
 			_currentX = 0;
 			if (--_currentY < 0)
@@ -162,4 +162,14 @@ void ModuleRayTracing::WriteColor(const Color& color)
 	int ig = int(255.99*color.g);
 	int ib = int(255.99*color.b);
 	_ppmImage << ir << " " << ig << " " << ib << "\n";
+}
+
+int ModuleRayTracing::GetInitialPixelY() const
+{
+	return _pixelsHeight - 1;
+}
+
+int ModuleRayTracing::GetInitialPixelX() const
+{
+	return 0;
 }

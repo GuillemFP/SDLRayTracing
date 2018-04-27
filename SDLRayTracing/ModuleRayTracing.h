@@ -41,6 +41,9 @@ private:
 	void InitFile();
 	void WriteColor(const Color& color);
 
+	int GetInitialPixelY() const;
+	int GetInitialPixelX() const;
+
 private:
 	bool _screenFinished = false;
 

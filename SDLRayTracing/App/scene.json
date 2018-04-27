@@ -5,7 +5,7 @@
 			"Radius": 0.5,
 			"Material" : {
 				"Type" : "Diffuse",
-				"Albedo" : [0.5, 0.5, 0.5]
+				"Albedo" : [0.8, 0.3, 0.3]
 			}
 		},
 		{
@@ -14,7 +14,16 @@
 			"Radius": 0.5,
 			"Material" : {
 				"Type" : "Metal",
-				"Albedo" : [0.5, 0.5, 0.5]
+				"Albedo" : [0.8, 0.6, 0.2]
+			}
+		},
+		{
+			"Type": "Sphere",
+			"Position": [-1, 0, -1],
+			"Radius": 0.5,
+			"Material" : {
+				"Type" : "Metal",
+				"Albedo" : [0.8, 0.8, 0.8]
 			}
 		},
 		{
@@ -23,7 +32,7 @@
 			"Radius": 100,
 			"Material" : {
 				"Type" : "Diffuse",
-				"Albedo" : [0.5, 0.5, 0.5]
+				"Albedo" : [0.8, 0.8, 0.0]
 			}
 		}
 	]
