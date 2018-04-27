@@ -22,6 +22,6 @@ Material* ModuleMaterials::LoadMaterial(const MaterialData& data) const
 	case Material::Type::Diffuse:
 		return new Diffuse(data.albedo);
 	case Material::Type::Metal:
-		return new Metal(data.albedo);
+		return new Metal(data.albedo, data.fuzziness);
 	}
 }

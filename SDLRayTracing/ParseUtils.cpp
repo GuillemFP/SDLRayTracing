@@ -45,6 +45,7 @@ namespace ParseUtils
 
 		data.type = parseMaterialTypeFromString(config.GetStringRequired("Type"));
 		data.albedo = parseVector(config.GetArray("Albedo"));
+		data.fuzziness = config.GetFloat("Fuzziness", 0.0f);
 
 		return data;
 	}

@@ -117,6 +117,7 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Diffuse.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Metal.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
     <ClCompile Include="Color.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="HitInfo.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialData.h" />
+    <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Metal.h" />
     <ClInclude Include="ModuleCamera.h" />
     <ClInclude Include="Color.h" />

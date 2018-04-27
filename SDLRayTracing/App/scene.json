@@ -14,7 +14,8 @@
 			"Radius": 0.5,
 			"Material" : {
 				"Type" : "Metal",
-				"Albedo" : [0.8, 0.6, 0.2]
+				"Albedo" : [0.8, 0.6, 0.2],
+				"Fuzziness" : 0.1
 			}
 		},
 		{
@@ -23,7 +24,8 @@
 			"Radius": 0.5,
 			"Material" : {
 				"Type" : "Metal",
-				"Albedo" : [0.8, 0.8, 0.8]
+				"Albedo" : [0.8, 0.8, 0.8],
+				"Fuzziness" : 0.03
 			}
 		},
 		{
