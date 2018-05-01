@@ -15,10 +15,10 @@ bool ModuleCamera::Init(Config* config)
 	int pixelsWidth = App->_window->GetWindowsWidth();
 	int pixelsHeight = App->_window->GetWindowsHeight();
 
-	_origin = ParseUtils::parseVector(config->GetArray("Origin"));
-	_front = ParseUtils::parseVector(config->GetArray("Front"));
-	_up = ParseUtils::parseVector(config->GetArray("Up"));
-	_right = ParseUtils::parseVector(config->GetArray("Right"));
+	_origin = ParseUtils::ParseVector(config->GetArray("Origin"));
+	_front = ParseUtils::ParseVector(config->GetArray("Front"));
+	_up = ParseUtils::ParseVector(config->GetArray("Up"));
+	_right = ParseUtils::ParseVector(config->GetArray("Right"));
 
 	Config viewport = config->GetSection("Viewport");
 

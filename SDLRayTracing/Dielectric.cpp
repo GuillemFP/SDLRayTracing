@@ -10,7 +10,7 @@ namespace
 	//Snell's law vectorial form
 	// v_refract = r v + (r c - sqrt(1 - r^2 (1 - c^2))) n
 	// r = n1/n2, c = - n * v
-	bool refracts(const math::float3& inVector, const math::float3& normal, float refractionFactorRatio, math::float3& refracted)
+	bool Refracts(const math::float3& inVector, const math::float3& normal, float refractionFactorRatio, math::float3& refracted)
 	{
 		float c = -normal.Dot(inVector);
 		float discriminant = 1 - refractionFactorRatio * refractionFactorRatio * (1 - c * c);
@@ -22,6 +22,14 @@ namespace
 
 		refracted = refractionFactorRatio * inVector + (refractionFactorRatio * c - sqrt(discriminant)) * normal;
 		return true;
+	}
+
+	//Approximates reflection coefficient as function of incident angle
+	float SchlickApproximation(float refractionFactorRatio, float cosine)
+	{
+		float r0 = (1 - refractionFactorRatio) / (1 + refractionFactorRatio);
+		r0 *= r0;
+		return r0 + (1.0f - r0) * powf((1.0f - cosine), 5);
 	}
 }
 
@@ -54,13 +62,13 @@ bool Dielectric::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterIn
 	scatterInfo.scatters = true;
 	scatterInfo.attenuation = math::float3::one;
 	scatterInfo.scatteredRay.pos = hitInfo.point;
-	if (refracts(ray.dir, normal, refractionFactorRatio, refracted))
+	if (Refracts(ray.dir, normal, refractionFactorRatio, refracted))
 	{
 		scatterInfo.scatteredRay.dir = refracted;
 	}
 	else
 	{
-		scatterInfo.scatteredRay.dir = MathUtils::reflectedVector(ray.dir, hitInfo.normal);
+		scatterInfo.scatteredRay.dir = MathUtils::ReflectedVector(ray.dir, hitInfo.normal);
 	}
 
 	return true;

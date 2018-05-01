@@ -26,7 +26,7 @@ bool ModuleEntities::Init(Config* config)
 
 	for (int i = 0; i < entitiesArray.GetArrayLength(); i++)
 	{
-		EntityData data = ParseUtils::parseEntityData(entitiesArray.GetSection(i));
+		EntityData data = ParseUtils::ParseEntityData(entitiesArray.GetSection(i));
 		EntityFactory(data);
 	}
 

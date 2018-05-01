@@ -6,7 +6,7 @@
 
 namespace ParseUtils
 {
-	math::float3 parseVector(const ConfigArray& config, const math::float3& defaultValue)
+	math::float3 ParseVector(const ConfigArray& config, const math::float3& defaultValue)
 	{
 		math::float3 vector;
 
@@ -17,19 +17,19 @@ namespace ParseUtils
 		return vector;
 	}
 
-	EntityData parseEntityData(const Config& config)
+	EntityData ParseEntityData(const Config& config)
 	{
 		EntityData data;
 
-		data.type = parseEntityTypeFromString(config.GetStringRequired("Type"));
-		data.position = parseVector(config.GetArray("Position"));
+		data.type = ParseEntityTypeFromString(config.GetStringRequired("Type"));
+		data.position = ParseVector(config.GetArray("Position"));
 		data.radius = config.GetFloat("Radius", 1.0f);
-		data.materialData = parseMaterialData(config.GetSection("Material"));
+		data.materialData = ParseMaterialData(config.GetSection("Material"));
 
 		return data;
 	}
 
-	Entity::Type parseEntityTypeFromString(const std::string& type)
+	Entity::Type ParseEntityTypeFromString(const std::string& type)
 	{
 		if (type == "Sphere")
 			return Entity::Type::Sphere;
@@ -37,19 +37,19 @@ namespace ParseUtils
 		APPLOG("Invalid entity type");
 	}
 
-	MaterialData parseMaterialData(const Config& config)
+	MaterialData ParseMaterialData(const Config& config)
 	{
 		MaterialData data;
 
-		data.type = parseMaterialTypeFromString(config.GetStringRequired("Type"));
-		data.albedo = parseVector(config.GetArray("Albedo"));
+		data.type = ParseMaterialTypeFromString(config.GetStringRequired("Type"));
+		data.albedo = ParseVector(config.GetArray("Albedo"));
 		data.fuzziness = config.GetFloat("Fuzziness", 0.0f);
 		data.refractiveIndex = config.GetFloat("RefractiveIndex", 1.0f);
 
 		return data;
 	}
 
-	Material::Type parseMaterialTypeFromString(const std::string& type)
+	Material::Type ParseMaterialTypeFromString(const std::string& type)
 	{
 		if (type == "Diffuse")
 			return Material::Type::Diffuse;

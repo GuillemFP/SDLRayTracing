@@ -14,7 +14,7 @@ namespace MathUtils
 		return ret;
 	}
 
-	math::float3 reflectedVector(const math::float3& inVector, const math::float3& normal)
+	math::float3 ReflectedVector(const math::float3& inVector, const math::float3& normal)
 	{
 		return inVector - 2.0f * inVector.Dot(normal) * normal;
 	}

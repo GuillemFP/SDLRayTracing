@@ -18,7 +18,7 @@ bool Metal::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterInfo& s
 {
 	scatterInfo.scatteredRay.pos = hitInfo.point;
 
-	math::float3 scatteredRay = MathUtils::reflectedVector(ray.dir, hitInfo.normal) + _fuzziness * MathUtils::RandomPointInSphere(randomGenerator);
+	math::float3 scatteredRay = MathUtils::ReflectedVector(ray.dir, hitInfo.normal) + _fuzziness * MathUtils::RandomPointInSphere(randomGenerator);
 	scatterInfo.scatteredRay.dir = scatteredRay.Normalized();
 	scatterInfo.attenuation = _albedo;
 

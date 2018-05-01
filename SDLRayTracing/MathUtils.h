@@ -7,7 +7,7 @@
 namespace MathUtils
 {
 	math::float3 RandomPointInSphere(math::LCG& randomGenerator);
-	math::float3 reflectedVector(const math::float3& inVector, const math::float3& normal);
+	math::float3 ReflectedVector(const math::float3& inVector, const math::float3& normal);
 }
 
 #endif // !MATHUTILS_H

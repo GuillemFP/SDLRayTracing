@@ -22,5 +22,5 @@ bool Diffuse::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterInfo&
 	scatterInfo.scatteredRay.dir = (sphereTarget - hitInfo.point).Normalized();
 	scatterInfo.attenuation = _albedo;
 
-	return scatterInfo.scatters;
+	return true;
 }

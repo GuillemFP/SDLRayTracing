@@ -9,13 +9,13 @@ class ConfigArray;
 
 namespace ParseUtils
 {
-	math::float3 parseVector(const ConfigArray& config, const math::float3& defaultValue = math::float3::one);
+	math::float3 ParseVector(const ConfigArray& config, const math::float3& defaultValue = math::float3::one);
 
-	EntityData parseEntityData(const Config& config);
-	Entity::Type parseEntityTypeFromString(const std::string& type);
+	EntityData ParseEntityData(const Config& config);
+	Entity::Type ParseEntityTypeFromString(const std::string& type);
 
-	MaterialData parseMaterialData(const Config& config);
-	Material::Type parseMaterialTypeFromString(const std::string& type);
+	MaterialData ParseMaterialData(const Config& config);
+	Material::Type ParseMaterialTypeFromString(const std::string& type);
 }
 
 #endif // !PARSEUTILS_H
