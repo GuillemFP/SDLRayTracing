@@ -29,6 +29,15 @@
 		},
 		{
 			"Type": "Sphere",
+			"Position": [-1, 0, -1],
+			"Radius": -0.45,
+			"Material": {
+				"Type": "Dielectric",
+				"RefractiveIndex": 1.5
+			}
+		},
+		{
+			"Type": "Sphere",
 			"Position": [0, -100.5, -1],
 			"Radius": 100,
 			"Material": {

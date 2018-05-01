@@ -32,9 +32,9 @@ namespace
 	//Approximates reflection coefficient as function of incident angle
 	float SchlickApproximation(float refractionFactorRatio, float cosine)
 	{
-		float r0 = (1 - refractionFactorRatio) / (1 + refractionFactorRatio);
-		r0 *= r0;
-		return r0 + (1.0f - r0) * powf((1.0f - cosine), 5);
+		float r0 = (refractionFactorRatio - 1.0f) / (refractionFactorRatio + 1.0f);
+		r0 = r0 * r0;
+		return r0 + (1.0f - r0) * math::Pow(1.0f - cosine, 5);
 	}
 }
 
@@ -51,34 +51,33 @@ bool Dielectric::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterIn
 	math::float3 normal;
 	float refractionFactorRatio;
 
-	// Negative value means ray crossing dielectric from inside to outside
-	if (ray.dir.Dot(hitInfo.normal) <= 0)
+	// Positive value means ray crossing dielectric from inside to outside
+	if (ray.dir.Dot(hitInfo.normal) > 0)
 	{
-		normal = hitInfo.normal;
-		refractionFactorRatio = 1.0f / _refractiveIndex;
+		normal = -hitInfo.normal;
+		refractionFactorRatio = _refractiveIndex;	
 	}
 	else
 	{
-		normal = -hitInfo.normal;
-		refractionFactorRatio = _refractiveIndex;
+		normal = hitInfo.normal;
+		refractionFactorRatio = 1.0f / _refractiveIndex;
 	}
 	float cosine = CosineIncidentAngle(normal, ray.dir);
 
 	math::float3 refracted;
 	scatterInfo.scatters = true;
 	scatterInfo.attenuation = math::float3::one;
-	scatterInfo.scatteredRay.pos = hitInfo.point;
 	if (Refracts(ray.dir, normal, refractionFactorRatio, refracted))
 	{
 		float reflectionProbability = SchlickApproximation(refractionFactorRatio, cosine);
 		if (randomGenerator.Float() >= reflectionProbability)
 		{
-			scatterInfo.scatteredRay.dir = refracted;
+			scatterInfo.scatteredRay = math::Ray(hitInfo.point, refracted);
 			return true;
 		}
 	}
 
-	scatterInfo.scatteredRay.dir = MathUtils::ReflectedVector(ray.dir, hitInfo.normal);
+	scatterInfo.scatteredRay = math::Ray(hitInfo.point, MathUtils::ReflectedVector(ray.dir, hitInfo.normal));
 	return true;
 }
 
