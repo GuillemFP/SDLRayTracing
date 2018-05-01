@@ -3,38 +3,37 @@
 			"Type": "Sphere",
 			"Position": [0, 0, -1],
 			"Radius": 0.5,
-			"Material" : {
-				"Type" : "Diffuse",
-				"Albedo" : [0.8, 0.3, 0.3]
+			"Material": {
+				"Type": "Diffuse",
+				"Albedo": [0.1, 0.2, 0.5]
 			}
 		},
 		{
 			"Type": "Sphere",
 			"Position": [1, 0, -1],
 			"Radius": 0.5,
-			"Material" : {
-				"Type" : "Metal",
-				"Albedo" : [0.8, 0.6, 0.2],
-				"Fuzziness" : 0.1
+			"Material": {
+				"Type": "Metal",
+				"Albedo": [0.8, 0.6, 0.2],
+				"Fuzziness": 0.0
 			}
 		},
 		{
 			"Type": "Sphere",
 			"Position": [-1, 0, -1],
 			"Radius": 0.5,
-			"Material" : {
-				"Type" : "Metal",
-				"Albedo" : [0.8, 0.8, 0.8],
-				"Fuzziness" : 0.03
+			"Material": {
+				"Type": "Dielectric",
+				"RefractiveIndex": 1.5
 			}
 		},
 		{
 			"Type": "Sphere",
 			"Position": [0, -100.5, -1],
 			"Radius": 100,
-			"Material" : {
-				"Type" : "Diffuse",
-				"Albedo" : [0.8, 0.8, 0.0]
+			"Material": {
+				"Type": "Diffuse",
+				"Albedo": [0.8, 0.8, 0.0]
 			}
 		}
 	]

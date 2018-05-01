@@ -1,5 +1,6 @@
 #include "ModuleMaterials.h"
 
+#include "Dielectric.h"
 #include "Diffuse.h"
 #include "Material.h"
 #include "MaterialData.h"
@@ -15,7 +16,7 @@ ModuleMaterials::~ModuleMaterials()
 
 Material* ModuleMaterials::LoadMaterial(const MaterialData& data) const
 {
-	static_assert(Material::Type::Unknown == 2, "Update material factory code");
+	static_assert(Material::Type::Unknown == 3, "Update material factory code");
 
 	switch (data.type)
 	{
@@ -23,5 +24,7 @@ Material* ModuleMaterials::LoadMaterial(const MaterialData& data) const
 		return new Diffuse(data.albedo);
 	case Material::Type::Metal:
 		return new Metal(data.albedo, data.fuzziness);
+	case Material::Type::Dielectric:
+		return new Dielectric(data.refractiveIndex);
 	}
 }

@@ -93,6 +93,9 @@
     <ClCompile Include="MathUtils.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Dielectric.cpp">
+      <Filter>Entities\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -178,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="MathUtils.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Dielectric.h">
+      <Filter>Entities\Materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

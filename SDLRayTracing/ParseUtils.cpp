@@ -6,13 +6,13 @@
 
 namespace ParseUtils
 {
-	math::float3 parseVector(const ConfigArray& config)
+	math::float3 parseVector(const ConfigArray& config, const math::float3& defaultValue)
 	{
 		math::float3 vector;
 
-		vector.x = config.GetFloatRequired(0);
-		vector.y = config.GetFloatRequired(1);
-		vector.z = config.GetFloatRequired(2);
+		vector.x = config.GetFloat(0, defaultValue.x);
+		vector.y = config.GetFloat(1, defaultValue.y);
+		vector.z = config.GetFloat(2, defaultValue.z);
 
 		return vector;
 	}
@@ -32,9 +32,7 @@ namespace ParseUtils
 	Entity::Type parseEntityTypeFromString(const std::string& type)
 	{
 		if (type == "Sphere")
-		{
 			return Entity::Type::Sphere;
-		}
 
 		APPLOG("Invalid entity type");
 	}
@@ -46,6 +44,7 @@ namespace ParseUtils
 		data.type = parseMaterialTypeFromString(config.GetStringRequired("Type"));
 		data.albedo = parseVector(config.GetArray("Albedo"));
 		data.fuzziness = config.GetFloat("Fuzziness", 0.0f);
+		data.refractiveIndex = config.GetFloat("RefractiveIndex", 1.0f);
 
 		return data;
 	}
@@ -53,13 +52,11 @@ namespace ParseUtils
 	Material::Type parseMaterialTypeFromString(const std::string& type)
 	{
 		if (type == "Diffuse")
-		{
 			return Material::Type::Diffuse;
-		}
 		if (type == "Metal")
-		{
 			return Material::Type::Metal;
-		}
+		if (type == "Dielectric")
+			return Material::Type::Dielectric;
 
 		APPLOG("Invalid material type");
 	}

@@ -9,7 +9,7 @@ class ConfigArray;
 
 namespace ParseUtils
 {
-	math::float3 parseVector(const ConfigArray& config);
+	math::float3 parseVector(const ConfigArray& config, const math::float3& defaultValue = math::float3::one);
 
 	EntityData parseEntityData(const Config& config);
 	Entity::Type parseEntityTypeFromString(const std::string& type);

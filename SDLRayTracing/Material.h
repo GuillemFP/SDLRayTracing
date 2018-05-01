@@ -18,6 +18,7 @@ public:
 	{
 		Diffuse = 0,
 		Metal,
+		Dielectric,
 		Unknown
 	};
 
