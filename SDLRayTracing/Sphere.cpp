@@ -44,6 +44,7 @@ bool Sphere::CheckRoot(const math::Ray& ray, float root, float minDistance, floa
 {
 	if (root < maxDistance && root > minDistance)
 	{
+		hitInfo.distance = root;
 		hitInfo.point = ray.GetPoint(root);
 		hitInfo.normal = GetNormal(hitInfo.point);
 		hitInfo.isHit = true;
