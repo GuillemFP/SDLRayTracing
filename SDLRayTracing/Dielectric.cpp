@@ -7,12 +7,17 @@
 
 namespace
 {
+	float CosineIncidentAngle(const math::float3& normal, const math::float3& inVector)
+	{
+		return -normal.Dot(inVector);
+	}
+
 	//Snell's law vectorial form
 	// v_refract = r v + (r c - sqrt(1 - r^2 (1 - c^2))) n
 	// r = n1/n2, c = - n * v
 	bool Refracts(const math::float3& inVector, const math::float3& normal, float refractionFactorRatio, math::float3& refracted)
 	{
-		float c = -normal.Dot(inVector);
+		float c = CosineIncidentAngle(normal, inVector);
 		float discriminant = 1 - refractionFactorRatio * refractionFactorRatio * (1 - c * c);
 		if (discriminant < 0)
 		{
@@ -57,6 +62,7 @@ bool Dielectric::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterIn
 		normal = -hitInfo.normal;
 		refractionFactorRatio = _refractiveIndex;
 	}
+	float cosine = CosineIncidentAngle(normal, ray.dir);
 
 	math::float3 refracted;
 	scatterInfo.scatters = true;
@@ -64,13 +70,15 @@ bool Dielectric::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterIn
 	scatterInfo.scatteredRay.pos = hitInfo.point;
 	if (Refracts(ray.dir, normal, refractionFactorRatio, refracted))
 	{
-		scatterInfo.scatteredRay.dir = refracted;
-	}
-	else
-	{
-		scatterInfo.scatteredRay.dir = MathUtils::ReflectedVector(ray.dir, hitInfo.normal);
+		float reflectionProbability = SchlickApproximation(refractionFactorRatio, cosine);
+		if (randomGenerator.Float() >= reflectionProbability)
+		{
+			scatterInfo.scatteredRay.dir = refracted;
+			return true;
+		}
 	}
 
+	scatterInfo.scatteredRay.dir = MathUtils::ReflectedVector(ray.dir, hitInfo.normal);
 	return true;
 }
 
