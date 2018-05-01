@@ -18,7 +18,7 @@ bool Sphere::Hit(const math::Ray& ray, float minDistance, float maxDistance, Hit
 	float b = oc.Dot(ray.dir);
 	float c = oc.Dot(oc) - _radius*_radius;
 	float discriminant = b*b - a*c;
-	if (discriminant < 0.0f)
+	if (discriminant <= 0.0f)
 	{
 		//No real solution -> no hit
 		return false;
@@ -56,5 +56,5 @@ bool Sphere::CheckRoot(const math::Ray& ray, float root, float minDistance, floa
 
 math::float3 Sphere::GetNormal(const math::float3& surfacePoint) const
 {
-	return (surfacePoint - _center).Normalized();
+	return (surfacePoint - _center) / _radius;
 }
