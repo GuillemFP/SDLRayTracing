@@ -134,7 +134,17 @@ math::float3 ModuleRayTracing::CalculateRayColor(const math::Ray& ray, int depth
 		ScatterInfo scatterInfo;
 		if (depth < _maxScatters && hitInfo.material->Scatter(ray, hitInfo, scatterInfo, *_randomGenerator))
 		{
-			return scatterInfo.attenuation.Mul(CalculateRayColor(scatterInfo.scatteredRay, depth + 1));
+			math::float3 color = math::float3::zero;
+			if (scatterInfo.reflects)
+			{
+				color += scatterInfo.reflectionCoeff * CalculateRayColor(scatterInfo.reflectedRay, depth + 1);
+			}
+			if (scatterInfo.refracts)
+			{
+				color += scatterInfo.refractionCoeff * CalculateRayColor(scatterInfo.refractedRay, depth + 1);
+			}
+
+			return scatterInfo.attenuation.Mul(color);
 		}
 
 		return math::float3::zero;

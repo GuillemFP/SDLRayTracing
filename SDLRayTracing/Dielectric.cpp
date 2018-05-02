@@ -5,6 +5,8 @@
 #include "MathUtils.h"
 #include "ScatterInfo.h"
 
+#define DIELECTRIC_R_COEFFICIENT_PROBABILITY 1
+
 namespace
 {
 	float CosineIncidentAngle(const math::float3& normal, const math::float3& inVector)
@@ -65,19 +67,32 @@ bool Dielectric::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterIn
 	float cosine = CosineIncidentAngle(normal, ray.dir);
 
 	math::float3 refracted;
-	scatterInfo.scatters = true;
 	scatterInfo.attenuation = math::float3::one;
 	if (Refracts(ray.dir, normal, refractionFactorRatio, refracted))
 	{
-		float reflectionProbability = SchlickApproximation(refractionFactorRatio, cosine);
-		if (randomGenerator.Float() >= reflectionProbability)
+		float reflectionCoefficient = SchlickApproximation(refractionFactorRatio, cosine);
+#if DIELECTRIC_R_COEFFICIENT_PROBABILITY
+		if (randomGenerator.Float() >= reflectionCoefficient)
 		{
-			scatterInfo.scatteredRay = math::Ray(hitInfo.point, refracted);
+			scatterInfo.refracts = true;
+			scatterInfo.refractedRay = math::Ray(hitInfo.point, refracted);
 			return true;
 		}
+#else
+		scatterInfo.reflectionCoeff = reflectionCoefficient;
+
+		scatterInfo.refracts = true;
+		scatterInfo.refractionCoeff = 1.0f - reflectionCoefficient;
+		scatterInfo.refractedRay = math::Ray(hitInfo.point, refracted);
+		if (scatterInfo.refractionCoeff >= 1.0f)
+		{
+			return true;
+		}
+#endif
 	}
 
-	scatterInfo.scatteredRay = math::Ray(hitInfo.point, MathUtils::ReflectedVector(ray.dir, hitInfo.normal));
+	scatterInfo.reflects = true;
+	scatterInfo.reflectedRay = math::Ray(hitInfo.point, MathUtils::ReflectedVector(ray.dir, hitInfo.normal));
 	return true;
 }
 

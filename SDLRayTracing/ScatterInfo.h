@@ -6,9 +6,13 @@
 
 struct ScatterInfo
 {
-	bool scatters = false;
+	bool refracts = false;
+	bool reflects = false;
+	float refractionCoeff = 1.0f;
+	float reflectionCoeff = 1.0f;
 	math::float3 attenuation;
-	math::Ray scatteredRay;
+	math::Ray reflectedRay;
+	math::Ray refractedRay;
 };
 
 #endif // !SCATTERINFO_H

@@ -15,11 +15,11 @@ Diffuse::~Diffuse()
 
 bool Diffuse::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
-	scatterInfo.scatters = true;
+	scatterInfo.reflects = true;
 
 	math::float3 sphereTarget = hitInfo.point + hitInfo.normal + MathUtils::RandomPointInSphere(randomGenerator);
-	scatterInfo.scatteredRay.pos = hitInfo.point;
-	scatterInfo.scatteredRay.dir = (sphereTarget - hitInfo.point).Normalized();
+	scatterInfo.reflectedRay.pos = hitInfo.point;
+	scatterInfo.reflectedRay.dir = (sphereTarget - hitInfo.point).Normalized();
 	scatterInfo.attenuation = _albedo;
 
 	return true;

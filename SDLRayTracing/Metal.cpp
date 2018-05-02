@@ -16,12 +16,12 @@ Metal::~Metal()
 
 bool Metal::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
-	scatterInfo.scatteredRay.pos = hitInfo.point;
+	scatterInfo.reflectedRay.pos = hitInfo.point;
 
 	math::float3 scatteredRay = MathUtils::ReflectedVector(ray.dir, hitInfo.normal) + _fuzziness * MathUtils::RandomPointInSphere(randomGenerator);
-	scatterInfo.scatteredRay.dir = scatteredRay.Normalized();
+	scatterInfo.reflectedRay.dir = scatteredRay.Normalized();
 	scatterInfo.attenuation = _albedo;
 
-	scatterInfo.scatters = scatterInfo.scatteredRay.dir.Dot(hitInfo.normal) > 0;
-	return scatterInfo.scatters;
+	scatterInfo.reflects = scatterInfo.reflectedRay.dir.Dot(hitInfo.normal) > 0;
+	return scatterInfo.reflects;
 }
