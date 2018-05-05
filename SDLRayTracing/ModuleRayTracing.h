@@ -46,13 +46,13 @@ private:
 private:
 	bool _screenFinished = false;
 
+	int _numberOfThreads = 1;
+
 	int _pixelsWidth = 0;
 	int _pixelsHeight = 0;
 	int _samplesPerPixel = 1;
 
-	int _currentX = 0;
 	int _currentY = 0;
-	int _pixelsPerUpdate = 1;
 
 	int _currentAccumulated = 0;
 	Uint32 _accumulatedRPS = 0;

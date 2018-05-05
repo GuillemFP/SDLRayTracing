@@ -13,6 +13,7 @@
 #include "ScatterInfo.h"
 #include "Timer.h"
 #include <omp.h>
+#include <algorithm>
 
 ModuleRayTracing::ModuleRayTracing() : Module(MODULERAYTRACING_NAME)
 {
@@ -34,13 +35,12 @@ bool ModuleRayTracing::Init(Config* config)
 	_maxDistance = config->GetFloat("MaxDistance");
 
 	_samplesPerPixel = config->GetFloat("SamplesPerPixel");
-	_pixelsPerUpdate = config->GetFloat("PixelPerUpdate");
+	_numberOfThreads = std::min(config->GetInt("MaxNumberOfThreads", 1), omp_get_max_threads());
 
 	_pixelsWidth = App->_window->GetWindowsWidth();
 	_pixelsHeight = App->_window->GetWindowsHeight();
 	_colorRow = new Color[_pixelsWidth];
 
-	_currentX = GetInitialPixelX();
 	_currentY = GetInitialPixelY();
 
 	InitFile();
@@ -76,7 +76,8 @@ update_status ModuleRayTracing::Update()
 	}
 
 	_frequencyTimer->Start();
-	#pragma omp parallel for
+
+	#pragma omp parallel for num_threads(_numberOfThreads)
 	for (int i = 0; i < _pixelsWidth; i++)
 	{
 		_colorRow[i] = CalculatePixelColor(i, _currentY);
@@ -97,7 +98,7 @@ update_status ModuleRayTracing::Update()
 	}
 
 	_accumulatedMs += _frequencyTimer->GetTimeInMs();
-	_accumulatedRays += _pixelsPerUpdate * _samplesPerPixel;
+	_accumulatedRays += _pixelsWidth * _samplesPerPixel;
 	if (_accumulatedMs >= 1000)
 	{
 		Uint32 raysPerSecond = _accumulatedRays * 1000 / _accumulatedMs;
