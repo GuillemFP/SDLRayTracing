@@ -121,7 +121,11 @@ Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 		color += CalculateRayColor(ray, 0);
 	}
 	Color averagedColor(color / _samplesPerPixel);
+#if GAMMA_CORRECTION
+	return Color(sqrt(averagedColor.r), sqrt(averagedColor.g), sqrt(averagedColor.b));
+#else
 	return averagedColor;
+#endif
 }
 
 math::float3 ModuleRayTracing::CalculateRayColor(const math::Ray& ray, int depth) const

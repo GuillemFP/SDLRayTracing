@@ -41,4 +41,8 @@ enum update_status
 // Configuration from JSON file
 #define CONFIGFILE "config.json"
 
+// Ray tracing defines
+#define DIELECTRIC_R_COEFFICIENT_PROBABILITY 1
+#define GAMMA_CORRECTION 1
+
 #endif // !GLOBALS_H

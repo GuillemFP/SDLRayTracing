@@ -1,11 +1,10 @@
 #include "Dielectric.h"
 
+#include "Globals.h"
 #include "HitInfo.h"
 #include "Math.h"
 #include "MathUtils.h"
 #include "ScatterInfo.h"
-
-#define DIELECTRIC_R_COEFFICIENT_PROBABILITY 1
 
 namespace
 {
