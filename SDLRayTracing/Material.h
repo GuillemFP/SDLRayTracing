@@ -3,11 +3,11 @@
 
 namespace math
 {
-	class Ray;
-	class float3;
 	class LCG;
 }
 
+class Ray;
+class Vector3;
 struct HitInfo;
 struct ScatterInfo;
 
@@ -30,7 +30,7 @@ public:
 		return _type;
 	}
 
-	virtual bool Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const = 0;
+	virtual bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const = 0;
 
 private:
 	Type _type = Unknown;

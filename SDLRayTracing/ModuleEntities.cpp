@@ -41,7 +41,7 @@ bool ModuleEntities::CleanUp()
 	return true;
 }
 
-bool ModuleEntities::Hit(const math::Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
+bool ModuleEntities::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
 {
 	HitInfo currentHitInfo;
 	float currentMaxDistance =  maxDistance;

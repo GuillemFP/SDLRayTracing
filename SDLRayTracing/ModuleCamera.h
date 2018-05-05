@@ -4,8 +4,8 @@
 #define MODULECAMERA_NAME "ModuleCamera"
 
 #include "Module.h"
-#include "MathGeoLib\include\Math\float3.h";
-#include "MathGeoLib\include\Geometry\Ray.h"
+#include "Vector3.h"
+#include "Ray.h"
 
 namespace math
 {
@@ -24,18 +24,18 @@ public:
 
 	void LookAt(const math::float3& lookAt);
 
-	math::Ray GenerateRay(float widthFactor, float heigthFactor, math::LCG& randomGenerator) const;
+	Ray GenerateRay(float widthFactor, float heigthFactor, math::LCG& randomGenerator) const;
 
 private:
 	math::Frustum* _frustum;
 
-	math::float3 _position;
-	math::float3 _up;
-	math::float3 _right;
+	Vector3 _position;
+	Vector3 _up;
+	Vector3 _right;
 
-	math::float3 _cornerBottomLeft;
-	math::float3 _viewportWidthVector;
-	math::float3 _viewportHeightVector;
+	Vector3 _cornerBottomLeft;
+	Vector3 _viewportWidthVector;
+	Vector3 _viewportHeightVector;
 
 	float _lensRadius = 0.0f;
 };

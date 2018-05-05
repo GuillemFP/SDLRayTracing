@@ -9,7 +9,7 @@ public:
 	Dielectric(float refractiveIndex);
 	~Dielectric();
 
-	bool Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
+	bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
 
 private:
 	float _refractiveIndex = 1.0f;

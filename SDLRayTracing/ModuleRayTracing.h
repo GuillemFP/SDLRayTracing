@@ -5,18 +5,17 @@
 
 #include "Module.h"
 #include "Color.h"
-#include "MathGeoLib\include\Math\float2.h"
-#include "MathGeoLib\include\Math\float3.h"
+#include "Vector3.h"
 #include "SDL\include\SDL_stdinc.h"
 #include <iostream>
 #include <fstream>
 
 namespace math
 {
-	class Ray;
 	class LCG;
 }
 
+class Ray;
 class Camera;
 class Timer;
 
@@ -35,8 +34,8 @@ public:
 private:
 	Color CalculatePixelColor(int xPixel, int yPixel) const;
 	
-	math::float3 CalculateRayColor(const math::Ray& ray, int depth) const;
-	math::float3 CalculateBackgroundColor(const math::Ray& ray) const;
+	Vector3 CalculateRayColor(const Ray& ray, int depth) const;
+	Vector3 CalculateBackgroundColor(const Ray& ray) const;
 
 	void InitFile();
 	void WriteColor(const Color& color);

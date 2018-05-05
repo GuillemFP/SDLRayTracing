@@ -1,12 +1,12 @@
 #include "Color.h"
 
-#include "MathGeoLib\include\Math\float3.h"
+#include "Vector3.h"
 
 Color::Color(float r, float g, float b, float a) : r(r), g(g), b(b), a(a)
 {
 }
 
-Color::Color(const math::float3& color) : r(color.x), g(color.y), b(color.z), a(1.0f)
+Color::Color(const Vector3& color) : r(color.x()), g(color.y()), b(color.z()), a(1.0f)
 {
 
 }

@@ -133,6 +133,7 @@
     <ClCompile Include="ParseUtils.cpp" />
     <ClCompile Include="parson\parson.c" />
     <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -161,9 +162,11 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="ParseUtils.h" />
     <ClInclude Include="parson\parson.h" />
+    <ClInclude Include="Ray.h" />
     <ClInclude Include="ScatterInfo.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

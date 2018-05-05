@@ -1,8 +1,8 @@
 #ifndef SCATTERINFO_H
 #define SCATTERINFO_H
 
-#include "MathGeoLib\include\Geometry\Ray.h"
-#include "MathGeoLib\include\Math\float3.h"
+#include "Ray.h"
+#include "Vector3.h"
 
 struct ScatterInfo
 {
@@ -10,9 +10,9 @@ struct ScatterInfo
 	bool reflects = false;
 	float refractionCoeff = 1.0f;
 	float reflectionCoeff = 1.0f;
-	math::float3 attenuation;
-	math::Ray reflectedRay;
-	math::Ray refractedRay;
+	Vector3 attenuation;
+	Ray reflectedRay;
+	Ray refractedRay;
 };
 
 #endif // !SCATTERINFO_H

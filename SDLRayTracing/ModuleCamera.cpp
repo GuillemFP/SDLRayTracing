@@ -21,14 +21,14 @@ bool ModuleCamera::Init(Config* config)
 	float aspectRatio = config->GetFloat("Aspect Ratio", 1.5f);
 	_frustum->SetVerticalFovAndAspectRatio(vFov * DEG_TO_RAD, aspectRatio);
 
-	math::float3 position = ParseUtils::ParseVector(config->GetArray("Position"));
-	math::float3 lookAt = ParseUtils::ParseVector(config->GetArray("LookAt"));
-	float distanceToFocus = (lookAt - position).Length();
+	Vector3 position = ParseUtils::ParseVector(config->GetArray("Position"));
+	Vector3 lookAt = ParseUtils::ParseVector(config->GetArray("LookAt"));
+	float distanceToFocus = (lookAt - position).length();
 
 	_frustum->SetViewPlaneDistances(distanceToFocus, distanceToFocus + 1.0f);
-	_frustum->SetPos(position);
-	_frustum->SetFrame(position, math::float3::unitZ, math::float3::unitY);
-	LookAt(lookAt);
+	_frustum->SetPos(position.toFloat3());
+	_frustum->SetFrame(position.toFloat3(), math::float3::unitZ, math::float3::unitY);
+	LookAt(lookAt.toFloat3());
 
 	_position = _frustum->Pos();
 	_up = _frustum->Up();
@@ -59,13 +59,13 @@ void ModuleCamera::LookAt(const math::float3& lookAt)
 	_frustum->SetUp(matrix.MulDir(_frustum->Up()).Normalized());
 }
 
-math::Ray ModuleCamera::GenerateRay(float widthFactor, float heightFactor, math::LCG& randomGenerator) const
+Ray ModuleCamera::GenerateRay(float widthFactor, float heightFactor, math::LCG& randomGenerator) const
 {
-	math::float3 viewportPosition = _cornerBottomLeft + _viewportWidthVector * widthFactor + _viewportHeightVector * heightFactor;
+	Vector3 viewportPosition = _cornerBottomLeft + _viewportWidthVector * widthFactor + _viewportHeightVector * heightFactor;
 
-	math::float3 randomInDisk = _lensRadius * MathUtils::RandomPointInDisk(randomGenerator);
-	math::float3 rayOrigin = _position + _up * randomInDisk.x + _right * randomInDisk.y;
+	Vector3 randomInDisk = _lensRadius * MathUtils::RandomPointInDisk(randomGenerator);
+	Vector3 rayOrigin = _position + _up * randomInDisk.x() + _right * randomInDisk.y();
 
-	math::float3 unitVector = (viewportPosition - rayOrigin).Normalized();
-	return math::Ray(rayOrigin, unitVector);
+	Vector3 unitVector = normalize(viewportPosition - rayOrigin);
+	return Ray(rayOrigin, unitVector);
 }

@@ -8,11 +8,7 @@
 #include "Module.h"
 #include <vector>
 
-namespace math
-{
-	class Ray;
-}
-
+class Ray;
 class Entity;
 struct EntityData;
 struct HitInfo;
@@ -26,7 +22,7 @@ public:
 	bool Init(Config* config = nullptr);
 	bool CleanUp();
 
-	bool Hit(const math::Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
+	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
 
 	Entity* EntityFactory(const EntityData& data);
 

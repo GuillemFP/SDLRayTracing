@@ -6,7 +6,7 @@
 struct MaterialData
 {
 	Material::Type type;
-	math::float3 albedo;
+	Vector3 albedo;
 	float fuzziness = 0.0f;
 	float refractiveIndex = 1.0f;
 };

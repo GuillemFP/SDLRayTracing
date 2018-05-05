@@ -34,6 +34,9 @@
     <Filter Include="Entities\Materials">
       <UniqueIdentifier>{0798468b-0a4e-4b68-bbed-6be77eac1424}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\Math">
+      <UniqueIdentifier>{45e35a76-a938-4f96-a95a-fca128263ced}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -90,11 +93,14 @@
     <ClCompile Include="Metal.cpp">
       <Filter>Entities\Materials</Filter>
     </ClCompile>
-    <ClCompile Include="MathUtils.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Dielectric.cpp">
       <Filter>Entities\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="MathUtils.cpp">
+      <Filter>Utils\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector3.cpp">
+      <Filter>Utils\Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,9 +118,6 @@
     </ClInclude>
     <ClInclude Include="MathGeoLib\include\MathGeoLib.h">
       <Filter>3rd Party\MathGeoLib</Filter>
-    </ClInclude>
-    <ClInclude Include="Math.h">
-      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="ModuleInput.h">
       <Filter>Modules\Core</Filter>
@@ -179,11 +182,20 @@
     <ClInclude Include="Metal.h">
       <Filter>Entities\Materials</Filter>
     </ClInclude>
-    <ClInclude Include="MathUtils.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="Dielectric.h">
       <Filter>Entities\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Utils\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MathUtils.h">
+      <Filter>Utils\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Ray.h">
+      <Filter>Utils\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3.h">
+      <Filter>Utils\Math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

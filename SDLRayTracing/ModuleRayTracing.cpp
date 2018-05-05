@@ -112,12 +112,12 @@ update_status ModuleRayTracing::Update()
 
 Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 {
-	math::float3 color = math::float3::zero;
+	Vector3 color = Vector3::zero;
 	for (int i = 0; i < _samplesPerPixel; i++)
 	{
 		float u = float(xPixel + _randomGenerator->Float()) / float(_pixelsWidth);
 		float v = float(yPixel + _randomGenerator->Float()) / float(_pixelsHeight);
-		math::Ray ray = App->_camera->GenerateRay(u, v, *_randomGenerator);
+		Ray ray = App->_camera->GenerateRay(u, v, *_randomGenerator);
 		color += CalculateRayColor(ray, 0);
 	}
 	Color averagedColor(color / _samplesPerPixel);
@@ -128,7 +128,7 @@ Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 #endif
 }
 
-math::float3 ModuleRayTracing::CalculateRayColor(const math::Ray& ray, int depth) const
+Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth) const
 {
 	HitInfo hitInfo;
 	bool isHit = App->_entities->Hit(ray, _minDistance, _maxDistance, hitInfo);
@@ -138,7 +138,7 @@ math::float3 ModuleRayTracing::CalculateRayColor(const math::Ray& ray, int depth
 		ScatterInfo scatterInfo;
 		if (depth < _maxScatters && hitInfo.material->Scatter(ray, hitInfo, scatterInfo, *_randomGenerator))
 		{
-			math::float3 color = math::float3::zero;
+			Vector3 color = Vector3::zero;
 			if (scatterInfo.reflects)
 			{
 				color += scatterInfo.reflectionCoeff * CalculateRayColor(scatterInfo.reflectedRay, depth + 1);
@@ -148,20 +148,19 @@ math::float3 ModuleRayTracing::CalculateRayColor(const math::Ray& ray, int depth
 				color += scatterInfo.refractionCoeff * CalculateRayColor(scatterInfo.refractedRay, depth + 1);
 			}
 
-			return scatterInfo.attenuation.Mul(color);
+			return scatterInfo.attenuation * color;
 		}
 
-		return math::float3::zero;
+		return Vector3::zero;
 	}
 	
 	return CalculateBackgroundColor(ray);
 }
 
-math::float3 ModuleRayTracing::CalculateBackgroundColor(const math::Ray& ray) const
+Vector3 ModuleRayTracing::CalculateBackgroundColor(const Ray& ray) const
 {
-	math::float3 direction = ray.dir;
-	float t = 0.5f * (direction.y + 1.0f);
-	return (1.0f - t) * math::float3::one + t * math::float3(0.5f, 0.7f, 1.0f);
+	float t = 0.5f * (ray.dir.y() + 1.0f);
+	return (1.0f - t) * Vector3::one + t * Vector3(0.5f, 0.7f, 1.0f);
 }
 
 void ModuleRayTracing::InitFile()

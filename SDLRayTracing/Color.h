@@ -1,17 +1,14 @@
 #ifndef COLOR_H
 #define COLOR_H
 
-namespace math
-{
-	class float3;
-}
+class Vector3;
 
 struct Color
 {
 public:
 	Color() = default;
 	Color(float r, float g, float b, float a = 1.0f);
-	Color(const math::float3& color);
+	Color(const Vector3& color);
 	~Color() = default;
 
 	void SetColor(float r, float g, float b);

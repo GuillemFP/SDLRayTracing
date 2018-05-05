@@ -8,15 +8,15 @@
 
 namespace
 {
-	float CosineIncidentAngle(const math::float3& normal, const math::float3& inVector)
+	float CosineIncidentAngle(const Vector3& normal, const Vector3& inVector)
 	{
-		return -normal.Dot(inVector);
+		return -dot(normal, inVector);
 	}
 
 	//Snell's law vectorial form
 	// v_refract = r v + (r c - sqrt(1 - r^2 (1 - c^2))) n
 	// r = n1/n2, c = - n * v
-	bool Refracts(const math::float3& inVector, const math::float3& normal, float refractionFactorRatio, math::float3& refracted)
+	bool Refracts(const Vector3& inVector, const Vector3& normal, float refractionFactorRatio, Vector3& refracted)
 	{
 		float c = CosineIncidentAngle(normal, inVector);
 		float discriminant = 1 - refractionFactorRatio * refractionFactorRatio * (1 - c * c);
@@ -47,13 +47,13 @@ Dielectric::~Dielectric()
 {
 }
 
-bool Dielectric::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
+bool Dielectric::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
-	math::float3 normal;
+	Vector3 normal;
 	float refractionFactorRatio;
 
 	// Positive value means ray crossing dielectric from inside to outside
-	if (ray.dir.Dot(hitInfo.normal) > 0)
+	if (dot(ray.dir, hitInfo.normal) > 0)
 	{
 		normal = -hitInfo.normal;
 		refractionFactorRatio = _refractiveIndex;	
@@ -65,8 +65,8 @@ bool Dielectric::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterIn
 	}
 	float cosine = CosineIncidentAngle(normal, ray.dir);
 
-	math::float3 refracted;
-	scatterInfo.attenuation = math::float3::one;
+	Vector3 refracted;
+	scatterInfo.attenuation = Vector3::one;
 	if (Refracts(ray.dir, normal, refractionFactorRatio, refracted))
 	{
 		float reflectionCoefficient = SchlickApproximation(refractionFactorRatio, cosine);
@@ -74,7 +74,7 @@ bool Dielectric::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterIn
 		if (randomGenerator.Float() >= reflectionCoefficient)
 		{
 			scatterInfo.refracts = true;
-			scatterInfo.refractedRay = math::Ray(hitInfo.point, refracted);
+			scatterInfo.refractedRay = Ray(hitInfo.point, refracted);
 			return true;
 		}
 #else
@@ -82,7 +82,7 @@ bool Dielectric::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterIn
 
 		scatterInfo.refracts = true;
 		scatterInfo.refractionCoeff = 1.0f - reflectionCoefficient;
-		scatterInfo.refractedRay = math::Ray(hitInfo.point, refracted);
+		scatterInfo.refractedRay = Ray(hitInfo.point, refracted);
 		if (scatterInfo.refractionCoeff >= 1.0f)
 		{
 			return true;
@@ -91,7 +91,7 @@ bool Dielectric::Scatter(const math::Ray& ray, const HitInfo& hitInfo, ScatterIn
 	}
 
 	scatterInfo.reflects = true;
-	scatterInfo.reflectedRay = math::Ray(hitInfo.point, MathUtils::ReflectedVector(ray.dir, hitInfo.normal));
+	scatterInfo.reflectedRay = Ray(hitInfo.point, MathUtils::ReflectedVector(ray.dir, hitInfo.normal));
 	return true;
 }
 

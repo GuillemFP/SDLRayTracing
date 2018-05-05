@@ -6,7 +6,7 @@
 
 namespace ParseUtils
 {
-	math::float3 ParseVector(const ConfigArray& config, const math::float3& defaultValue)
+	math::float3 ParseFloat3(const ConfigArray& config, const math::float3& defaultValue)
 	{
 		math::float3 vector;
 
@@ -15,6 +15,11 @@ namespace ParseUtils
 		vector.z = config.GetFloat(2, defaultValue.z);
 
 		return vector;
+	}
+
+	Vector3 ParseVector(const ConfigArray& config, const Vector3& defaultValue)
+	{
+		return ParseFloat3(config, defaultValue.toFloat3());
 	}
 
 	EntityData ParseEntityData(const Config& config)
