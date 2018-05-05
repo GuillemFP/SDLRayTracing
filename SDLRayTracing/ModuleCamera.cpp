@@ -12,40 +12,52 @@ ModuleCamera::ModuleCamera() : Module(MODULECAMERA_NAME)
 
 bool ModuleCamera::Init(Config* config)
 {
-	int pixelsWidth = App->_window->GetWindowsWidth();
-	int pixelsHeight = App->_window->GetWindowsHeight();
+	_frustum = new math::Frustum();
+	_frustum->SetKind(math::FrustumProjectiveSpace::FrustumSpaceGL, math::FrustumHandedness::FrustumRightHanded);
 
-	_origin = ParseUtils::ParseVector(config->GetArray("Origin"));
-	_front = ParseUtils::ParseVector(config->GetArray("Front"));
-	_up = ParseUtils::ParseVector(config->GetArray("Up"));
-	_right = ParseUtils::ParseVector(config->GetArray("Right"));
+	float vFov = config->GetFloat("Vertical FOV", 60.0f);
+	float aspectRatio = config->GetFloat("Aspect Ratio", 1.5f);
+	_frustum->SetVerticalFovAndAspectRatio(vFov * DEG_TO_RAD, aspectRatio);
+	_frustum->SetViewPlaneDistances(1.0f, 2.0f);
 
-	Config viewport = config->GetSection("Viewport");
+	math::float3 position = ParseUtils::ParseVector(config->GetArray("Position"));
+	math::float3 lookAt = ParseUtils::ParseVector(config->GetArray("LookAt"));
+	_frustum->SetPos(position);
+	_frustum->SetFrame(position, math::float3::unitZ, math::float3::unitY);
+	LookAt(lookAt);
 
-	float viewportWidth = viewport.GetFloat("Width");
-	float viewportHeight = viewport.GetFloat("Height");
-	float viewportDistance = viewport.GetFloat("Distance");
-
-	_viewportWidthVector = viewportWidth * _right;
-	_viewportHeightVector = viewportHeight * _up;
-	_cornerBottomLeft = _origin + viewportDistance * _front - 0.5f * _viewportWidthVector - 0.5f * _viewportHeightVector;
+	_position = _frustum->Pos();
+	math::float3 up = _frustum->Up();
+	math::float3 right = _frustum->WorldRight();
+	
+	math::float3 corners[8];
+	_frustum->GetCornerPoints(corners);
+	_cornerBottomLeft = corners[0];
+	_viewportWidthVector = corners[1] - _cornerBottomLeft;
+	_viewportHeightVector = corners[2] - _cornerBottomLeft;
 
 	return true;
 }
 
 bool ModuleCamera::CleanUp()
 {
+	RELEASE(_frustum);
+
 	return true;
 }
 
-float ModuleCamera::GetViewportDistance() const
+void ModuleCamera::LookAt(const math::float3& lookAt)
 {
-	return (_cornerBottomLeft - _origin).Dot(_front);
+	math::float3 direction = (lookAt - _frustum->Pos()).Normalized();
+	math::float3x3 matrix = math::float3x3::LookAt(_frustum->Front(), direction, _frustum->Up(), math::float3::unitY);
+
+	_frustum->SetFront(matrix.MulDir(_frustum->Front()).Normalized());
+	_frustum->SetUp(matrix.MulDir(_frustum->Up()).Normalized());
 }
 
 math::Ray ModuleCamera::GenerateRay(float widthFactor, float heightFactor) const
 {
 	math::float3 viewportPosition = _cornerBottomLeft + _viewportWidthVector * widthFactor + _viewportHeightVector * heightFactor;
-	math::float3 unitVector = (viewportPosition - _origin).Normalized();
-	return math::Ray(_origin, unitVector);
+	math::float3 unitVector = (viewportPosition - _position).Normalized();
+	return math::Ray(_position, unitVector);
 }
