@@ -117,7 +117,7 @@ Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 	{
 		float u = float(xPixel + _randomGenerator->Float()) / float(_pixelsWidth);
 		float v = float(yPixel + _randomGenerator->Float()) / float(_pixelsHeight);
-		math::Ray ray = App->_camera->GenerateRay(u, v);
+		math::Ray ray = App->_camera->GenerateRay(u, v, *_randomGenerator);
 		color += CalculateRayColor(ray, 0);
 	}
 	Color averagedColor(color / _samplesPerPixel);

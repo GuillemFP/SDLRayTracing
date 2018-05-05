@@ -9,6 +9,16 @@ namespace MathUtils
 		math::float3 ret;
 		do
 		{
+			ret = 2.0f * math::float3(randomGenerator.Float(), randomGenerator.Float(), 0.0f) - math::float3(1.0f, 1.0f, 0.0f);
+		} while (ret.Dot(ret) >= 1.0f);
+		return ret;
+	}
+
+	math::float3 RandomPointInDisk(math::LCG& randomGenerator)
+	{
+		math::float3 ret;
+		do
+		{
 			ret = 2.0f * math::float3(randomGenerator.Float(), randomGenerator.Float(), randomGenerator.Float()) - math::float3::one;
 		} while (ret.DistanceSq(math::float3::zero) >= 1.0f);
 		return ret;

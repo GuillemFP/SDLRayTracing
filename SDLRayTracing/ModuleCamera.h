@@ -10,6 +10,7 @@
 namespace math
 {
 	class Frustum;
+	class LCG;
 }
 
 class ModuleCamera : public Module
@@ -23,15 +24,20 @@ public:
 
 	void LookAt(const math::float3& lookAt);
 
-	math::Ray GenerateRay(float widthFactor, float heigthFactor) const;
+	math::Ray GenerateRay(float widthFactor, float heigthFactor, math::LCG& randomGenerator) const;
 
 private:
 	math::Frustum* _frustum;
 
 	math::float3 _position;
+	math::float3 _up;
+	math::float3 _right;
+
 	math::float3 _cornerBottomLeft;
 	math::float3 _viewportWidthVector;
 	math::float3 _viewportHeightVector;
+
+	float _lensRadius = 0.0f;
 };
 
 #endif // !CAMERA_H
