@@ -12,6 +12,7 @@
 #include "ModuleWindow.h"
 #include "ScatterInfo.h"
 #include "Timer.h"
+#include <omp.h>
 
 ModuleRayTracing::ModuleRayTracing() : Module(MODULERAYTRACING_NAME)
 {
@@ -37,6 +38,7 @@ bool ModuleRayTracing::Init(Config* config)
 
 	_pixelsWidth = App->_window->GetWindowsWidth();
 	_pixelsHeight = App->_window->GetWindowsHeight();
+	_colorRow = new Color[_pixelsWidth];
 
 	_currentX = GetInitialPixelX();
 	_currentY = GetInitialPixelY();
@@ -61,6 +63,7 @@ bool ModuleRayTracing::CleanUp()
 	RELEASE(_frequencyTimer);
 
 	RELEASE(_randomGenerator);
+	RELEASE_ARRAY(_colorRow);
 
 	return true;
 }
@@ -73,24 +76,24 @@ update_status ModuleRayTracing::Update()
 	}
 
 	_frequencyTimer->Start();
-	for (int i = 0; i < _pixelsPerUpdate; i++)
+	#pragma omp parallel for
+	for (int i = 0; i < _pixelsWidth; i++)
 	{
-		Color color = CalculatePixelColor(_currentX, _currentY);
-		App->_renderer->DrawPixel(color, _currentX, _currentY);
-		WriteColor(color);
+		_colorRow[i] = CalculatePixelColor(i, _currentY);
+	}
 
-		if (++_currentX >= _pixelsWidth)
-		{
-			_currentX = 0;
-			if (--_currentY < 0)
-			{
-				_screenFinished = true;
-				float seconds = _rayTracingTime->GetTimeInS();
-				APPLOG("RayTracing finished after %f seconds", seconds);
-				_rayTracingTime->Stop();
-				break;
-			}
-		}
+	for (int i = 0; i < _pixelsWidth; i++)
+	{
+		App->_renderer->DrawPixel(_colorRow[i], i, _currentY);
+		WriteColor(_colorRow[i]);
+	}
+
+	if (--_currentY < 0)
+	{
+		_screenFinished = true;
+		float seconds = _rayTracingTime->GetTimeInS();
+		APPLOG("RayTracing finished after %f seconds", seconds);
+		_rayTracingTime->Stop();
 	}
 
 	_accumulatedMs += _frequencyTimer->GetTimeInMs();

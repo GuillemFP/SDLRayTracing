@@ -69,6 +69,8 @@ private:
 
 	Timer* _rayTracingTime = nullptr;
 	Timer* _frequencyTimer = nullptr;
+
+	Color* _colorRow = nullptr;
 };
 
 #endif // !MODULERAYTRACING_H
