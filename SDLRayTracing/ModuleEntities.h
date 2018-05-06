@@ -8,6 +8,12 @@
 #include "Module.h"
 #include <vector>
 
+namespace math
+{
+	class LCG;
+}
+
+class Vector3;
 class Ray;
 class Entity;
 struct EntityData;
@@ -27,6 +33,9 @@ public:
 	Entity* EntityFactory(const EntityData& data);
 
 private:
+	void InitRandomSpheres();
+	void InitRandomSphere(const Vector3& center, float radius, math::LCG& randomGenerator);
+
 	std::vector<Entity*> _entities;
 };
 

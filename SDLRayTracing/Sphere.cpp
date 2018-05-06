@@ -3,7 +3,7 @@
 #include "HitInfo.h"
 #include "Math.h"
 
-Sphere::Sphere(Material* material, float radius, const Vector3& center) : Entity(Type::Sphere, material), _radius(radius), _center(center)
+Sphere::Sphere(Material* material, float radius, const Vector3& center) : Entity(Type::Sphere, material, center), _radius(radius)
 {
 }
 
@@ -58,4 +58,9 @@ bool Sphere::CheckRoot(const Ray& ray, float root, float minDistance, float maxD
 Vector3 Sphere::GetNormal(const Vector3& surfacePoint) const
 {
 	return (surfacePoint - _center) / _radius;
+}
+
+float Sphere::GetRadius() const
+{
+	return _radius;
 }

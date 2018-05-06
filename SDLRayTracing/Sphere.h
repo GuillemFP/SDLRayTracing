@@ -11,6 +11,7 @@ public:
 	~Sphere();
 
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
+	float GetRadius() const;
 
 protected:
 	Vector3 GetNormal(const Vector3& surfacePoint) const;
@@ -18,7 +19,6 @@ protected:
 
 private:
 	float _radius = 1.0f;
-	Vector3 _center;
 };
 
 #endif // !SPHERE_H
