@@ -2,14 +2,15 @@
 	"Config": {
 		"ModuleInput": {},
 		"ModuleWindow": {
-			"WindowWidth": 800,
-			"WindowHeight": 600
+			"WindowWidth": 400,
+			"WindowHeight": 300
 		},
 		"ModuleRender": {},
 		"ModuleCamera": {
 			"Position": [8.0, 2.0, 2.0],
 			"LookAt" : [0.0, 0.0, 0.0],
-			"Aperture" : 0.0,
+			"FocusPoint" : [4.0, 0.0, 0.0],
+			"Aperture" : 0.1,
 			"Vertical FOV" : 40,
 			"Aspect Ratio" : 1.5
 		},
@@ -19,8 +20,8 @@
 		"ModuleRayTracing": {
 			"MinDistance": 0.001,
 			"MaxDistance": 1000,
-			"MaxScatters": 50,
-			"SamplesPerPixel": 50,
+			"MaxScatters": 25,
+			"SamplesPerPixel": 25,
 			"MaxNumberOfThreads": 4
 		}
 	}

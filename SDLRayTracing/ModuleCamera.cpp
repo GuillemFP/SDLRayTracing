@@ -23,7 +23,8 @@ bool ModuleCamera::Init(Config* config)
 
 	Vector3 position = ParseUtils::ParseVector(config->GetArray("Position"));
 	Vector3 lookAt = ParseUtils::ParseVector(config->GetArray("LookAt"));
-	float distanceToFocus = (lookAt - position).length();
+	Vector3 focusPoint = ParseUtils::ParseVector(config->GetArray("FocusPoint"));
+	float distanceToFocus = (focusPoint - position).length();
 
 	_frustum->SetViewPlaneDistances(distanceToFocus, distanceToFocus + 1.0f);
 	_frustum->SetPos(position.toFloat3());

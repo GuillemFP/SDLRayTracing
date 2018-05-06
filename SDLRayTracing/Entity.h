@@ -24,8 +24,6 @@ public:
 	Type GetType() const;
 
 protected:
-	virtual Vector3 GetNormal(const Vector3& surfacePoint) const = 0;
-
 	Material* _material = nullptr;
 	Vector3 _center;
 

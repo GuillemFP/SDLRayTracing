@@ -14,8 +14,10 @@ public:
 	float GetRadius() const;
 
 protected:
-	Vector3 GetNormal(const Vector3& surfacePoint) const;
-	bool CheckRoot(const Ray& ray, float root, float minDistance, float maxDistance, HitInfo& hitInfo) const;
+	inline Vector3 GetNormal(const Vector3& surfacePoint) const
+	{
+		return (surfacePoint - _center) / _radius;
+	}
 
 private:
 	float _radius = 1.0f;

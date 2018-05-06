@@ -26,26 +26,21 @@ bool Sphere::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& 
 
 	float squaredDiscriminant = sqrt(discriminant);
 	float negativeRoot = (-b - squaredDiscriminant) / a;
-	if (CheckRoot(ray, negativeRoot, minDistance, maxDistance, hitInfo))
+	if (negativeRoot < maxDistance && negativeRoot > minDistance)
 	{
+		hitInfo.distance = negativeRoot;
+		hitInfo.point = ray.getPoint(negativeRoot);
+		hitInfo.normal = GetNormal(hitInfo.point);
+		hitInfo.isHit = true;
+		hitInfo.material = _material;
 		return true;
 	}
 
 	float positiveRoot = (-b + squaredDiscriminant) / a;
-	if (CheckRoot(ray, positiveRoot, minDistance, maxDistance, hitInfo))
+	if (positiveRoot < maxDistance && positiveRoot > minDistance)
 	{
-		return true;
-	}
-
-	return false;
-}
-
-bool Sphere::CheckRoot(const Ray& ray, float root, float minDistance, float maxDistance, HitInfo& hitInfo) const
-{
-	if (root < maxDistance && root > minDistance)
-	{
-		hitInfo.distance = root;
-		hitInfo.point = ray.getPoint(root);
+		hitInfo.distance = positiveRoot;
+		hitInfo.point = ray.getPoint(positiveRoot);
 		hitInfo.normal = GetNormal(hitInfo.point);
 		hitInfo.isHit = true;
 		hitInfo.material = _material;
@@ -53,11 +48,6 @@ bool Sphere::CheckRoot(const Ray& ray, float root, float minDistance, float maxD
 	}
 
 	return false;
-}
-
-Vector3 Sphere::GetNormal(const Vector3& surfacePoint) const
-{
-	return (surfacePoint - _center) / _radius;
 }
 
 float Sphere::GetRadius() const
