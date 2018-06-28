@@ -1,37 +1,23 @@
-## Welcome to GitHub Pages
+This is a small personal project to better understand raytracers. It's done by following the Peter Shirley's books "Raytracing in one weekend" and continuations.
 
-You can use the [editor on GitHub](https://github.com/GuillemFP/SDLRayTracing/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Basics
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+I'm using SDL to render the image to screen but will probably switch to OpenGL if eventually I want to add some fancy imGui stuff. Also, the project is build with an update pattern in case later I want to add some small animated rendering.
 
-### Markdown
+This project will probably advance slowly as I'm not full time invested in it.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Current state
 
-```markdown
-Syntax highlighted code block
+<p align="center">
+  <img src="spheres.png" alt="hi" class="inline" width="400"/>
+</p>
 
-# Header 1
-## Header 2
-### Header 3
+Right now, there is small optimizations apart from OpenMP for the main raycasting method. The next step will probably be some spatial optimization to try to gain some speed.
 
-- Bulleted
-- List
+### Project information
 
-1. Numbered
-2. List
+Full project at github: https://github.com/GuillemFP/SDLRayTracing
 
-**Bold** and _Italic_ and `Code` text
+Author: Guillem Ferré
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/GuillemFP/SDLRayTracing/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Contact: guillemferre@gmail.com
