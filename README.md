@@ -16,7 +16,7 @@ Right now, there is small optimizations apart from OpenMP for the main raycastin
 
 ### Project information
 
-Full project at github: https://github.com/GuillemFP/SDLRayTracing
+Full project at github: [https://github.com/GuillemFP/SDLRayTracing](https://github.com/GuillemFP/SDLRayTracing)
 
 Author: Guillem Ferré
 
