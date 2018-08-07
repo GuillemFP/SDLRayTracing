@@ -30,7 +30,7 @@ public:
 
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
 
-	Entity* EntityFactory(const EntityData& data);
+	void EntityFactory(const EntityData& data);
 
 	const VEntity& GetEntities() const
 	{

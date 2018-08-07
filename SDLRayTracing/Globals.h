@@ -45,6 +45,9 @@ enum update_status
 #define DIELECTRIC_R_COEFFICIENT_PROBABILITY 1
 #define GAMMA_CORRECTION 1
 
+// Optimization
+#define USE_OOP 0
+
 // Parallelization
 #define USE_OPENMP_PIXEL_LOOP 0
 

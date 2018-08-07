@@ -51,8 +51,10 @@ bool ModuleEntities::Init(Config* config)
 
 bool ModuleEntities::CleanUp()
 {
+#if USE_OOP
 	for (VEntity::reverse_iterator it = _entities.rbegin(); it != _entities.rend(); ++it)
 		RELEASE(*it);
+#endif // USE_OOP
 
 #if USE_CUDA
 	cudaFree(_dEntities);
@@ -61,8 +63,9 @@ bool ModuleEntities::CleanUp()
 	return true;
 }
 
-Entity* ModuleEntities::EntityFactory(const EntityData& data)
+void ModuleEntities::EntityFactory(const EntityData& data)
 {
+#if USE_OOP
 	Material* material = App->_materials->LoadMaterial(data.materialData);
 
 	const ShapeData& shapeData = data.shapeData;
@@ -77,13 +80,13 @@ Entity* ModuleEntities::EntityFactory(const EntityData& data)
 
 	if (!material || !shape)
 	{
-		return nullptr;
+		return;
 	}
 
-	Entity* entity = new Entity(shape, material);
-	_entities.push_back(entity);
-
-	return entity;
+	_entities.push_back(new Entity(shape, material));
+#else
+	_entities.push_back(Entity(data.shapeData, data.materialData));
+#endif // USE_OOP
 }
 
 void ModuleEntities::InitRandomSpheres()

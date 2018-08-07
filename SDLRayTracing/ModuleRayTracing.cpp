@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "Color.h"
 #include "Config.h"
+#include "Globals.h"
 #include "HitInfo.h"
 #include "Math.h"
 #include "Material.h"
@@ -24,7 +25,11 @@ namespace
 
 		for (VEntity::const_iterator it = entities.cbegin(); it != entities.cend(); ++it)
 		{
+#if USE_OOP
 			if ((*it)->Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
+#else
+			if ((*it).Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
+#endif // USE_OPP
 			{
 				currentMaxDistance = currentHitInfo.distance;
 				hitInfo = currentHitInfo;
@@ -170,7 +175,7 @@ Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth, const VEn
 	if (isHit)
 	{
 		ScatterInfo scatterInfo;
-		if (depth < _maxScatters && hitInfo.material->Scatter(ray, hitInfo, scatterInfo, *_randomGenerator))
+		if (depth < _maxScatters && hitInfo.entity->Scatter(ray, hitInfo, scatterInfo, *_randomGenerator))
 		{
 			Vector3 color = Vector3::zero;
 			if (scatterInfo.reflects)

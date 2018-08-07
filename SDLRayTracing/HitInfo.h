@@ -3,7 +3,7 @@
 
 #include "Vector3.h"
 
-class Material;
+class Entity;
 
 struct HitInfo
 {
@@ -11,7 +11,7 @@ struct HitInfo
 	float distance = 0.0f;
 	Vector3 point;
 	Vector3 normal;
-	const Material* material;
+	const Entity* entity;
 };
 
 #endif // !HITINFO_H
