@@ -2,7 +2,6 @@
 
 #include "Application.h"
 #include "Config.h"
-#include "Entity.h"
 #include "EntityData.h"
 #include "HitInfo.h"
 #include "Material.h"
@@ -52,7 +51,7 @@ bool ModuleEntities::Init(Config* config)
 
 bool ModuleEntities::CleanUp()
 {
-	for (std::vector<Entity*>::reverse_iterator it = _entities.rbegin(); it != _entities.rend(); ++it)
+	for (VEntity::reverse_iterator it = _entities.rbegin(); it != _entities.rend(); ++it)
 		RELEASE(*it);
 
 #if USE_CUDA

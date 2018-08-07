@@ -6,6 +6,7 @@
 class Ray;
 class Material;
 struct HitInfo;
+struct ShapeData;
 
 class Shape
 {
@@ -19,6 +20,7 @@ public:
 	Shape(Type type, const Vector3& center);
 	~Shape();
 
+	static bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const ShapeData& shapeData);
 	virtual bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const = 0;
 
 protected:

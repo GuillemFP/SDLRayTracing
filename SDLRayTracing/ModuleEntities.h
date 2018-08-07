@@ -6,6 +6,7 @@
 #define ENTITIES_CONFIGFILE "scene.json"
 
 #include "Module.h"
+#include "Entity.h"
 #include <vector>
 
 namespace math
@@ -15,7 +16,6 @@ namespace math
 
 class Vector3;
 class Ray;
-class Entity;
 struct EntityData;
 struct HitInfo;
 
@@ -32,7 +32,7 @@ public:
 
 	Entity* EntityFactory(const EntityData& data);
 
-	const std::vector<Entity*>& GetEntities() const
+	const VEntity& GetEntities() const
 	{
 		return _entities;
 	}
@@ -41,7 +41,7 @@ private:
 	void InitRandomSpheres();
 	void InitRandomSphere(const Vector3& center, float radius, math::LCG& randomGenerator);
 
-	std::vector<Entity*> _entities;
+	VEntity _entities;
 
 #if USE_CUDA
 	Entity* _dEntities;

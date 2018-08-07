@@ -5,6 +5,7 @@
 
 #include "Module.h"
 #include "Color.h"
+#include "Entity.h"
 #include "Vector3.h"
 #include "SDL\include\SDL_stdinc.h"
 #include <iostream>
@@ -15,7 +16,6 @@ namespace math
 	class LCG;
 }
 
-class Entity;
 class Ray;
 class Camera;
 class Timer;
@@ -35,7 +35,7 @@ public:
 private:
 	Color CalculatePixelColor(int xPixel, int yPixel) const;
 	
-	Vector3 CalculateRayColor(const Ray& ray, int depth, const std::vector<Entity*>& entities) const;
+	Vector3 CalculateRayColor(const Ray& ray, int depth, const VEntity& entities) const;
 
 	void InitFile();
 	void WriteColor(const Color& color);

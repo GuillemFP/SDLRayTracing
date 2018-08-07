@@ -3,7 +3,6 @@
 #include "Application.h"
 #include "Color.h"
 #include "Config.h"
-#include "Entity.h"
 #include "HitInfo.h"
 #include "Math.h"
 #include "Material.h"
@@ -18,12 +17,12 @@
 
 namespace
 {
-	bool HitEntity(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const std::vector<Entity*>& entities)
+	bool HitEntity(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const VEntity& entities)
 	{
 		HitInfo currentHitInfo;
 		float currentMaxDistance = maxDistance;
 
-		for (std::vector<Entity*>::const_iterator it = entities.cbegin(); it != entities.cend(); ++it)
+		for (VEntity::const_iterator it = entities.cbegin(); it != entities.cend(); ++it)
 		{
 			if ((*it)->Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
 			{
@@ -145,7 +144,7 @@ update_status ModuleRayTracing::Update()
 
 Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 {
-	const std::vector<Entity*>& entities = App->_entities->GetEntities();
+	const VEntity& entities = App->_entities->GetEntities();
 
 	Vector3 color = Vector3::zero;
 	for (int i = 0; i < _samplesPerPixel; i++)
@@ -163,7 +162,7 @@ Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 #endif
 }
 
-Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth, const std::vector<Entity*>& entities) const
+Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth, const VEntity& entities) const
 {
 	HitInfo hitInfo;
 	bool isHit = HitEntity(ray, _minDistance, _maxDistance, hitInfo, entities);

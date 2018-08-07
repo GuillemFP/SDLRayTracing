@@ -108,6 +108,9 @@
     <ClCompile Include="Shape.cpp">
       <Filter>Entities\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Entities\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">

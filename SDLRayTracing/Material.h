@@ -10,6 +10,7 @@ class Ray;
 class Vector3;
 struct HitInfo;
 struct ScatterInfo;
+struct MaterialData;
 
 class Material
 {
@@ -30,6 +31,7 @@ public:
 		return _type;
 	}
 
+	static bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator, const MaterialData& materialData);
 	virtual bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const = 0;
 
 private:

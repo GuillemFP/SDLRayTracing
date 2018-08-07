@@ -1,7 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "Vector3.h"
+#include <vector>
 
 class Ray;
 class Material;
@@ -20,5 +20,7 @@ protected:
 	Material* _material = nullptr;
 	Shape* _shape = nullptr;
 };
+
+using VEntity = std::vector<Entity*>;
 
 #endif // !ENTITY_H
