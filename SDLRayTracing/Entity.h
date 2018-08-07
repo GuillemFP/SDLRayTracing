@@ -28,11 +28,16 @@ public:
 	Entity(Shape* shape, Material* material);
 #else
 	Entity(const ShapeData& shapeData, const MaterialData& materialData);
+	Entity() {}
 #endif // USE_OOP
 	~Entity();
 
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
 	bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
+
+#if USE_CUDA
+	Entity Clone() const;
+#endif // USE_CUDA
 
 protected:
 #if USE_OOP
@@ -45,7 +50,7 @@ protected:
 };
 
 #if USE_OOP
-	using VEntity = std::vector<Entity*>;	
+	using VEntity = std::vector<Entity*>;
 #else
 	using VEntity = std::vector<Entity>;
 #endif // USE_OOP

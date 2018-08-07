@@ -18,11 +18,22 @@
 
 namespace
 {
-	bool HitEntity(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const VEntity& entities)
+	bool HitEntity(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const EntitiesInfo& entitiesInfo)
 	{
 		HitInfo currentHitInfo;
 		float currentMaxDistance = maxDistance;
 
+#if USE_CUDA
+		for (size_t i = 0; i < entitiesInfo.size; i++)
+		{
+			if (entitiesInfo.entities[i].Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
+			{
+				currentMaxDistance = currentHitInfo.distance;
+				hitInfo = currentHitInfo;
+			}
+		}
+#else
+		const VEntity& entities = entitiesInfo.entities;
 		for (VEntity::const_iterator it = entities.cbegin(); it != entities.cend(); ++it)
 		{
 #if USE_OOP
@@ -35,6 +46,7 @@ namespace
 				hitInfo = currentHitInfo;
 			}
 		}
+#endif // USE_CUDA
 
 		return hitInfo.isHit;
 	}
@@ -149,7 +161,11 @@ update_status ModuleRayTracing::Update()
 
 Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 {
+#if USE_CUDA
+	EntitiesInfo entities(App->_entities->GetDeviceEntities(), App->_entities->GetNumberOfEntities());
+#else
 	const VEntity& entities = App->_entities->GetEntities();
+#endif // USE_CUDA
 
 	Vector3 color = Vector3::zero;
 	for (int i = 0; i < _samplesPerPixel; i++)
@@ -167,10 +183,10 @@ Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 #endif
 }
 
-Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth, const VEntity& entities) const
+Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth, const EntitiesInfo& entitiesInfo) const
 {
 	HitInfo hitInfo;
-	bool isHit = HitEntity(ray, _minDistance, _maxDistance, hitInfo, entities);
+	bool isHit = HitEntity(ray, _minDistance, _maxDistance, hitInfo, entitiesInfo);
 
 	if (isHit)
 	{
@@ -180,11 +196,11 @@ Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth, const VEn
 			Vector3 color = Vector3::zero;
 			if (scatterInfo.reflects)
 			{
-				color += scatterInfo.reflectionCoeff * CalculateRayColor(scatterInfo.reflectedRay, depth + 1, entities);
+				color += scatterInfo.reflectionCoeff * CalculateRayColor(scatterInfo.reflectedRay, depth + 1, entitiesInfo);
 			}
 			if (scatterInfo.refracts)
 			{
-				color += scatterInfo.refractionCoeff * CalculateRayColor(scatterInfo.refractedRay, depth + 1, entities);
+				color += scatterInfo.refractionCoeff * CalculateRayColor(scatterInfo.refractedRay, depth + 1, entitiesInfo);
 			}
 
 			return scatterInfo.attenuation * color;

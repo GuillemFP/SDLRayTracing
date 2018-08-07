@@ -48,3 +48,10 @@ bool Entity::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatte
 	return Material::Scatter(ray, hitInfo, scatterInfo, randomGenerator, _materialData);
 #endif // USE_OOP
 }
+
+#if USE_CUDA
+	Entity Entity::Clone() const
+	{
+		return Entity(_shapeData, _materialData);
+	}
+#endif // USE_CUDA

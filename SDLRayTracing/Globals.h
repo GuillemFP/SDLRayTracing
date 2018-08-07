@@ -46,11 +46,21 @@ enum update_status
 #define GAMMA_CORRECTION 1
 
 // Optimization
-#define USE_OOP 0
+#define USE_OOP 1
 
 // Parallelization
 #define USE_OPENMP_PIXEL_LOOP 0
 
-#define USE_CUDA 0
+#define USE_CUDA 1
+#if USE_CUDA
+	#define USE_OOP 0
+	#define CUDA_DEVICE_CALLABLE __device__
+	#define CUDA_HOST_CALLABLE __host__
+	#define CUDA_KERNEL	__global__
+#else
+	#define CUDA_DEVICE_CALLABLE
+	#define CUDA_HOST_CALLABLE
+	#define CUDA_KERNEL
+#endif // USE_CUDA
 
 #endif // !GLOBALS_H

@@ -41,9 +41,16 @@ bool ModuleEntities::Init(Config* config)
 	}
 
 #if USE_CUDA
-	size_t size = _entities.size() * sizeof(Entity);
+	size_t numberOfEntities = _entities.size();
+	_dEntities = new Entity[numberOfEntities];
 
-	cudaMalloc((void **)&_dEntities, size);
+	for (size_t i = 0; i < numberOfEntities; i++)
+	{
+		_dEntities[i] = _entities.at(i).Clone();
+	}
+
+	//cudaMalloc((void **)&_dEntities, size);
+
 #endif // USE_CUDA
 
 	return true;
@@ -57,7 +64,9 @@ bool ModuleEntities::CleanUp()
 #endif // USE_OOP
 
 #if USE_CUDA
-	cudaFree(_dEntities);
+	RELEASE_ARRAY(_dEntities);
+
+	//cudaFree(_dEntities);
 #endif // USE_CUDA
 
 	return true;

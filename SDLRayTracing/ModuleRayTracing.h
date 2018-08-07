@@ -20,6 +20,20 @@ class Ray;
 class Camera;
 class Timer;
 
+struct EntitiesInfo
+{
+#if USE_CUDA
+	const Entity* entities;
+	size_t size;
+
+	EntitiesInfo(const Entity* entities, size_t size) : entities(entities), size(size) {}
+#else
+	const VEntity& entities;
+
+	EntitiesInfo(const VEntity& entities) : entities(entities) {}
+#endif // USE_CUDA
+};
+
 class ModuleRayTracing : public Module
 {
 public:
@@ -35,7 +49,7 @@ public:
 private:
 	Color CalculatePixelColor(int xPixel, int yPixel) const;
 	
-	Vector3 CalculateRayColor(const Ray& ray, int depth, const VEntity& entities) const;
+	Vector3 CalculateRayColor(const Ray& ray, int depth, const EntitiesInfo& entitiesInfo) const;
 
 	void InitFile();
 	void WriteColor(const Color& color);

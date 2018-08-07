@@ -37,6 +37,18 @@ public:
 		return _entities;
 	}
 
+#if USE_CUDA
+	const Entity* GetDeviceEntities() const
+	{
+		return _dEntities;
+	}
+
+	size_t GetNumberOfEntities() const
+	{
+		return _entities.size();
+	}
+#endif // USE_CUDA
+
 private:
 	void InitRandomSpheres();
 	void InitRandomSphere(const Vector3& center, float radius, math::LCG& randomGenerator);
