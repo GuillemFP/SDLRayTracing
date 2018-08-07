@@ -3,6 +3,14 @@
 #include "HitInfo.h"
 #include "Math.h"
 
+namespace
+{
+	inline Vector3 GetNormal(const Vector3& surfacePoint, const Vector3& center, const float radius)
+	{
+		return (surfacePoint - center) / radius;
+	}
+}
+
 Sphere::Sphere(float radius, const Vector3& center) : Shape(Type::Sphere, center), _radius(radius)
 {
 }
@@ -11,12 +19,12 @@ Sphere::~Sphere()
 {
 }
 
-bool Sphere::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
+bool Sphere::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const Vector3& center, const float radius)
 {
-	Vector3 oc = ray.pos - _center;
+	Vector3 oc = ray.pos - center;
 	float a = dot(ray.dir, ray.dir);
 	float b = dot(oc, ray.dir);
-	float c = dot(oc, oc) - _radius*_radius;
+	float c = dot(oc, oc) - radius*radius;
 	float discriminant = b*b - a*c;
 	if (discriminant <= 0.0f)
 	{
@@ -30,7 +38,7 @@ bool Sphere::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& 
 	{
 		hitInfo.distance = negativeRoot;
 		hitInfo.point = ray.getPoint(negativeRoot);
-		hitInfo.normal = GetNormal(hitInfo.point);
+		hitInfo.normal = GetNormal(hitInfo.point, center, radius);
 		return true;
 	}
 
@@ -39,11 +47,16 @@ bool Sphere::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& 
 	{
 		hitInfo.distance = positiveRoot;
 		hitInfo.point = ray.getPoint(positiveRoot);
-		hitInfo.normal = GetNormal(hitInfo.point);
+		hitInfo.normal = GetNormal(hitInfo.point, center, radius);
 		return true;
 	}
 
 	return false;
+}
+
+bool Sphere::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
+{
+	return Hit(ray, minDistance, maxDistance, hitInfo, _center, _radius);
 }
 
 float Sphere::GetRadius() const

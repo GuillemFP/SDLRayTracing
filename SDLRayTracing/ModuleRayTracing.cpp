@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "Color.h"
 #include "Config.h"
+#include "Entity.h"
 #include "HitInfo.h"
 #include "Math.h"
 #include "Material.h"
@@ -14,6 +15,32 @@
 #include "Timer.h"
 #include <omp.h>
 #include <algorithm>
+
+namespace
+{
+	bool HitEntity(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const std::vector<Entity*>& entities)
+	{
+		HitInfo currentHitInfo;
+		float currentMaxDistance = maxDistance;
+
+		for (std::vector<Entity*>::const_iterator it = entities.cbegin(); it != entities.cend(); ++it)
+		{
+			if ((*it)->Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
+			{
+				currentMaxDistance = currentHitInfo.distance;
+				hitInfo = currentHitInfo;
+			}
+		}
+
+		return hitInfo.isHit;
+	}
+
+	Vector3 CalculateBackgroundColor(const Ray& ray)
+	{
+		float t = 0.5f * (ray.dir.y() + 1.0f);
+		return (1.0f - t) * Vector3::one + t * Vector3(0.5f, 0.7f, 1.0f);
+	}
+}
 
 ModuleRayTracing::ModuleRayTracing() : Module(MODULERAYTRACING_NAME)
 {
@@ -118,13 +145,15 @@ update_status ModuleRayTracing::Update()
 
 Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 {
+	const std::vector<Entity*>& entities = App->_entities->GetEntities();
+
 	Vector3 color = Vector3::zero;
 	for (int i = 0; i < _samplesPerPixel; i++)
 	{
 		float u = float(xPixel + _randomGenerator->Float()) / float(_pixelsWidth);
 		float v = float(yPixel + _randomGenerator->Float()) / float(_pixelsHeight);
 		Ray ray = App->_camera->GenerateRay(u, v, *_randomGenerator);
-		color += CalculateRayColor(ray, 0);
+		color += CalculateRayColor(ray, 0, entities);
 	}
 	Color averagedColor(color / _samplesPerPixel);
 #if GAMMA_CORRECTION
@@ -134,10 +163,10 @@ Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 #endif
 }
 
-Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth) const
+Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth, const std::vector<Entity*>& entities) const
 {
 	HitInfo hitInfo;
-	bool isHit = App->_entities->Hit(ray, _minDistance, _maxDistance, hitInfo);
+	bool isHit = HitEntity(ray, _minDistance, _maxDistance, hitInfo, entities);
 
 	if (isHit)
 	{
@@ -147,11 +176,11 @@ Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth) const
 			Vector3 color = Vector3::zero;
 			if (scatterInfo.reflects)
 			{
-				color += scatterInfo.reflectionCoeff * CalculateRayColor(scatterInfo.reflectedRay, depth + 1);
+				color += scatterInfo.reflectionCoeff * CalculateRayColor(scatterInfo.reflectedRay, depth + 1, entities);
 			}
 			if (scatterInfo.refracts)
 			{
-				color += scatterInfo.refractionCoeff * CalculateRayColor(scatterInfo.refractedRay, depth + 1);
+				color += scatterInfo.refractionCoeff * CalculateRayColor(scatterInfo.refractedRay, depth + 1, entities);
 			}
 
 			return scatterInfo.attenuation * color;
@@ -161,12 +190,6 @@ Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth) const
 	}
 	
 	return CalculateBackgroundColor(ray);
-}
-
-Vector3 ModuleRayTracing::CalculateBackgroundColor(const Ray& ray) const
-{
-	float t = 0.5f * (ray.dir.y() + 1.0f);
-	return (1.0f - t) * Vector3::one + t * Vector3(0.5f, 0.7f, 1.0f);
 }
 
 void ModuleRayTracing::InitFile()

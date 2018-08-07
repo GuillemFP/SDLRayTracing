@@ -15,6 +15,7 @@ namespace math
 	class LCG;
 }
 
+class Entity;
 class Ray;
 class Camera;
 class Timer;
@@ -34,8 +35,7 @@ public:
 private:
 	Color CalculatePixelColor(int xPixel, int yPixel) const;
 	
-	Vector3 CalculateRayColor(const Ray& ray, int depth) const;
-	Vector3 CalculateBackgroundColor(const Ray& ray) const;
+	Vector3 CalculateRayColor(const Ray& ray, int depth, const std::vector<Entity*>& entities) const;
 
 	void InitFile();
 	void WriteColor(const Color& color);

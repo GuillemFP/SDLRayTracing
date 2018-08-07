@@ -41,11 +41,11 @@ bool ModuleEntities::Init(Config* config)
 		InitRandomSpheres();
 	}
 
-#if USE_CUDA_ENTITIES
+#if USE_CUDA
 	size_t size = _entities.size() * sizeof(Entity);
 
 	cudaMalloc((void **)&_dEntities, size);
-#endif // USE_CUDA_ENTITIES
+#endif // USE_CUDA
 
 	return true;
 }
@@ -55,28 +55,11 @@ bool ModuleEntities::CleanUp()
 	for (std::vector<Entity*>::reverse_iterator it = _entities.rbegin(); it != _entities.rend(); ++it)
 		RELEASE(*it);
 
-#if USE_CUDA_ENTITIES
+#if USE_CUDA
 	cudaFree(_dEntities);
-#endif // USE_CUDA_ENTITIES
+#endif // USE_CUDA
 
 	return true;
-}
-
-bool ModuleEntities::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
-{
-	HitInfo currentHitInfo;
-	float currentMaxDistance =  maxDistance;
-
-	for (std::vector<Entity*>::const_iterator it = _entities.cbegin(); it != _entities.cend(); ++it)
-	{
-		if ((*it)->Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
-		{
-			currentMaxDistance = currentHitInfo.distance;
-			hitInfo = currentHitInfo;
-		}
-	}
-
-	return hitInfo.isHit;
 }
 
 Entity* ModuleEntities::EntityFactory(const EntityData& data)

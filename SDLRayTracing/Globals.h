@@ -48,6 +48,6 @@ enum update_status
 // Parallelization
 #define USE_OPENMP_PIXEL_LOOP 0
 
-#define USE_CUDA_ENTITIES 0
+#define USE_CUDA 0
 
 #endif // !GLOBALS_H

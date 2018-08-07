@@ -32,15 +32,20 @@ public:
 
 	Entity* EntityFactory(const EntityData& data);
 
+	const std::vector<Entity*>& GetEntities() const
+	{
+		return _entities;
+	}
+
 private:
 	void InitRandomSpheres();
 	void InitRandomSphere(const Vector3& center, float radius, math::LCG& randomGenerator);
 
 	std::vector<Entity*> _entities;
 
-#if USE_CUDA_ENTITIES
+#if USE_CUDA
 	Entity* _dEntities;
-#endif // USE_CUDA_ENTITIES
+#endif // USE_CUDA
 };
 
 #endif // !MODULEENTITIES_H
