@@ -37,6 +37,9 @@
     <Filter Include="Utils\Math">
       <UniqueIdentifier>{45e35a76-a938-4f96-a95a-fca128263ced}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\Shapes">
+      <UniqueIdentifier>{8244ca5a-9b2d-4301-9aa8-4582312d9515}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -65,9 +68,6 @@
     </ClCompile>
     <ClCompile Include="ModuleEntities.cpp">
       <Filter>Modules\RayTracing</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Entities</Filter>
@@ -101,6 +101,12 @@
     </ClCompile>
     <ClCompile Include="Vector3.cpp">
       <Filter>Utils\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Entities\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Entities\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,9 +144,6 @@
       <Filter>Modules\RayTracing</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
@@ -196,6 +199,15 @@
     </ClInclude>
     <ClInclude Include="Vector3.h">
       <Filter>Utils\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeData.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Entities\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Entities\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -77,7 +77,7 @@ update_status ModuleRayTracing::Update()
 
 	_frequencyTimer->Start();
 
-#if USE_OPENMP
+#if USE_OPENMP_PIXEL_LOOP
 	#pragma omp parallel for num_threads(_numberOfThreads)
 #endif // USE_OPENMP
 	for (int i = 0; i < _pixelsWidth; i++)

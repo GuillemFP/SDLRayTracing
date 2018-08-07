@@ -12,6 +12,10 @@
 #include "ModuleMaterials.h"
 #include "ParseUtils.h"
 #include "Sphere.h"
+#include "Shape.h"
+
+#include <cuda_runtime_api.h>
+#include <cuda.h>
 
 ModuleEntities::ModuleEntities() : Module(MODULEENTITIES_NAME)
 {
@@ -37,6 +41,12 @@ bool ModuleEntities::Init(Config* config)
 		InitRandomSpheres();
 	}
 
+#if USE_CUDA_ENTITIES
+	size_t size = _entities.size() * sizeof(Entity);
+
+	cudaMalloc((void **)&_dEntities, size);
+#endif // USE_CUDA_ENTITIES
+
 	return true;
 }
 
@@ -44,6 +54,10 @@ bool ModuleEntities::CleanUp()
 {
 	for (std::vector<Entity*>::reverse_iterator it = _entities.rbegin(); it != _entities.rend(); ++it)
 		RELEASE(*it);
+
+#if USE_CUDA_ENTITIES
+	cudaFree(_dEntities);
+#endif // USE_CUDA_ENTITIES
 
 	return true;
 }
@@ -67,23 +81,25 @@ bool ModuleEntities::Hit(const Ray& ray, float minDistance, float maxDistance, H
 
 Entity* ModuleEntities::EntityFactory(const EntityData& data)
 {
-	static_assert(Entity::Type::Unknown == 1, "Update entity factory code");
-
 	Material* material = App->_materials->LoadMaterial(data.materialData);
 
-	Entity* entity = nullptr;
+	const ShapeData& shapeData = data.shapeData;
+	Shape* shape = nullptr;
 
-	switch (data.type)
+	switch (shapeData.type)
 	{
-	case Entity::Type::Sphere:
-		entity = new Sphere(material, data.radius, data.position);
+	case Shape::Type::Sphere:
+		shape = new Sphere(shapeData.radius, shapeData.position);
 		break;
 	}
 
-	if (entity)
+	if (!material || !shape)
 	{
-		_entities.push_back(entity);
+		return nullptr;
 	}
+
+	Entity* entity = new Entity(shape, material);
+	_entities.push_back(entity);
 
 	return entity;
 }
@@ -114,9 +130,10 @@ void ModuleEntities::InitRandomSphere(const Vector3& center, float radius, math:
 	const float metalProb = 0.15f;
 
 	EntityData entityData;
-	entityData.position = center;
-	entityData.radius = radius;
-	entityData.type = Entity::Sphere;
+	ShapeData& shapeData = entityData.shapeData;
+	shapeData.position = center;
+	shapeData.radius = radius;
+	shapeData.type = Shape::Type::Sphere;
 
 	MaterialData& materialData = entityData.materialData;
 	float materialProb = randomGenerator.Float();

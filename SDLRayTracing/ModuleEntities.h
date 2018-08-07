@@ -37,6 +37,10 @@ private:
 	void InitRandomSphere(const Vector3& center, float radius, math::LCG& randomGenerator);
 
 	std::vector<Entity*> _entities;
+
+#if USE_CUDA_ENTITIES
+	Entity* _dEntities;
+#endif // USE_CUDA_ENTITIES
 };
 
 #endif // !MODULEENTITIES_H

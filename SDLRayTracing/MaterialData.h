@@ -2,6 +2,7 @@
 #define MATERIALDATA_H
 
 #include "Material.h"
+#include "Vector3.h"
 
 struct MaterialData
 {

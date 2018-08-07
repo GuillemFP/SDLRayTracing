@@ -14,7 +14,9 @@ namespace ParseUtils
 	Vector3 ParseVector(const ConfigArray& config, const Vector3& defaultValue = Vector3::one);
 
 	EntityData ParseEntityData(const Config& config);
-	Entity::Type ParseEntityTypeFromString(const std::string& type);
+
+	ShapeData ParseShapeData(const Config& config);
+	Shape::Type ParseShapeTypeFromString(const std::string& type);
 
 	MaterialData ParseMaterialData(const Config& config);
 	Material::Type ParseMaterialTypeFromString(const std::string& type);

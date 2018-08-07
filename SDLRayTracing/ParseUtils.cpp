@@ -26,18 +26,27 @@ namespace ParseUtils
 	{
 		EntityData data;
 
-		data.type = ParseEntityTypeFromString(config.GetStringRequired("Type"));
-		data.position = ParseVector(config.GetArray("Position"));
-		data.radius = config.GetFloat("Radius", 1.0f);
+		data.shapeData = ParseShapeData(config.GetSection("Shape"));
 		data.materialData = ParseMaterialData(config.GetSection("Material"));
 
 		return data;
 	}
 
-	Entity::Type ParseEntityTypeFromString(const std::string& type)
+	ShapeData ParseShapeData(const Config& config)
+	{
+		ShapeData data;
+
+		data.type = ParseShapeTypeFromString(config.GetStringRequired("Type"));
+		data.position = ParseVector(config.GetArray("Position"));
+		data.radius = config.GetFloat("Radius", 1.0f);
+
+		return data;
+	}
+
+	Shape::Type ParseShapeTypeFromString(const std::string& type)
 	{
 		if (type == "Sphere")
-			return Entity::Type::Sphere;
+			return Shape::Type::Sphere;
 
 		APPLOG("Invalid entity type");
 	}

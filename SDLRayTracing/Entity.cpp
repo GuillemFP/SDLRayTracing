@@ -2,23 +2,28 @@
 
 #include "Globals.h"
 #include "HitInfo.h"
+#include "Material.h"
 #include "Math.h"
+#include "Shape.h"
 
-Entity::Entity(Type type, Material* material, const Vector3& center) : _type(type), _material(material), _center(center)
+Entity::Entity(Shape* shape, Material* material) : _shape(shape), _material(material)
 {
 }
 
 Entity::~Entity()
 {
+	RELEASE(_shape);
 	RELEASE(_material)
 }
 
-const Vector3& Entity::GetCenter() const
+bool Entity::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
 {
-	return _center;
-}
+	if (_shape->Hit(ray, minDistance, maxDistance, hitInfo))
+	{
+		hitInfo.material = _material;
+		hitInfo.isHit = true;
+		return true;
+	}
 
-Entity::Type Entity::GetType() const
-{
-	return _type;
+	return false;
 }

@@ -1,13 +1,13 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
-#include "Entity.h"
+#include "Shape.h"
 #include "Vector3.h"
 
-class Sphere : public Entity
+class Sphere : public Shape
 {
 public:
-	Sphere(Material* material, float radius, const Vector3& center);
+	Sphere(float radius, const Vector3& center);
 	~Sphere();
 
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;

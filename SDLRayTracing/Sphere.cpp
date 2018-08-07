@@ -3,7 +3,7 @@
 #include "HitInfo.h"
 #include "Math.h"
 
-Sphere::Sphere(Material* material, float radius, const Vector3& center) : Entity(Type::Sphere, material, center), _radius(radius)
+Sphere::Sphere(float radius, const Vector3& center) : Shape(Type::Sphere, center), _radius(radius)
 {
 }
 
@@ -31,8 +31,6 @@ bool Sphere::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& 
 		hitInfo.distance = negativeRoot;
 		hitInfo.point = ray.getPoint(negativeRoot);
 		hitInfo.normal = GetNormal(hitInfo.point);
-		hitInfo.isHit = true;
-		hitInfo.material = _material;
 		return true;
 	}
 
@@ -42,8 +40,6 @@ bool Sphere::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& 
 		hitInfo.distance = positiveRoot;
 		hitInfo.point = ray.getPoint(positiveRoot);
 		hitInfo.normal = GetNormal(hitInfo.point);
-		hitInfo.isHit = true;
-		hitInfo.material = _material;
 		return true;
 	}
 
