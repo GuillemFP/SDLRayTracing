@@ -44,6 +44,6 @@ enum update_status
 // Ray tracing defines
 #define DIELECTRIC_R_COEFFICIENT_PROBABILITY 1
 #define GAMMA_CORRECTION 1
-#define USE_MATHGEOLIB 1
+#define USE_OPENMP 0
 
 #endif // !GLOBALS_H

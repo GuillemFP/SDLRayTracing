@@ -2,20 +2,20 @@
 	"Config": {
 		"ModuleInput": {},
 		"ModuleWindow": {
-			"WindowWidth": 800,
-			"WindowHeight": 600
+			"WindowWidth": 400,
+			"WindowHeight": 300
 		},
 		"ModuleRender": {},
 		"ModuleCamera": {
-			"Position": [8.0, 2.0, 2.0],
+			"Position": [2.0, 3.0, -8.0],
 			"LookAt" : [0.0, 0.0, 0.0],
-			"FocusPoint" : [4.0, 0.0, 0.0],
+			"FocusPoint" : [0.0, 0.0, 0.0],
 			"Aperture" : 0.1,
 			"Vertical FOV" : 40,
 			"Aspect Ratio" : 1.5
 		},
 		"ModuleEntities": {
-			"Add Random" : true
+			"Add Random" : false
 		},
 		"ModuleRayTracing": {
 			"MinDistance": 0.001,

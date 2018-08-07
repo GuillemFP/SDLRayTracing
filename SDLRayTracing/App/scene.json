@@ -19,7 +19,7 @@
 		},
 		{
 			"Type": "Sphere",
-			"Position": [-4, 1, 0],
+			"Position": [-2, 1, 0],
 			"Radius": 1,
 			"Material": {
 				"Type": "Diffuse",
@@ -28,7 +28,7 @@
 		},
 		{
 			"Type": "Sphere",
-			"Position": [4, 1, 0],
+			"Position": [2, 1, 0],
 			"Radius": 1,
 			"Material": {
 				"Type": "Metal",
