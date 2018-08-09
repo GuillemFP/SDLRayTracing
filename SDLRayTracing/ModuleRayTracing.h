@@ -11,6 +11,8 @@
 #include <iostream>
 #include <fstream>
 
+#include "CudaHelper.cuh"
+
 namespace math
 {
 	class LCG;
@@ -48,7 +50,7 @@ public:
 
 private:
 	Color CalculatePixelColor(int xPixel, int yPixel) const;
-	
+
 	Vector3 CalculateRayColor(const Ray& ray, int depth, const EntitiesInfo& entitiesInfo) const;
 
 	void InitFile();
@@ -85,11 +87,6 @@ private:
 	Timer* _frequencyTimer = nullptr;
 
 	Color* _colorRow = nullptr;
-
-#if USE_CUDA
-	Color* _colorSamples = nullptr;
-	Color* _dColorSamples = nullptr;
-#endif // USE_CUDA
 };
 
 #endif // !MODULERAYTRACING_H

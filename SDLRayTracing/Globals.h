@@ -50,19 +50,7 @@ enum update_status
 #define USE_C_ARRAYS 1
 
 // Parallelization
-#define USE_OPENMP_PIXEL_LOOP 0
-
-#define USE_CUDA 0
-#if USE_CUDA
-	#define USE_C_ARRAYS 1
-	#define CUDA_DEVICE_CALLABLE __device__
-	#define CUDA_HOST_CALLABLE __host__
-	#define CUDA_KERNEL	__global__
-#else
-	#define CUDA_DEVICE_CALLABLE
-	#define CUDA_HOST_CALLABLE
-	#define CUDA_KERNEL
-#endif // USE_CUDA
+#define USE_OPENMP_PIXEL_LOOP 1
 
 #if USE_C_ARRAYS
 	#define USE_OOP 0

@@ -15,8 +15,10 @@
 #include "Timer.h"
 #include <omp.h>
 #include <algorithm>
-#include <cuda_runtime_api.h>
+#include <cuda_runtime.h>
 #include <cuda.h>
+#include <curand_kernel.h>
+#include "device_launch_parameters.h"
 
 namespace
 {
@@ -88,12 +90,6 @@ bool ModuleRayTracing::Init(Config* config)
 
 	_currentY = GetInitialPixelY();
 
-#if USE_CUDA
-	_colorSamples = new Color[_samplesPerPixel];
-
-	cudaMalloc((void**)&_dColorSamples, _samplesPerPixel * sizeof(Color));
-#endif // USE_CUDA
-
 	InitFile();
 
 	return true;
@@ -115,12 +111,6 @@ bool ModuleRayTracing::CleanUp()
 
 	RELEASE(_randomGenerator);
 	RELEASE_ARRAY(_colorRow);
-
-#if USE_CUDA
-	RELEASE_ARRAY(_colorSamples);
-
-	cudaFree(_dColorSamples);
-#endif // USE_CUDA
 
 	return true;
 }
@@ -175,7 +165,7 @@ update_status ModuleRayTracing::Update()
 
 Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 {
-#if USE_C_ARRAYS
+#if USE_C_ARRAYS 
 	EntitiesInfo entities(App->_entities->GetDeviceEntities(), App->_entities->GetNumberOfEntities());
 #else
 	const VEntity& entities = App->_entities->GetEntities();
@@ -190,6 +180,7 @@ Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 		color += CalculateRayColor(ray, 0, entities);
 	}
 	Color averagedColor(color / _samplesPerPixel);
+
 #if GAMMA_CORRECTION
 	return Color(sqrt(averagedColor.r), sqrt(averagedColor.g), sqrt(averagedColor.b));
 #else

@@ -41,25 +41,11 @@ bool ModuleEntities::Init(Config* config)
 
 #if USE_C_ARRAYS
 	size_t numberOfEntities = _entities.size();
-#if USE_CUDA
-	Entity* tempEntities = new Entity[numberOfEntities];
-	for (size_t i = 0; i < numberOfEntities; i++)
-	{
-		tempEntities[i] = _entities.at(i).Clone();
-	}
-
-	size_t size = numberOfEntities * sizeof(Entity);
-	cudaMalloc((void**)&_dEntities, size);
-	cudaMemcpy(_dEntities, tempEntities, size, cudaMemcpyHostToDevice);
-
-	RELEASE_ARRAY(tempEntities);
-#else
 	_dEntities = new Entity[numberOfEntities];
 	for (size_t i = 0; i < numberOfEntities; i++)
 	{
 		_dEntities[i] = _entities.at(i).Clone();
 	}
-#endif // USE_CUDA
 #endif // USE_C_ARRAYS
 
 	return true;
@@ -73,11 +59,7 @@ bool ModuleEntities::CleanUp()
 #endif // USE_OOP
 
 #if USE_C_ARRAYS
-#if USE_CUDA
-	cudaFree(_dEntities);
-#else
 	RELEASE_ARRAY(_dEntities);
-#endif // USE_CUDA
 #endif // USE_C_ARRAYS
 
 	return true;
