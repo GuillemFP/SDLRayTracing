@@ -37,7 +37,7 @@ public:
 		return _entities;
 	}
 
-#if USE_CUDA
+#if USE_C_ARRAYS
 	const Entity* GetDeviceEntities() const
 	{
 		return _dEntities;
@@ -47,7 +47,7 @@ public:
 	{
 		return _entities.size();
 	}
-#endif // USE_CUDA
+#endif // USE_C_ARRAYS
 
 private:
 	void InitRandomSpheres();
@@ -55,9 +55,9 @@ private:
 
 	VEntity _entities;
 
-#if USE_CUDA
+#if USE_C_ARRAYS
 	Entity* _dEntities;
-#endif // USE_CUDA
+#endif // USE_C_ARRAYS
 };
 
 #endif // !MODULEENTITIES_H

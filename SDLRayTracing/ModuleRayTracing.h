@@ -22,7 +22,7 @@ class Timer;
 
 struct EntitiesInfo
 {
-#if USE_CUDA
+#if USE_C_ARRAYS
 	const Entity* entities;
 	size_t size;
 
@@ -31,7 +31,7 @@ struct EntitiesInfo
 	const VEntity& entities;
 
 	EntitiesInfo(const VEntity& entities) : entities(entities) {}
-#endif // USE_CUDA
+#endif // USE_C_ARRAYS
 };
 
 class ModuleRayTracing : public Module
@@ -85,6 +85,11 @@ private:
 	Timer* _frequencyTimer = nullptr;
 
 	Color* _colorRow = nullptr;
+
+#if USE_CUDA
+	Color* _colorSamples = nullptr;
+	Color* _dColorSamples = nullptr;
+#endif // USE_CUDA
 };
 
 #endif // !MODULERAYTRACING_H

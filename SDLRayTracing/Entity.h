@@ -35,9 +35,9 @@ public:
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
 	bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
 
-#if USE_CUDA
+#if USE_C_ARRAYS
 	Entity Clone() const;
-#endif // USE_CUDA
+#endif // USE_C_ARRAYS
 
 protected:
 #if USE_OOP

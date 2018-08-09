@@ -49,9 +49,9 @@ bool Entity::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatte
 #endif // USE_OOP
 }
 
-#if USE_CUDA
+#if USE_C_ARRAYS
 	Entity Entity::Clone() const
 	{
 		return Entity(_shapeData, _materialData);
 	}
-#endif // USE_CUDA
+#endif // USE_C_ARRAYS

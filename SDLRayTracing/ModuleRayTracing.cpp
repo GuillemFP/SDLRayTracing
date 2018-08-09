@@ -15,6 +15,8 @@
 #include "Timer.h"
 #include <omp.h>
 #include <algorithm>
+#include <cuda_runtime_api.h>
+#include <cuda.h>
 
 namespace
 {
@@ -23,7 +25,7 @@ namespace
 		HitInfo currentHitInfo;
 		float currentMaxDistance = maxDistance;
 
-#if USE_CUDA
+#if USE_C_ARRAYS
 		for (size_t i = 0; i < entitiesInfo.size; i++)
 		{
 			if (entitiesInfo.entities[i].Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
@@ -46,7 +48,7 @@ namespace
 				hitInfo = currentHitInfo;
 			}
 		}
-#endif // USE_CUDA
+#endif // USE_C_ARRAYS
 
 		return hitInfo.isHit;
 	}
@@ -86,6 +88,12 @@ bool ModuleRayTracing::Init(Config* config)
 
 	_currentY = GetInitialPixelY();
 
+#if USE_CUDA
+	_colorSamples = new Color[_samplesPerPixel];
+
+	cudaMalloc((void**)&_dColorSamples, _samplesPerPixel * sizeof(Color));
+#endif // USE_CUDA
+
 	InitFile();
 
 	return true;
@@ -107,6 +115,12 @@ bool ModuleRayTracing::CleanUp()
 
 	RELEASE(_randomGenerator);
 	RELEASE_ARRAY(_colorRow);
+
+#if USE_CUDA
+	RELEASE_ARRAY(_colorSamples);
+
+	cudaFree(_dColorSamples);
+#endif // USE_CUDA
 
 	return true;
 }
@@ -161,11 +175,11 @@ update_status ModuleRayTracing::Update()
 
 Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 {
-#if USE_CUDA
+#if USE_C_ARRAYS
 	EntitiesInfo entities(App->_entities->GetDeviceEntities(), App->_entities->GetNumberOfEntities());
 #else
 	const VEntity& entities = App->_entities->GetEntities();
-#endif // USE_CUDA
+#endif // USE_C_ARRAYS
 
 	Vector3 color = Vector3::zero;
 	for (int i = 0; i < _samplesPerPixel; i++)
