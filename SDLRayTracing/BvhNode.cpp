@@ -2,8 +2,21 @@
 
 #include "HitInfo.h"
 
+namespace
+{
+	int CompareBoxes(const void* e1, const void* e2)
+	{
+		Entity* first = *(Entity**)e1;
+		Entity* second = *(Entity**)e2;
+
+		return first->CreateBoundingBox().GetMin().e[0] < second->CreateBoundingBox().GetMin().e[0];
+	}
+}
+
 BvhNode::BvhNode(const Entity** entities, const size_t entitiesSize)
 {
+	std::qsort(entities, entitiesSize, sizeof(Entity*), CompareBoxes);
+
 	if (entitiesSize == 1)
 	{
 		_entity = entities[0];

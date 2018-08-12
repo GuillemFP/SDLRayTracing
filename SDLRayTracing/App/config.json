@@ -15,7 +15,7 @@
 			"Aspect Ratio" : 1.5
 		},
 		"ModuleEntities": {
-			"Add Random" : false
+			"Add Random" : true
 		},
 		"ModuleRayTracing": {
 			"MinDistance": 0.001,
