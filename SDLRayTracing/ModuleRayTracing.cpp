@@ -1,6 +1,7 @@
 #include "ModuleRayTracing.h"
 
 #include "Application.h"
+#include "BvhNode.h"
 #include "Color.h"
 #include "Config.h"
 #include "Globals.h"
@@ -24,9 +25,11 @@ namespace
 {
 	bool HitEntity(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const EntitiesInfo& entitiesInfo)
 	{
+#if USE_BVH
+		return entitiesInfo.rootNode->Hit(ray, minDistance, maxDistance, hitInfo);
+#else
 		HitInfo currentHitInfo;
 		float currentMaxDistance = maxDistance;
-
 #if USE_C_ARRAYS
 		for (size_t i = 0; i < entitiesInfo.size; i++)
 		{
@@ -55,8 +58,8 @@ namespace
 			}
 		}
 #endif // USE_C_ARRAYS
-
 		return hitInfo.isHit;
+#endif // USE_BVH
 	}
 
 	Vector3 CalculateBackgroundColor(const Ray& ray)
@@ -169,11 +172,13 @@ update_status ModuleRayTracing::Update()
 
 Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
 {
-#if USE_C_ARRAYS 
+#if USE_BVH
+	const BvhNode* entities = App->_entities->GetBvhRootNode();
+#elif USE_C_ARRAYS 
 	EntitiesInfo entities(App->_entities->GetDeviceEntities(), App->_entities->GetNumberOfEntities());
 #else
 	const VEntity& entities = App->_entities->GetEntities();
-#endif // USE_C_ARRAYS
+#endif // USE_BVH
 
 	Vector3 color = Vector3::zero;
 	for (int i = 0; i < _samplesPerPixel; i++)

@@ -1,6 +1,7 @@
 #include "ModuleEntities.h"
 
 #include "Application.h"
+#include "BvhNode.h"
 #include "Config.h"
 #include "EntityData.h"
 #include "HitInfo.h"
@@ -55,6 +56,19 @@ bool ModuleEntities::Init(Config* config)
 	}
 #endif // USE_OOP
 #endif // USE_C_ARRAYS
+
+#if USE_BVH
+	size_t numberOfEntities = _entities.size();
+	const Entity** cEntities = new const Entity*[numberOfEntities];
+	for (size_t i = 0; i < numberOfEntities; i++)
+	{
+		cEntities[i] = _entities.at(i);
+	}
+
+	_rootNode = new BvhNode(cEntities, numberOfEntities);
+
+	RELEASE_ARRAY(cEntities);
+#endif // USE_BVH
 
 	return true;
 }

@@ -18,13 +18,18 @@ namespace math
 	class LCG;
 }
 
+class BvhNode;
 class Ray;
 class Camera;
 class Timer;
 
 struct EntitiesInfo
 {
-#if USE_C_ARRAYS
+#if USE_BVH
+	const BvhNode* rootNode;
+
+	EntitiesInfo(const BvhNode* rootNode) : rootNode(rootNode) {}
+#elif USE_C_ARRAYS
 	const AEntity entities;
 	size_t size;
 
@@ -33,7 +38,7 @@ struct EntitiesInfo
 	const VEntity& entities;
 
 	EntitiesInfo(const VEntity& entities) : entities(entities) {}
-#endif // USE_C_ARRAYS
+#endif // USE_BVH
 };
 
 class ModuleRayTracing : public Module

@@ -19,3 +19,12 @@ bool Shape::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& h
 		return Sphere::Hit(ray, minDistance, maxDistance, hitInfo, shapeData.position, shapeData.radius);
 	}
 }
+
+AABB Shape::CreateBoundingBox(const ShapeData& shapeData)
+{
+	switch (shapeData.type)
+	{
+	case Type::Sphere:
+		return Sphere::CreateBoundingBox(shapeData.position, shapeData.radius);
+	}
+}

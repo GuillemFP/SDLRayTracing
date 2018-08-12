@@ -49,6 +49,15 @@ bool Entity::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatte
 #endif // USE_OOP
 }
 
+AABB Entity::CreateBoundingBox() const
+{
+#if USE_OOP
+	return _shape->CreateBoundingBox();
+#else
+	return Shape::CreateBoundingBox(_shapeData);
+#endif // USE_OOP
+}
+
 #if !USE_OOP
 	Entity Entity::Clone() const
 	{

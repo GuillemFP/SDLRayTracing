@@ -10,6 +10,7 @@ namespace math
 }
 
 class Ray;
+class AABB;
 struct HitInfo;
 struct ScatterInfo;
 
@@ -34,6 +35,7 @@ public:
 
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
 	bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
+	AABB CreateBoundingBox() const;
 
 #if !USE_OOP
 	Entity Clone() const;

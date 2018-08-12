@@ -6,6 +6,7 @@
 
 #include "Ray.h"
 #include "Vector3.h"
+#include "AABB.h"
 
 #pragma comment (lib, "MathGeoLib/libx86/MathGeoLib.lib")
 

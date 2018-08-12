@@ -116,7 +116,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="BvhNode.cpp" />
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Dielectric.cpp" />
     <ClCompile Include="Diffuse.cpp" />
@@ -141,7 +143,9 @@
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="Application.h" />
+    <ClInclude Include="BvhNode.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Dielectric.h" />
     <ClInclude Include="Diffuse.h" />

@@ -16,6 +16,7 @@ namespace math
 
 class Vector3;
 class Ray;
+class BvhNode;
 struct EntityData;
 struct HitInfo;
 
@@ -49,6 +50,13 @@ public:
 	}
 #endif // USE_C_ARRAYS
 
+#if USE_BVH
+	const BvhNode* GetBvhRootNode() const
+	{
+		return _rootNode;
+	}
+#endif // USE_BVH
+
 private:
 	void InitRandomSpheres();
 	void InitRandomSphere(const Vector3& center, float radius, math::LCG& randomGenerator);
@@ -58,6 +66,10 @@ private:
 #if USE_C_ARRAYS
 	AEntity _cEntities;
 #endif // USE_C_ARRAYS
+
+#if USE_BVH
+	BvhNode* _rootNode = nullptr;
+#endif // USE_BVH
 };
 
 #endif // !MODULEENTITIES_H

@@ -48,6 +48,12 @@ enum update_status
 // Optimization
 #define USE_OOP 1
 #define USE_C_ARRAYS 1
+#define USE_BVH 1
+
+#if USE_BVH
+#define USE_C_ARRAYS 0
+#define USE_OOP 1
+#endif // USE_BVH
 
 // Parallelization
 #define USE_OPENMP_PIXEL_LOOP 1

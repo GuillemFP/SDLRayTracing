@@ -10,8 +10,12 @@ public:
 	Sphere(float radius, const Vector3& center);
 	~Sphere();
 
-	inline static bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const Vector3& center, const float radius);
+	static bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const Vector3& center, const float radius);
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
+
+	static AABB CreateBoundingBox(const Vector3& center, const float radius);
+	AABB CreateBoundingBox() const;
+
 	float GetRadius() const;
 
 private:

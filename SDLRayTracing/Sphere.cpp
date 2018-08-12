@@ -59,6 +59,17 @@ bool Sphere::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& 
 	return Hit(ray, minDistance, maxDistance, hitInfo, _center, _radius);
 }
 
+AABB Sphere::CreateBoundingBox(const Vector3& center, const float radius)
+{
+	Vector3 radiusDisplacement(radius, radius, radius);
+	return AABB(center - radiusDisplacement, center + radiusDisplacement);
+}
+
+AABB Sphere::CreateBoundingBox() const
+{
+	return CreateBoundingBox(_center, _radius);
+}
+
 float Sphere::GetRadius() const
 {
 	return _radius;
