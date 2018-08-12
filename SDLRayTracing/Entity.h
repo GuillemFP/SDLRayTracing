@@ -35,9 +35,9 @@ public:
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
 	bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
 
-#if USE_C_ARRAYS
+#if !USE_OOP
 	Entity Clone() const;
-#endif // USE_C_ARRAYS
+#endif // !USE_OOP
 
 protected:
 #if USE_OOP
@@ -51,8 +51,10 @@ protected:
 
 #if USE_OOP
 	using VEntity = std::vector<Entity*>;
+	using AEntity = Entity**;
 #else
 	using VEntity = std::vector<Entity>;
+	using AEntity = Entity*;
 #endif // USE_OOP
 
 #endif // !ENTITY_H

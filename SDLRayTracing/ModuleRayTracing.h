@@ -25,10 +25,10 @@ class Timer;
 struct EntitiesInfo
 {
 #if USE_C_ARRAYS
-	const Entity* entities;
+	const AEntity entities;
 	size_t size;
 
-	EntitiesInfo(const Entity* entities, size_t size) : entities(entities), size(size) {}
+	EntitiesInfo(const AEntity entities, size_t size) : entities(entities), size(size) {}
 #else
 	const VEntity& entities;
 

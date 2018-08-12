@@ -38,9 +38,9 @@ public:
 	}
 
 #if USE_C_ARRAYS
-	const Entity* GetDeviceEntities() const
+	const AEntity& GetDeviceEntities() const
 	{
-		return _dEntities;
+		return _cEntities;
 	}
 
 	size_t GetNumberOfEntities() const
@@ -56,7 +56,7 @@ private:
 	VEntity _entities;
 
 #if USE_C_ARRAYS
-	Entity* _dEntities;
+	AEntity _cEntities;
 #endif // USE_C_ARRAYS
 };
 

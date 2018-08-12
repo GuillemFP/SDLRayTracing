@@ -41,11 +41,19 @@ bool ModuleEntities::Init(Config* config)
 
 #if USE_C_ARRAYS
 	size_t numberOfEntities = _entities.size();
-	_dEntities = new Entity[numberOfEntities];
+#if USE_OOP
+	_cEntities = new Entity*[numberOfEntities];
 	for (size_t i = 0; i < numberOfEntities; i++)
 	{
-		_dEntities[i] = _entities.at(i).Clone();
+		_cEntities[i] = _entities.at(i);
 	}
+#else
+	_cEntities = new Entity[numberOfEntities];
+	for (size_t i = 0; i < numberOfEntities; i++)
+	{
+		_cEntities[i] = _entities.at(i).Clone();
+	}
+#endif // USE_OOP
 #endif // USE_C_ARRAYS
 
 	return true;
@@ -59,7 +67,7 @@ bool ModuleEntities::CleanUp()
 #endif // USE_OOP
 
 #if USE_C_ARRAYS
-	RELEASE_ARRAY(_dEntities);
+	RELEASE_ARRAY(_cEntities);
 #endif // USE_C_ARRAYS
 
 	return true;

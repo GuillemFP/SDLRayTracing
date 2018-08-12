@@ -30,7 +30,11 @@ namespace
 #if USE_C_ARRAYS
 		for (size_t i = 0; i < entitiesInfo.size; i++)
 		{
+#if USE_OOP
+			if (entitiesInfo.entities[i]->Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
+#else
 			if (entitiesInfo.entities[i].Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
+#endif // USE_OOP
 			{
 				currentMaxDistance = currentHitInfo.distance;
 				hitInfo = currentHitInfo;

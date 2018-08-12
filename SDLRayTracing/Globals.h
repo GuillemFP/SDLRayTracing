@@ -52,8 +52,4 @@ enum update_status
 // Parallelization
 #define USE_OPENMP_PIXEL_LOOP 1
 
-#if USE_C_ARRAYS
-	#define USE_OOP 0
-#endif // USE_C_ARRAYS
-
 #endif // !GLOBALS_H
