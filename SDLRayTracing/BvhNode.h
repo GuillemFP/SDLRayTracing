@@ -7,7 +7,7 @@
 class BvhNode
 {
 public:
-	BvhNode(const Entity** entities, const size_t entitiesSize);
+	BvhNode(Entity* entities, const size_t entitiesSize);
 	~BvhNode();
 
 	bool Hit(const Ray& ray, const float minDistance, const float maxDistance, HitInfo& hitInfo) const;
@@ -15,7 +15,7 @@ public:
 	const AABB& GetBoundingBox() const { return _boundingBox; }
 
 private:
-	const Entity* _entity = nullptr;
+	Entity _entity;
 
 	BvhNode* _firstChild = nullptr;
 	BvhNode* _secondChild = nullptr;

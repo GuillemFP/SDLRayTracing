@@ -29,8 +29,8 @@ public:
 	Entity(Shape* shape, Material* material);
 #else
 	Entity(const ShapeData& shapeData, const MaterialData& materialData);
-	Entity() {}
 #endif // USE_OOP
+	Entity() {}
 	~Entity();
 
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;

@@ -4,17 +4,17 @@
 #include "Ray.h"
 #include <algorithm>
 
-BvhNode::BvhNode(const Entity** entities, const size_t entitiesSize)
+BvhNode::BvhNode(Entity* entities, const size_t entitiesSize)
 {
-	std::sort(entities, entities+entitiesSize, [](const Entity* e1, const Entity* e2)
+	std::sort(entities, entities+entitiesSize, [](const Entity& e1, const Entity& e2)
 	{
-		return e1->CreateBoundingBox().GetMin().e[0] < e2->CreateBoundingBox().GetMin().e[0];
+		return e1.CreateBoundingBox().GetMin().e[0] < e2.CreateBoundingBox().GetMin().e[0];
 	});
 
 	if (entitiesSize == 1)
 	{
 		_entity = entities[0];
-		_boundingBox = _entity->CreateBoundingBox();
+		_boundingBox = _entity.CreateBoundingBox();
 	}
 	else
 	{
@@ -37,9 +37,9 @@ bool BvhNode::Hit(const Ray& ray, const float minDistance, const float maxDistan
 {
 	if (_boundingBox.Hit(ray, minDistance, maxDistance))
 	{
-		if (_entity)
+		if (!_firstChild && !_secondChild)
 		{
-			return _entity->Hit(ray, minDistance, maxDistance, hitInfo);
+			return _entity.Hit(ray, minDistance, maxDistance, hitInfo);
 		}
 		else
 		{
