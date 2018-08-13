@@ -49,6 +49,8 @@ namespace ParseUtils
 			return Shape::Type::Sphere;
 
 		APPLOG("Invalid entity type");
+
+		return Shape::Type::Unknown;
 	}
 
 	MaterialData ParseMaterialData(const Config& config)
@@ -73,5 +75,7 @@ namespace ParseUtils
 			return Material::Type::Dielectric;
 
 		APPLOG("Invalid material type");
+
+		return Material::Type::Unknown;
 	}
 }

@@ -10,7 +10,7 @@ public:
 	BvhNode(const Entity** entities, const size_t entitiesSize);
 	~BvhNode();
 
-	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
+	bool Hit(const Ray& ray, const float minDistance, const float maxDistance, HitInfo& hitInfo) const;
 
 	const AABB& GetBoundingBox() const { return _boundingBox; }
 

@@ -1,21 +1,15 @@
 #include "BvhNode.h"
 
 #include "HitInfo.h"
-
-namespace
-{
-	int CompareBoxes(const void* e1, const void* e2)
-	{
-		Entity* first = *(Entity**)e1;
-		Entity* second = *(Entity**)e2;
-
-		return first->CreateBoundingBox().GetMin().e[0] < second->CreateBoundingBox().GetMin().e[0];
-	}
-}
+#include "Ray.h"
+#include <algorithm>
 
 BvhNode::BvhNode(const Entity** entities, const size_t entitiesSize)
 {
-	std::qsort(entities, entitiesSize, sizeof(Entity*), CompareBoxes);
+	std::sort(entities, entities+entitiesSize, [](const Entity* e1, const Entity* e2)
+	{
+		return e1->CreateBoundingBox().GetMin().e[0] < e2->CreateBoundingBox().GetMin().e[0];
+	});
 
 	if (entitiesSize == 1)
 	{
@@ -39,7 +33,7 @@ BvhNode::~BvhNode()
 	RELEASE(_secondChild);
 }
 
-bool BvhNode::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
+bool BvhNode::Hit(const Ray& ray, const float minDistance, const float maxDistance, HitInfo& hitInfo) const
 {
 	if (_boundingBox.Hit(ray, minDistance, maxDistance))
 	{
