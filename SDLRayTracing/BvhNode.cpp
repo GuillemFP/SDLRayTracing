@@ -8,13 +8,13 @@ BvhNode::BvhNode(Entity* entities, const size_t entitiesSize)
 {
 	std::sort(entities, entities+entitiesSize, [](const Entity& e1, const Entity& e2)
 	{
-		return e1.CreateBoundingBox().GetMin().e[0] < e2.CreateBoundingBox().GetMin().e[0];
+		return e1.GetBoundingBox().GetMin().e[0] < e2.GetBoundingBox().GetMin().e[0];
 	});
 
 	if (entitiesSize == 1)
 	{
 		_entity = entities[0];
-		_boundingBox = _entity.CreateBoundingBox();
+		_boundingBox = _entity.GetBoundingBox();
 	}
 	else
 	{

@@ -54,7 +54,7 @@ public:
 	update_status Update();
 
 private:
-	Color CalculatePixelColor(int xPixel, int yPixel) const;
+	Color CalculatePixelColor(int xPixel, int yPixel, const EntitiesInfo& entitiesInfo) const;
 
 	Vector3 CalculateRayColor(const Ray& ray, int depth, const EntitiesInfo& entitiesInfo) const;
 

@@ -9,10 +9,12 @@
 #if USE_OOP
 	Entity::Entity(Shape* shape, Material* material) : _shape(shape), _material(material)
 	{
+		_boundingBox = _shape->CreateBoundingBox();
 	}
 #else
 	Entity::Entity(const ShapeData& shapeData, const MaterialData& materialData) : _shapeData(shapeData), _materialData(materialData)
 	{
+		_boundingBox = Shape::CreateBoundingBox(_shapeData);
 	}
 #endif // USE_OOP
 
@@ -46,15 +48,6 @@ bool Entity::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatte
 	return _material->Scatter(ray, hitInfo, scatterInfo, randomGenerator);
 #else
 	return Material::Scatter(ray, hitInfo, scatterInfo, randomGenerator, _materialData);
-#endif // USE_OOP
-}
-
-AABB Entity::CreateBoundingBox() const
-{
-#if USE_OOP
-	return _shape->CreateBoundingBox();
-#else
-	return Shape::CreateBoundingBox(_shapeData);
 #endif // USE_OOP
 }
 

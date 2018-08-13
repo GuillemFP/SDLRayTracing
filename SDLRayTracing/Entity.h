@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include "Globals.h"
+#include "AABB.h"
 #include <vector>
 
 namespace math
@@ -10,7 +11,6 @@ namespace math
 }
 
 class Ray;
-class AABB;
 struct HitInfo;
 struct ScatterInfo;
 
@@ -35,13 +35,14 @@ public:
 
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
 	bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
-	AABB CreateBoundingBox() const;
+	const AABB& GetBoundingBox() const { return _boundingBox; }
 
 #if !USE_OOP
 	Entity Clone() const;
 #endif // !USE_OOP
 
 protected:
+	AABB _boundingBox;
 #if USE_OOP
 	Material* _material = nullptr;
 	Shape* _shape = nullptr;

@@ -131,12 +131,20 @@ update_status ModuleRayTracing::Update()
 
 	_frequencyTimer->Start();
 
+#if USE_BVH
+	const BvhNode* entities = App->_entities->GetBvhRootNode();
+#elif USE_C_ARRAYS 
+	EntitiesInfo entities(App->_entities->GetDeviceEntities(), App->_entities->GetNumberOfEntities());
+#else
+	const VEntity& entities = App->_entities->GetEntities();
+#endif // USE_BVH
+
 #if USE_OPENMP_PIXEL_LOOP
 	#pragma omp parallel for num_threads(_numberOfThreads)
 #endif // USE_OPENMP
 	for (int i = 0; i < _pixelsWidth; i++)
 	{
-		_colorRow[i] = CalculatePixelColor(i, _currentY);
+		_colorRow[i] = CalculatePixelColor(i, _currentY, entities);
 	}
 
 	for (int i = 0; i < _pixelsWidth; i++)
@@ -170,23 +178,15 @@ update_status ModuleRayTracing::Update()
 	return UPDATE_CONTINUE;
 }
 
-Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel) const
+Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel, const EntitiesInfo& entitiesInfo) const
 {
-#if USE_BVH
-	const BvhNode* entities = App->_entities->GetBvhRootNode();
-#elif USE_C_ARRAYS 
-	EntitiesInfo entities(App->_entities->GetDeviceEntities(), App->_entities->GetNumberOfEntities());
-#else
-	const VEntity& entities = App->_entities->GetEntities();
-#endif // USE_BVH
-
 	Vector3 color = Vector3::zero;
 	for (int i = 0; i < _samplesPerPixel; i++)
 	{
 		float u = float(xPixel + _randomGenerator->Float()) / float(_pixelsWidth);
 		float v = float(yPixel + _randomGenerator->Float()) / float(_pixelsHeight);
 		Ray ray = App->_camera->GenerateRay(u, v, *_randomGenerator);
-		color += CalculateRayColor(ray, 0, entities);
+		color += CalculateRayColor(ray, 0, entitiesInfo);
 	}
 	Color averagedColor(color / _samplesPerPixel);
 
