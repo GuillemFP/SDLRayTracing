@@ -5,13 +5,15 @@
 #include "Math.h"
 #include "MathUtils.h"
 #include "ScatterInfo.h"
+#include "Texture.h"
 
-Metal::Metal(const Vector3& albedo, float fuzziness) : Material(Material::Type::Metal), _albedo(albedo), _fuzziness(fuzziness)
+Metal::Metal(Texture* texture, float fuzziness) : Material(Material::Type::Metal), _texture(texture), _fuzziness(fuzziness)
 {
 }
 
 Metal::~Metal()
 {
+	RELEASE(_texture);
 }
 
 bool Metal::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator, const Vector3& albedo, const float fuzziness)
@@ -28,5 +30,5 @@ bool Metal::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatter
 
 bool Metal::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
-	return Scatter(ray, hitInfo, scatterInfo, randomGenerator, _albedo, _fuzziness);
+	return Scatter(ray, hitInfo, scatterInfo, randomGenerator, _texture->GetColor(), _fuzziness);
 }

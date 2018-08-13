@@ -20,6 +20,9 @@ namespace ParseUtils
 
 	MaterialData ParseMaterialData(const Config& config);
 	Material::Type ParseMaterialTypeFromString(const std::string& type);
+
+	TextureData ParseTextureData(const Config& config);
+	Texture::Type ParseTextureTypeFromString(const std::string& type);
 }
 
 #endif // !PARSEUTILS_H

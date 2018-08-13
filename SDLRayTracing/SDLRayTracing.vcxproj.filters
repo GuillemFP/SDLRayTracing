@@ -40,6 +40,9 @@
     <Filter Include="Entities\Shapes">
       <UniqueIdentifier>{8244ca5a-9b2d-4301-9aa8-4582312d9515}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Entities\Textures">
+      <UniqueIdentifier>{a446ef55-eb64-4c0c-a4a3-13da23bc0fa3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="BvhNode.cpp">
       <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Entities\Textures</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -222,6 +228,15 @@
       <Filter>Utils\Math</Filter>
     </ClInclude>
     <ClInclude Include="BvhNode.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Entities\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorTexture.h">
+      <Filter>Entities\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureData.h">
       <Filter>Containers</Filter>
     </ClInclude>
   </ItemGroup>

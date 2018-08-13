@@ -4,17 +4,19 @@
 #include "Material.h"
 #include "Vector3.h"
 
+class Texture;
+
 class Diffuse : public Material
 {
 public:
-	Diffuse(const Vector3& albedo);
+	Diffuse(Texture* texture);
 	~Diffuse();
 
 	static bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator, const Vector3& albedo);
 	bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
 
 private:
-	Vector3 _albedo;
+	Texture* _texture;
 };
 
 #endif // !DIFFUSE_H

@@ -15,6 +15,7 @@ public:
 	~Config();
 
 	bool IsLoaded() const;
+	bool HasSection(const char* name, int index = -1) const;
 	Config GetSection(const char* name, int index = -1) const;
 	ConfigArray GetArray(const char* name, int index = -1) const;
 
@@ -46,6 +47,7 @@ public:
 	~ConfigArray();
 
 	bool IsLoaded() const;
+	bool HasSection(int index, const char* name = nullptr) const;
 	Config GetSection(int index, const char* name = nullptr) const;
 	ConfigArray GetArray(int index, const char* name = nullptr) const;
 

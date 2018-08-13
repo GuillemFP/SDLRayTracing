@@ -58,7 +58,10 @@ namespace ParseUtils
 		MaterialData data;
 
 		data.type = ParseMaterialTypeFromString(config.GetStringRequired("Type"));
-		data.albedo = ParseVector(config.GetArray("Albedo"));
+		if (config.HasSection("Texture"))
+			data.textureData = ParseTextureData(config.GetSection("Texture"));
+		else
+			data.textureData.type = Texture::Type::NoTexture;
 		data.fuzziness = config.GetFloat("Fuzziness", 0.0f);
 		data.refractiveIndex = config.GetFloat("RefractiveIndex", 1.0f);
 
@@ -77,5 +80,23 @@ namespace ParseUtils
 		APPLOG("Invalid material type");
 
 		return Material::Type::Unknown;
+	}
+
+	TextureData ParseTextureData(const Config& config)
+	{
+		TextureData data;
+
+		data.type = ParseTextureTypeFromString(config.GetStringRequired("Type"));
+		data.color = ParseVector(config.GetArray("Color"));
+
+		return data;
+	}
+
+	Texture::Type ParseTextureTypeFromString(const std::string& type)
+	{
+		if (type == "Color")
+			return Texture::Type::Color;
+
+		return Texture::Type::NoTexture;
 	}
 }

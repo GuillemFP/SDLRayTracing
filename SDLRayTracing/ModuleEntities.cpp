@@ -13,8 +13,7 @@
 #include "ParseUtils.h"
 #include "Sphere.h"
 #include "Shape.h"
-#include <cuda_runtime_api.h>
-#include <cuda.h>
+#include "TextureData.h"
 
 ModuleEntities::ModuleEntities() : Module(MODULEENTITIES_NAME)
 {
@@ -91,6 +90,9 @@ void ModuleEntities::EntityFactory(const EntityData& data)
 	case Shape::Type::Sphere:
 		shape = new Sphere(shapeData.radius, shapeData.position);
 		break;
+	case Shape::Type::Unknown:
+		APPLOG("Unknown shape in entity factory!");
+		break;
 	}
 
 	if (!material || !shape)
@@ -140,13 +142,18 @@ void ModuleEntities::InitRandomSphere(const Vector3& center, float radius, math:
 	if (materialProb < diffuseProb)
 	{
 		materialData.type = Material::Type::Diffuse;
-		materialData.albedo = Vector3(randomGenerator.Float(), randomGenerator.Float(), randomGenerator.Float());
+		TextureData& textureData = materialData.textureData;
+		textureData.type = Texture::Type::Color;
+		textureData.color = Vector3(randomGenerator.Float(), randomGenerator.Float(), randomGenerator.Float());
 	}
 	else if (materialProb < diffuseProb + metalProb)
 	{
 		materialData.type = Material::Type::Metal;
-		materialData.albedo = Vector3(randomGenerator.Float(), randomGenerator.Float(), randomGenerator.Float());
 		materialData.fuzziness = randomGenerator.Float();
+
+		TextureData& textureData = materialData.textureData;
+		textureData.type = Texture::Type::Color;
+		textureData.color = Vector3(randomGenerator.Float(), randomGenerator.Float(), randomGenerator.Float());
 	}
 	else
 	{

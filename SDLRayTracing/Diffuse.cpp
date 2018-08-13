@@ -1,16 +1,19 @@
 #include "Diffuse.h"
 
+#include "Globals.h"
 #include "HitInfo.h"
 #include "Math.h"
 #include "MathUtils.h"
 #include "ScatterInfo.h"
+#include "Texture.h"
 
-Diffuse::Diffuse(const Vector3& albedo) : Material(Material::Type::Diffuse), _albedo(albedo)
+Diffuse::Diffuse(Texture* texture) : Material(Material::Type::Diffuse), _texture(texture)
 {
 }
 
 Diffuse::~Diffuse()
 {
+	RELEASE(_texture);
 }
 
 bool Diffuse::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator, const Vector3& albedo)
@@ -27,5 +30,5 @@ bool Diffuse::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatt
 
 bool Diffuse::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
-	return Scatter(ray, hitInfo, scatterInfo, randomGenerator, _albedo);
+	return Scatter(ray, hitInfo, scatterInfo, randomGenerator, _texture->GetColor());
 }
