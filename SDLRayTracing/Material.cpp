@@ -12,8 +12,8 @@ bool Material::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scat
 	case Type::Dielectric:
 		return Dielectric::Scatter(ray, hitInfo, scatterInfo, randomGenerator, materialData.refractiveIndex);
 	case Type::Diffuse:
-		return Diffuse::Scatter(ray, hitInfo, scatterInfo, randomGenerator, Texture::GetColor(materialData.textureData));
+		return Diffuse::Scatter(ray, hitInfo, scatterInfo, randomGenerator, Texture::GetColor(hitInfo, materialData.textureData));
 	case Type::Metal:
-		return Metal::Scatter(ray, hitInfo, scatterInfo, randomGenerator, Texture::GetColor(materialData.textureData), materialData.fuzziness);
+		return Metal::Scatter(ray, hitInfo, scatterInfo, randomGenerator, Texture::GetColor(hitInfo, materialData.textureData), materialData.fuzziness);
 	}
 }

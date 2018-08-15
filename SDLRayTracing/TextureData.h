@@ -7,7 +7,9 @@
 struct TextureData
 {
 	Texture::Type type;
-	Vector3 color;
+	Vector3 color = Vector3::zero;
+	Vector3 dimensions = Vector3::zero;
+	std::vector<TextureData> subTextures;
 };
 
 #endif // !TEXTUREDATA_H

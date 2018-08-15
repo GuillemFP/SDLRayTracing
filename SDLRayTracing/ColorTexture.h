@@ -9,7 +9,7 @@ public:
 	ColorTexture() = default;
 	ColorTexture(const Vector3& color) : _color(color) {}
 
-	virtual Vector3 GetColor() const { return _color; }
+	virtual Vector3 GetColor(const HitInfo& hitInfo) const { return _color; }
 
 protected:
 	Vector3 _color;

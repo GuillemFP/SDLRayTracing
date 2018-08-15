@@ -30,5 +30,5 @@ bool Diffuse::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatt
 
 bool Diffuse::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
-	return Scatter(ray, hitInfo, scatterInfo, randomGenerator, _texture->GetColor());
+	return Scatter(ray, hitInfo, scatterInfo, randomGenerator, _texture->GetColor(hitInfo));
 }

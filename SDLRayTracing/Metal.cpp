@@ -30,5 +30,5 @@ bool Metal::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatter
 
 bool Metal::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
-	return Scatter(ray, hitInfo, scatterInfo, randomGenerator, _texture->GetColor(), _fuzziness);
+	return Scatter(ray, hitInfo, scatterInfo, randomGenerator, _texture->GetColor(hitInfo), _fuzziness);
 }

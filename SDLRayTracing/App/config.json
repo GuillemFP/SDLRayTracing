@@ -7,7 +7,7 @@
 		},
 		"ModuleRender": {},
 		"ModuleCamera": {
-			"Position": [2.0, 3.0, -8.0],
+			"Position": [2.0, 2.0, -8.0],
 			"LookAt" : [0.0, 0.0, 0.0],
 			"FocusPoint" : [0.0, 0.0, 0.0],
 			"Aperture" : 0.1,

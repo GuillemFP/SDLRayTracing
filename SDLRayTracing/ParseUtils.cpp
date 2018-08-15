@@ -88,6 +88,17 @@ namespace ParseUtils
 
 		data.type = ParseTextureTypeFromString(config.GetStringRequired("Type"));
 		data.color = ParseVector(config.GetArray("Color"));
+		if (config.HasArray("Dimensions"))
+			data.dimensions = ParseVector(config.GetArray("Dimensions"));
+		if (config.HasArray("SubTextures"))
+		{
+			ConfigArray subTextures = config.GetArray("SubTextures");
+			for (size_t i = 0; i < subTextures.GetArrayLength(); i++)
+			{
+				Config subTexture = subTextures.GetSection(i);
+				data.subTextures.push_back(ParseTextureData(subTexture));
+			}
+		}
 
 		return data;
 	}
@@ -96,6 +107,8 @@ namespace ParseUtils
 	{
 		if (type == "Color")
 			return Texture::Type::Color;
+		if (type == "Checker")
+			return Texture::Type::Checker;
 
 		return Texture::Type::NoTexture;
 	}

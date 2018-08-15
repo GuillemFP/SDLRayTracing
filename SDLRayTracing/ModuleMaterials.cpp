@@ -1,5 +1,6 @@
 #include "ModuleMaterials.h"
 
+#include "CheckerTexture.h"
 #include "ColorTexture.h"
 #include "Dielectric.h"
 #include "Diffuse.h"
@@ -43,6 +44,16 @@ Texture* ModuleMaterials::TextureFactory(const TextureData& data) const
 	{
 	case Texture::Type::Color:
 		return new ColorTexture(data.color);
+	case Texture::Type::Checker:
+		const std::vector<TextureData>& subTextures = data.subTextures;
+		if (subTextures.size() < 2)
+		{
+			APPLOG("Wrong number of textures for checker texture in factory");
+			return new NoTexture();
+		}
+		Texture* odd = TextureFactory(subTextures.at(0));
+		Texture* even = TextureFactory(subTextures.at(1));
+		return new CheckerTexture(odd, even, data.dimensions);
 	}
 
 	APPLOG("No texture, loading empty texture");

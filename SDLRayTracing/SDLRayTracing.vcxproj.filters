@@ -123,6 +123,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Entities\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="CheckerTexture.cpp">
+      <Filter>Entities\Textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -238,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="TextureData.h">
       <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckerTexture.h">
+      <Filter>Entities\Textures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

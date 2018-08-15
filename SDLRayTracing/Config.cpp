@@ -26,6 +26,11 @@ bool Config::HasSection(const char* name, int index) const
 	return FindObject(name, index);
 }
 
+bool Config::HasArray(const char * name, int index) const
+{
+	return FindArray(name, index);
+}
+
 Config Config::GetSection(const char* name, int index) const
 {
 	return Config(FindObject(name, index));
@@ -173,6 +178,11 @@ bool ConfigArray::IsLoaded() const
 bool ConfigArray::HasSection(int index, const char * name) const
 {
 	return FindObject(index, name);
+}
+
+bool ConfigArray::HasArray(int index, const char * name) const
+{
+	return FindArray(index, name);
 }
 
 Config ConfigArray::GetSection(int index, const char* name) const
