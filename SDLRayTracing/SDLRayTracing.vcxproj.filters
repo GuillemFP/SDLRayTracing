@@ -111,17 +111,11 @@
     <ClCompile Include="Shape.cpp">
       <Filter>Entities\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>Entities\Materials</Filter>
-    </ClCompile>
     <ClCompile Include="AABB.cpp">
       <Filter>Utils\Math</Filter>
     </ClCompile>
     <ClCompile Include="BvhNode.cpp">
       <Filter>Containers</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Entities\Textures</Filter>
     </ClCompile>
     <ClCompile Include="CheckerTexture.cpp">
       <Filter>Entities\Textures</Filter>

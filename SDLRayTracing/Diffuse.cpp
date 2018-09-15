@@ -16,19 +16,14 @@ Diffuse::~Diffuse()
 	RELEASE(_texture);
 }
 
-bool Diffuse::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator, const Vector3& albedo)
+bool Diffuse::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
 	scatterInfo.reflects = true;
 
 	Vector3 sphereTarget = hitInfo.point + hitInfo.normal + MathUtils::RandomPointInSphere(randomGenerator);
 	scatterInfo.reflectedRay.pos = hitInfo.point;
 	scatterInfo.reflectedRay.dir = normalize(sphereTarget - hitInfo.point);
-	scatterInfo.attenuation = albedo;
+	scatterInfo.attenuation = _texture->GetColor(hitInfo);
 
 	return true;
-}
-
-bool Diffuse::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
-{
-	return Scatter(ray, hitInfo, scatterInfo, randomGenerator, _texture->GetColor(hitInfo));
 }

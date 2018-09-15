@@ -9,7 +9,6 @@ public:
 	CheckerTexture(Texture* odd, Texture* even, const Vector3& dimensions);
 	~CheckerTexture();
 
-	static Vector3 GetColor(const HitInfo& hitInfo, const Vector3& colorOdd, const Vector3& colorEven, const Vector3& dimensions);
 	virtual Vector3 GetColor(const HitInfo& hitInfo) const;
 
 private:

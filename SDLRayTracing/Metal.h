@@ -12,7 +12,6 @@ public:
 	Metal(Texture* texture, float fuzziness);
 	~Metal();
 
-	static bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator, const Vector3& albedo, const float fuzziness);
 	bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
 
 private:

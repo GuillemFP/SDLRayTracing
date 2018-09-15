@@ -47,7 +47,7 @@ Dielectric::~Dielectric()
 {
 }
 
-bool Dielectric::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator, const float refractiveIndex)
+bool Dielectric::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
 	Vector3 normal;
 	float refractionFactorRatio;
@@ -56,12 +56,12 @@ bool Dielectric::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& sc
 	if (dot(ray.dir, hitInfo.normal) > 0)
 	{
 		normal = -hitInfo.normal;
-		refractionFactorRatio = refractiveIndex;
+		refractionFactorRatio = _refractiveIndex;
 	}
 	else
 	{
 		normal = hitInfo.normal;
-		refractionFactorRatio = 1.0f / refractiveIndex;
+		refractionFactorRatio = 1.0f / _refractiveIndex;
 	}
 	float cosine = CosineIncidentAngle(normal, ray.dir);
 
@@ -93,10 +93,5 @@ bool Dielectric::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& sc
 	scatterInfo.reflects = true;
 	scatterInfo.reflectedRay = Ray(hitInfo.point, MathUtils::ReflectedVector(ray.dir, hitInfo.normal));
 	return true;
-}
-
-bool Dielectric::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
-{
-	return Scatter(ray, hitInfo, scatterInfo, randomGenerator, _refractiveIndex);
 }
 

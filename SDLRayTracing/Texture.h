@@ -16,7 +16,6 @@ public:
 		NoTexture
 	};
 
-	static Vector3 GetColor(const HitInfo& hitInfo, const TextureData& textureData);
 	virtual Vector3 GetColor(const HitInfo& hitInfo) const = 0;
 };
 
