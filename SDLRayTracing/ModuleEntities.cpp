@@ -41,19 +41,11 @@ bool ModuleEntities::Init(Config* config)
 
 #if USE_C_ARRAYS
 	size_t numberOfEntities = _entities.size();
-#if USE_OOP
 	_cEntities = new Entity*[numberOfEntities];
 	for (size_t i = 0; i < numberOfEntities; i++)
 	{
 		_cEntities[i] = _entities.at(i);
 	}
-#else
-	_cEntities = new Entity[numberOfEntities];
-	for (size_t i = 0; i < numberOfEntities; i++)
-	{
-		_cEntities[i] = _entities.at(i).Clone();
-	}
-#endif // USE_OOP
 #endif // USE_C_ARRAYS
 
 #if USE_BVH
@@ -65,10 +57,8 @@ bool ModuleEntities::Init(Config* config)
 
 bool ModuleEntities::CleanUp()
 {
-#if USE_OOP
 	for (VEntity::reverse_iterator it = _entities.rbegin(); it != _entities.rend(); ++it)
 		RELEASE(*it);
-#endif // USE_OOP
 
 #if USE_C_ARRAYS
 	RELEASE_ARRAY(_cEntities);
@@ -79,7 +69,6 @@ bool ModuleEntities::CleanUp()
 
 void ModuleEntities::EntityFactory(const EntityData& data)
 {
-#if USE_OOP
 	Material* material = App->_materials->LoadMaterial(data.materialData);
 
 	const ShapeData& shapeData = data.shapeData;
@@ -101,9 +90,6 @@ void ModuleEntities::EntityFactory(const EntityData& data)
 	}
 
 	_entities.push_back(new Entity(shape, material));
-#else
-	_entities.push_back(Entity(data.shapeData, data.materialData));
-#endif // USE_OOP
 }
 
 void ModuleEntities::InitRandomSpheres()

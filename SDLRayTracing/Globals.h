@@ -46,13 +46,11 @@ enum update_status
 #define GAMMA_CORRECTION 1
 
 // Optimization
-#define USE_OOP 1
 #define USE_C_ARRAYS 1
 #define USE_BVH 0
 
 #if USE_BVH
 #define USE_C_ARRAYS 1
-#define USE_OOP 0
 #endif // USE_BVH
 
 // Parallelization

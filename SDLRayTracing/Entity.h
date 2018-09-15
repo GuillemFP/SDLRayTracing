@@ -14,22 +14,13 @@ class Ray;
 struct HitInfo;
 struct ScatterInfo;
 
-#if USE_OOP
-	class Material;
-	class Shape;	
-#else
-	#include "MaterialData.h"
-	#include "ShapeData.h"
-#endif // USE_OOP
+class Material;
+class Shape;	
 
 class Entity
 {
 public:
-#if USE_OOP
 	Entity(Shape* shape, Material* material);
-#else
-	Entity(const ShapeData& shapeData, const MaterialData& materialData);
-#endif // USE_OOP
 	Entity() {}
 	~Entity();
 
@@ -37,27 +28,13 @@ public:
 	bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
 	const AABB& GetBoundingBox() const { return _boundingBox; }
 
-#if !USE_OOP
-	Entity Clone() const;
-#endif // !USE_OOP
-
 protected:
 	AABB _boundingBox;
-#if USE_OOP
 	Material* _material = nullptr;
 	Shape* _shape = nullptr;
-#else
-	ShapeData _shapeData;
-	MaterialData _materialData;
-#endif // USE_OOP
 };
 
-#if USE_OOP
-	using VEntity = std::vector<Entity*>;
-	using AEntity = Entity**;
-#else
-	using VEntity = std::vector<Entity>;
-	using AEntity = Entity*;
-#endif // USE_OOP
+using VEntity = std::vector<Entity*>;
+using AEntity = Entity**;
 
 #endif // !ENTITY_H
