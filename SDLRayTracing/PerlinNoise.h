@@ -17,7 +17,7 @@ public:
 	float Noise(const Vector3& p) const;
 
 private:
-	float* _ranfloat = nullptr;
+	Vector3* _ranvec = nullptr;
 	int* _permutation_x = nullptr;
 	int* _permutation_y = nullptr;
 	int* _permutation_z = nullptr;

@@ -8,12 +8,12 @@ namespace
 	const int kLength = 256;
 	const int kInterpolationSteps = 2;
 
-	float* InitPerlin(math::LCG& rng)
+	Vector3* InitPerlin(math::LCG& rng)
 	{
-		float* p = new float[kLength];
+		Vector3* p = new Vector3[kLength];
 		for (int i = 0; i < kLength; ++i)
 		{
-			p[i] = rng.Float();
+			p[i] = normalize(Vector3(rng.FloatIncl(-1.0f, 1.0f), rng.FloatIncl(-1.0f, 1.0f), rng.FloatIncl(-1.0f, 1.0f)));
 		}
 		return p;
 	}
@@ -23,7 +23,7 @@ namespace
 	{
 		for (int i = n-1; i > n; i--)
 		{
-			int targetIndex = int(rng.Float(0, i + 1));
+			int targetIndex = rng.Int(0, i);
 			T tmp = p[i];
 			p[i] = p[targetIndex];
 			p[targetIndex] = tmp;
@@ -62,22 +62,26 @@ namespace
 		return (i*u + (1 - i)*(1 - u));
 	}
 
-	inline float Interpolation(float c[kInterpolationSteps][kInterpolationSteps][kInterpolationSteps], float u, float v, float w)
+	inline float Interpolation(Vector3 c[kInterpolationSteps][kInterpolationSteps][kInterpolationSteps], float u, float v, float w)
 	{
+		float uu = HermitCubic(u);
+		float vv = HermitCubic(v);
+		float ww = HermitCubic(w);
 		float sum = 0;
-
 		for (int i = 0; i < kInterpolationSteps; ++i)
 			for (int j = 0; j < kInterpolationSteps; ++j)
 				for (int k = 0; k < kInterpolationSteps; ++k)
-					sum += InterpolationFactor(i, u)*InterpolationFactor(j, v)*InterpolationFactor(k, w)*c[i][j][k];
-
+				{
+					Vector3 weight(u - i, v - j, w - k);
+					sum += InterpolationFactor(i, uu)*InterpolationFactor(j, vv)*InterpolationFactor(k, ww)*dot(c[i][j][k], weight);
+				}
 		return sum;
 	}
 }
 
 PerlinNoise::PerlinNoise(math::LCG& rng)
 {
-	_ranfloat = InitPerlin(rng);
+	_ranvec = InitPerlin(rng);
 	_permutation_x = InitPermutation(rng);
 	_permutation_y = InitPermutation(rng);
 	_permutation_z = InitPermutation(rng);
@@ -89,17 +93,17 @@ PerlinNoise::~PerlinNoise()
 
 float PerlinNoise::Noise(const Vector3& p) const
 {
-	float u = HermitCubic(GetDecimalPart(p.e[0]));
-	float v = HermitCubic(GetDecimalPart(p.e[1]));
-	float w = HermitCubic(GetDecimalPart(p.e[2]));
+	float u = GetDecimalPart(p.e[0]);
+	float v = GetDecimalPart(p.e[1]);
+	float w = GetDecimalPart(p.e[2]);
 	int i = floor(p.e[0]);
 	int j = floor(p.e[1]);
 	int k = floor(p.e[2]);
-	float c[kInterpolationSteps][kInterpolationSteps][kInterpolationSteps];
+	Vector3 c[kInterpolationSteps][kInterpolationSteps][kInterpolationSteps];
 	for (int di = 0; di < kInterpolationSteps; ++di)
 		for (int dj = 0; dj < kInterpolationSteps; ++dj)
 			for (int dk = 0; dk < kInterpolationSteps; ++dk)
-				c[di][dj][dk] = _ranfloat[_permutation_x[ApplyMask(i + di)] ^ _permutation_y[ApplyMask(j + dj)] ^ _permutation_z[ApplyMask(k + dk)]];
+				c[di][dj][dk] = _ranvec[_permutation_x[ApplyMask(i + di)] ^ _permutation_y[ApplyMask(j + dj)] ^ _permutation_z[ApplyMask(k + dk)]];
 
 	return Interpolation(c, u, v, w);
 }

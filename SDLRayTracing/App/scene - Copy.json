@@ -1,0 +1,67 @@
+{
+	"Entities": [{
+			"Shape": {
+				"Type": "Sphere",
+				"Position": [0, -1000, -1],
+				"Radius": 1000
+			},
+			"Material": {
+				"Type": "Diffuse",
+				"Texture": {
+					"Type": "Checker",
+					"SubTextures": [{
+						"Type": "Color",
+						"Color": [0.2, 0.3, 0.1]
+						},
+						{
+						"Type": "Color",
+						"Color": [0.9, 0.9, 0.9]
+						}
+					],
+					"Dimensions": [5, 5, 5]
+				}
+			}
+		},
+		{
+			"Shape": {
+				"Type": "Sphere",
+				"Position": [0, 1, 0],
+				"Radius": 1
+			},
+			"Material": {
+				"Type": "Dielectric",
+				"RefractiveIndex": 1.5
+			}
+		},
+		{
+		"Shape": {
+				"Type": "Sphere",
+				"Position": [-2, 1, 0],
+				"Radius": 1
+			},
+			"Material": {
+				"Type": "Diffuse",
+				"Texture": {
+					"Type": "Perlin",
+					"Color": [0.4, 0.2, 0.1],
+					"Dimensions": [1, 1, 1]
+				}
+			}
+		},
+		{
+			"Shape": {
+				"Type": "Sphere",
+				"Position": [2, 1, 0],
+				"Radius": 1
+			},
+			"Material": {
+				"Type": "Metal",
+				"Texture": {
+					"Type": "Color",
+					"Color": [0.7, 0.6, 0.5]
+				},
+				"Fuzziness": 0.0
+			}
+		}
+	]
+}

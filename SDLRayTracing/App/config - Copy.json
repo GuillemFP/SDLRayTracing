@@ -7,11 +7,11 @@
 		},
 		"ModuleRender": {},
 		"ModuleCamera": {
-			"Position": [13.0, 2.0, 3.0],
+			"Position": [2.0, 2.0, -8.0],
 			"LookAt" : [0.0, 0.0, 0.0],
 			"FocusPoint" : [0.0, 0.0, 0.0],
-			"Aperture" : 0.0,
-			"Vertical FOV" : 20,
+			"Aperture" : 0.1,
+			"Vertical FOV" : 40,
 			"Aspect Ratio" : 1.5
 		},
 		"ModuleEntities": {
