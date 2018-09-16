@@ -5,7 +5,7 @@
 #include "PerlinNoise.h"
 #include "HitInfo.h"
 
-PerlinTexture::PerlinTexture(PerlinNoise* perlin) : _perlin(perlin)
+PerlinTexture::PerlinTexture(PerlinNoise* perlin, const Vector3& dimensions) : _perlin(perlin), _scale(dimensions)
 {
 }
 
@@ -16,5 +16,5 @@ PerlinTexture::~PerlinTexture()
 
 Vector3 PerlinTexture::GetColor(const HitInfo& hitInfo) const
 {
-	return Vector3::one * _perlin->Noise(hitInfo.point);
+	return Vector3::one * _perlin->Noise(hitInfo.point * _scale);
 }

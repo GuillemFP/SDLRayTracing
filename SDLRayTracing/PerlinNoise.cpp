@@ -42,9 +42,14 @@ namespace
 		return p;
 	}
 
-	inline float GetDecimalPart(const float n)
+	inline float GetDecimalPart(const float u)
 	{
-		return n - floor(n);
+		return u - floor(u);
+	}
+
+	inline float HermitCubic(const float u)
+	{
+		return u*u*(3.0f - 2.0f*u);
 	}
 
 	inline int ApplyMask(const int n)
@@ -84,9 +89,9 @@ PerlinNoise::~PerlinNoise()
 
 float PerlinNoise::Noise(const Vector3& p) const
 {
-	float u = GetDecimalPart(p.e[0]);
-	float v = GetDecimalPart(p.e[1]);
-	float w = GetDecimalPart(p.e[2]);
+	float u = HermitCubic(GetDecimalPart(p.e[0]));
+	float v = HermitCubic(GetDecimalPart(p.e[1]));
+	float w = HermitCubic(GetDecimalPart(p.e[2]));
 	int i = floor(p.e[0]);
 	int j = floor(p.e[1]);
 	int k = floor(p.e[2]);

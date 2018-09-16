@@ -49,28 +49,27 @@ Texture* ModuleMaterials::TextureFactory(const TextureData& data) const
 
 	switch (data.type)
 	{
-	case Texture::Type::Color:
-	{
-		return new ColorTexture(data.color);
-	}
-	case Texture::Type::Checker:
-	{
-		const std::vector<TextureData>& subTextures = data.subTextures;
-		if (subTextures.size() < 2)
+		case Texture::Type::Color:
 		{
-			APPLOG("Wrong number of textures for checker texture in factory");
-			return new NoTexture();
+			return new ColorTexture(data.color);
 		}
-		Texture* odd = TextureFactory(subTextures.at(0));
-		Texture* even = TextureFactory(subTextures.at(1));
-
-		return new CheckerTexture(odd, even, data.dimensions);
-	}
-	case Texture::Type::Perlin:
-	{
-		return new PerlinTexture(new PerlinNoise(*rng));
-	}
-	}
+		case Texture::Type::Checker:
+		{
+			const std::vector<TextureData>& subTextures = data.subTextures;
+			if (subTextures.size() < 2)
+			{
+				APPLOG("Wrong number of textures for checker texture in factory");
+				return new NoTexture();
+			}
+			Texture* odd = TextureFactory(subTextures.at(0));
+			Texture* even = TextureFactory(subTextures.at(1));
+			return new CheckerTexture(odd, even, data.dimensions);
+		}
+		case Texture::Type::Perlin:
+		{
+			return new PerlinTexture(new PerlinNoise(*rng), data.dimensions);
+		}
+	}	
 
 	APPLOG("No texture, loading empty texture");
 

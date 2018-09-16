@@ -43,7 +43,8 @@
 				"Type": "Diffuse",
 				"Texture": {
 					"Type": "Perlin",
-					"Color": [0.4, 0.2, 0.1]
+					"Color": [0.4, 0.2, 0.1],
+					"Dimensions": [10, 10, 10]
 				}
 			}
 		},
