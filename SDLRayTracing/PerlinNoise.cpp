@@ -6,6 +6,7 @@
 namespace
 {
 	const int kLength = 256;
+	const int kInterpolationSteps = 2;
 
 	float* InitPerlin(math::LCG& rng)
 	{
@@ -46,9 +47,26 @@ namespace
 		return n - floor(n);
 	}
 
-	inline int ApplyMask(const float n)
+	inline int ApplyMask(const int n)
 	{
-		return int(4 * n) & 255;
+		return n & 255;
+	}
+
+	inline float InterpolationFactor(int i, float u)
+	{
+		return (i*u + (1 - i)*(1 - u));
+	}
+
+	inline float Interpolation(float c[kInterpolationSteps][kInterpolationSteps][kInterpolationSteps], float u, float v, float w)
+	{
+		float sum = 0;
+
+		for (int i = 0; i < kInterpolationSteps; ++i)
+			for (int j = 0; j < kInterpolationSteps; ++j)
+				for (int k = 0; k < kInterpolationSteps; ++k)
+					sum += InterpolationFactor(i, u)*InterpolationFactor(j, v)*InterpolationFactor(k, w)*c[i][j][k];
+
+		return sum;
 	}
 }
 
@@ -69,8 +87,14 @@ float PerlinNoise::Noise(const Vector3& p) const
 	float u = GetDecimalPart(p.e[0]);
 	float v = GetDecimalPart(p.e[1]);
 	float w = GetDecimalPart(p.e[2]);
-	int i = ApplyMask(p.e[0]);
-	int j = ApplyMask(p.e[1]);
-	int k = ApplyMask(p.e[2]);
-	return _ranfloat[_permutation_x[i] ^ _permutation_y[j] ^ _permutation_z[k]];
+	int i = floor(p.e[0]);
+	int j = floor(p.e[1]);
+	int k = floor(p.e[2]);
+	float c[kInterpolationSteps][kInterpolationSteps][kInterpolationSteps];
+	for (int di = 0; di < kInterpolationSteps; ++di)
+		for (int dj = 0; dj < kInterpolationSteps; ++dj)
+			for (int dk = 0; dk < kInterpolationSteps; ++dk)
+				c[di][dj][dk] = _ranfloat[_permutation_x[ApplyMask(i + di)] ^ _permutation_y[ApplyMask(j + dj)] ^ _permutation_z[ApplyMask(k + dk)]];
+
+	return Interpolation(c, u, v, w);
 }
