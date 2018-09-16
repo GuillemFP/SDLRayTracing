@@ -3,7 +3,7 @@
 
 #include "Vector3.h"
 
-class TextureData;
+struct TextureData;
 struct HitInfo;
 
 class Texture
@@ -13,6 +13,7 @@ public:
 	{
 		Color = 0,
 		Checker,
+		Perlin,
 		NoTexture
 	};
 

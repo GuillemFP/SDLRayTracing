@@ -10,6 +10,11 @@ class Texture;
 struct MaterialData;
 struct TextureData;
 
+namespace math
+{
+	class LCG;
+}
+
 class ModuleMaterials : public Module
 {
 public:
@@ -20,6 +25,8 @@ public:
 
 private:
 	Texture* TextureFactory(const TextureData& data) const;
+	
+	math::LCG* rng = nullptr;
 };
 
 #endif // !MODULEMATERIALS_H

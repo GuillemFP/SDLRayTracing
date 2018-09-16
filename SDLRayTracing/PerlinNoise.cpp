@@ -54,6 +54,10 @@ namespace
 
 PerlinNoise::PerlinNoise(math::LCG& rng)
 {
+	_ranfloat = InitPerlin(rng);
+	_permutation_x = InitPermutation(rng);
+	_permutation_y = InitPermutation(rng);
+	_permutation_z = InitPermutation(rng);
 }
 
 PerlinNoise::~PerlinNoise()
@@ -68,5 +72,5 @@ float PerlinNoise::Noise(const Vector3& p) const
 	int i = ApplyMask(p.e[0]);
 	int j = ApplyMask(p.e[1]);
 	int k = ApplyMask(p.e[2]);
-	return ranfloat[permutation_x[i] ^ permutation_y[j] ^ permutation_z[k]];
+	return _ranfloat[_permutation_x[i] ^ _permutation_y[j] ^ _permutation_z[k]];
 }

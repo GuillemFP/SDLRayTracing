@@ -17,10 +17,10 @@ public:
 	float Noise(const Vector3& p) const;
 
 private:
-	float* ranfloat = nullptr;
-	int* permutation_x = nullptr;
-	int* permutation_y = nullptr;
-	int* permutation_z = nullptr;
+	float* _ranfloat = nullptr;
+	int* _permutation_x = nullptr;
+	int* _permutation_y = nullptr;
+	int* _permutation_z = nullptr;
 };
 
 #endif // !PERLINNOISE_H

@@ -9,13 +9,18 @@
 #include "Metal.h"
 #include "Texture.h"
 #include "TextureData.h"
+#include "MathGeoLib\include\Algorithm\Random\LCG.h"
+#include "PerlinNoise.h"
+#include "PerlinTexture.h"
 
 ModuleMaterials::ModuleMaterials() : Module(MODULEMATERIALS_NAME)
 {
+	rng = new math::LCG();
 }
 
 ModuleMaterials::~ModuleMaterials()
 {
+	RELEASE(rng);
 }
 
 Material* ModuleMaterials::LoadMaterial(const MaterialData& data) const
@@ -38,13 +43,18 @@ Material* ModuleMaterials::LoadMaterial(const MaterialData& data) const
 
 Texture* ModuleMaterials::TextureFactory(const TextureData& data) const
 {
+	static_assert(Texture::Type::NoTexture == 3, "Update texture factory code");
+
 	Texture* texture = nullptr;
 
 	switch (data.type)
 	{
 	case Texture::Type::Color:
+	{
 		return new ColorTexture(data.color);
+	}
 	case Texture::Type::Checker:
+	{
 		const std::vector<TextureData>& subTextures = data.subTextures;
 		if (subTextures.size() < 2)
 		{
@@ -53,7 +63,13 @@ Texture* ModuleMaterials::TextureFactory(const TextureData& data) const
 		}
 		Texture* odd = TextureFactory(subTextures.at(0));
 		Texture* even = TextureFactory(subTextures.at(1));
+
 		return new CheckerTexture(odd, even, data.dimensions);
+	}
+	case Texture::Type::Perlin:
+	{
+		return new PerlinTexture(new PerlinNoise(*rng));
+	}
 	}
 
 	APPLOG("No texture, loading empty texture");

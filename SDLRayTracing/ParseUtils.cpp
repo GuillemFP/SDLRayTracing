@@ -109,6 +109,8 @@ namespace ParseUtils
 			return Texture::Type::Color;
 		if (type == "Checker")
 			return Texture::Type::Checker;
+		if (type == "Perlin")
+			return Texture::Type::Perlin;
 
 		return Texture::Type::NoTexture;
 	}
