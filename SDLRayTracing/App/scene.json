@@ -9,7 +9,7 @@
 				"Type": "Diffuse",
 				"Texture": {
 					"Type": "Perlin",
-					"Dimensions": [1, 1, 1]
+					"Dimensions": [10, 10, 10]
 				}
 			}
 		},
@@ -17,13 +17,13 @@
 			"Shape": {
 				"Type": "Sphere",
 				"Position": [0, 2, 0],
-				"Radius": 1
+				"Radius": 2
 			},
 			"Material": {
 				"Type": "Diffuse",
 				"Texture": {
 					"Type": "Perlin",
-					"Dimensions": [1, 1, 1]
+					"Dimensions": [10, 10, 10]
 				}
 			}
 		}

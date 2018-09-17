@@ -16,5 +16,5 @@ PerlinTexture::~PerlinTexture()
 
 Vector3 PerlinTexture::GetColor(const HitInfo& hitInfo) const
 {
-	return Vector3::one * _perlin->Noise(hitInfo.point * _scale);
+	return Vector3::one * 0.5f * (_perlin->Noise(hitInfo.point * _scale) + 1.0f);
 }

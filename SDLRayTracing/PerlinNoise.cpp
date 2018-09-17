@@ -2,6 +2,7 @@
 
 #include "MathGeoLib\include\Algorithm\Random\LCG.h"
 #include "Math.h"
+#include "MathUtils.h"
 
 namespace
 {
@@ -13,7 +14,7 @@ namespace
 		Vector3* p = new Vector3[kLength];
 		for (int i = 0; i < kLength; ++i)
 		{
-			p[i] = normalize(Vector3(rng.FloatIncl(-1.0f, 1.0f), rng.FloatIncl(-1.0f, 1.0f), rng.FloatIncl(-1.0f, 1.0f)));
+			p[i] = MathUtils::RandomPointInSphere(rng).normalized();
 		}
 		return p;
 	}
