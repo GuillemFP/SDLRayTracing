@@ -4,6 +4,9 @@
 #define MODULEMATERIALS_NAME "ModuleMaterials"
 
 #include "Module.h"
+#include "ImageData.h"
+#include <string>
+#include <vector>
 
 class Material;
 class Texture;
@@ -21,12 +24,16 @@ public:
 	ModuleMaterials();
 	~ModuleMaterials();
 
-	Material* LoadMaterial(const MaterialData& data) const;
+	Material* LoadMaterial(const MaterialData& data);
 
 private:
-	Texture* TextureFactory(const TextureData& data) const;
+	using VImageTex = std::vector<unsigned char*>;
+
+	Texture* TextureFactory(const TextureData& data);
+	ImageData CreateImage(const std::string& path);
 	
-	math::LCG* rng = nullptr;
+	math::LCG* _rng = nullptr;
+	VImageTex _images;
 };
 
 #endif // !MODULEMATERIALS_H

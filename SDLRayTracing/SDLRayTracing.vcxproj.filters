@@ -126,6 +126,9 @@
     <ClCompile Include="PerlinNoise.cpp">
       <Filter>Utils\Math</Filter>
     </ClCompile>
+    <ClCompile Include="ImageTexture.cpp">
+      <Filter>Entities\Textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -250,6 +253,15 @@
     </ClInclude>
     <ClInclude Include="PerlinNoise.h">
       <Filter>Utils\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image\stb_image.h">
+      <Filter>3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageData.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageTexture.h">
+      <Filter>Entities\Textures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -124,6 +124,7 @@
     <ClCompile Include="Dielectric.cpp" />
     <ClCompile Include="Diffuse.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Metal.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
@@ -156,6 +157,8 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityData.h" />
     <ClInclude Include="HitInfo.h" />
+    <ClInclude Include="ImageData.h" />
+    <ClInclude Include="ImageTexture.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="MaterialData.h" />
     <ClInclude Include="MathUtils.h" />
@@ -182,6 +185,7 @@
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapeData.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="stb_image\stb_image.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureData.h" />
     <ClInclude Include="Timer.h" />

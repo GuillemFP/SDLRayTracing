@@ -12,18 +12,24 @@
 #include "MathGeoLib\include\Algorithm\Random\LCG.h"
 #include "PerlinNoise.h"
 #include "PerlinTexture.h"
+#include "ImageTexture.h"
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image\stb_image.h"
 
 ModuleMaterials::ModuleMaterials() : Module(MODULEMATERIALS_NAME)
 {
-	rng = new math::LCG();
+	_rng = new math::LCG();
 }
 
 ModuleMaterials::~ModuleMaterials()
 {
-	RELEASE(rng);
+	RELEASE(_rng);
+
+	for (VImageTex::reverse_iterator it = _images.rbegin(); it != _images.rend(); ++it)
+		stbi_image_free(*it);
 }
 
-Material* ModuleMaterials::LoadMaterial(const MaterialData& data) const
+Material* ModuleMaterials::LoadMaterial(const MaterialData& data)
 {
 	static_assert(Material::Type::Unknown == 3, "Update material factory code");
 
@@ -41,9 +47,9 @@ Material* ModuleMaterials::LoadMaterial(const MaterialData& data) const
 	return nullptr;
 }
 
-Texture* ModuleMaterials::TextureFactory(const TextureData& data) const
+Texture* ModuleMaterials::TextureFactory(const TextureData& data)
 {
-	static_assert(Texture::Type::NoTexture == 3, "Update texture factory code");
+	static_assert(Texture::Type::NoTexture == 4, "Update texture factory code");
 
 	Texture* texture = nullptr;
 
@@ -67,11 +73,26 @@ Texture* ModuleMaterials::TextureFactory(const TextureData& data) const
 		}
 		case Texture::Type::Perlin:
 		{
-			return new PerlinTexture(new PerlinNoise(*rng), data.dimensions);
+			return new PerlinTexture(new PerlinNoise(*_rng), data.dimensions);
+		}
+		case Texture::Type::Image:
+		{
+			return new ImageTexture(CreateImage(data.image));
 		}
 	}	
 
 	APPLOG("No texture, loading empty texture");
 
 	return new NoTexture();
+}
+
+ImageData ModuleMaterials::CreateImage(const std::string& path)
+{
+	ImageData data;
+
+	unsigned char* tex = stbi_load(path.c_str(), &data.nx, &data.ny, &data.nn, 0);
+	_images.push_back(tex);
+	data.tex = tex;
+
+	return data;
 }

@@ -10,6 +10,7 @@ struct TextureData
 	Vector3 color = Vector3::zero;
 	Vector3 dimensions = Vector3::zero;
 	std::vector<TextureData> subTextures;
+	std::string image;
 };
 
 #endif // !TEXTUREDATA_H

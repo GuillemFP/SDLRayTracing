@@ -14,6 +14,7 @@ public:
 		Color = 0,
 		Checker,
 		Perlin,
+		Image,
 		NoTexture
 	};
 

@@ -88,8 +88,8 @@ namespace ParseUtils
 
 		data.type = ParseTextureTypeFromString(config.GetStringRequired("Type"));
 		data.color = ParseVector(config.GetArray("Color"));
-		if (config.HasArray("Dimensions"))
-			data.dimensions = ParseVector(config.GetArray("Dimensions"));
+		data.dimensions = ParseVector(config.GetArray("Dimensions"));
+		data.image = config.GetString("Path", "");
 		if (config.HasArray("SubTextures"))
 		{
 			ConfigArray subTextures = config.GetArray("SubTextures");
@@ -111,6 +111,8 @@ namespace ParseUtils
 			return Texture::Type::Checker;
 		if (type == "Perlin")
 			return Texture::Type::Perlin;
+		if (type == "Image")
+			return Texture::Type::Image;
 
 		return Texture::Type::NoTexture;
 	}

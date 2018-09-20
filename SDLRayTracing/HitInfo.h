@@ -12,6 +12,8 @@ struct HitInfo
 	Vector3 point;
 	Vector3 normal;
 	const Entity* entity;
+	float u = 0;
+	float v = 0;
 };
 
 #endif // !HITINFO_H
