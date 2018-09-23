@@ -17,7 +17,7 @@ public:
 	Vector3 dir;
 };
 
-inline Ray operator*(const Ray& r, const math::float4x4& m)
+inline Ray operator*(const math::float4x4& m, const Ray& r)
 {
 	return Ray(m.MulPos(r.pos.toFloat3()), m.MulDir(r.dir.toFloat3()));
 }

@@ -23,7 +23,7 @@ Entity::~Entity()
 
 bool Entity::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
 {
-	Ray transformedRay = ray * _inverseTransform;
+	Ray transformedRay = _inverseTransform * ray;
 	if (_shape->Hit(transformedRay, minDistance, maxDistance, hitInfo))
 	{
 		hitInfo.point = _transform.MulPos(hitInfo.point.toFloat3());
