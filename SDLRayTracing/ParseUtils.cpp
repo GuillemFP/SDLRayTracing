@@ -39,6 +39,7 @@ namespace ParseUtils
 		ShapeData data;
 
 		data.type = ParseShapeTypeFromString(config.GetStringRequired("Type"));
+		data.dimensions = ParseVector(config.GetArray("Dimensions"));
 		data.radius = config.GetFloat("Radius", 1.0f);
 
 		return data;
@@ -48,6 +49,8 @@ namespace ParseUtils
 	{
 		if (type == "Sphere")
 			return Shape::Type::Sphere;
+		if (type == "Plane")
+			return Shape::Type::Plane;
 
 		APPLOG("Invalid entity type");
 

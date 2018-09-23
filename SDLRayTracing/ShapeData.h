@@ -6,6 +6,7 @@
 struct ShapeData
 {
 	Shape::Type type;
+	Vector3 dimensions = Vector3::one;
 	float radius = 1.0f;
 };
 

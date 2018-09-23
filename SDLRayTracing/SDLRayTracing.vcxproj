@@ -141,6 +141,7 @@
     <ClCompile Include="parson\parson.c" />
     <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="PerlinTexture.cpp" />
+    <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Vector3.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="parson\parson.h" />
     <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="PerlinTexture.h" />
+    <ClInclude Include="Plane.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="ScatterInfo.h" />
     <ClInclude Include="Shape.h" />

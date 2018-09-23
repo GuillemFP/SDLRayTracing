@@ -15,6 +15,7 @@ public:
 	enum Type
 	{
 		Sphere = 0,
+		Plane,
 		Unknown
 	};
 

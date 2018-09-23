@@ -129,6 +129,9 @@
     <ClCompile Include="ImageTexture.cpp">
       <Filter>Entities\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="Plane.cpp">
+      <Filter>Entities\Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -262,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="ImageTexture.h">
       <Filter>Entities\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>Entities\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,6 +14,7 @@
 #include "Sphere.h"
 #include "Shape.h"
 #include "TextureData.h"
+#include "Plane.h"
 
 ModuleEntities::ModuleEntities() : Module(MODULEENTITIES_NAME)
 {
@@ -79,6 +80,8 @@ void ModuleEntities::EntityFactory(const EntityData& data)
 	case Shape::Type::Sphere:
 		shape = new Sphere(shapeData.radius);
 		break;
+	case Shape::Type::Plane:
+		shape = new Plane(shapeData.dimensions);
 	case Shape::Type::Unknown:
 		APPLOG("Unknown shape in entity factory!");
 		break;
