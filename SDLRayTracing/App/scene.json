@@ -1,7 +1,7 @@
 {
 	"Entities": [{
 			"Position" : [0, -1000, -1],
-			"Rotation" : [0, 180, 0],
+			"Rotation" : [0, 0, 0],
 			"Shape": {
 				"Type": "Sphere",
 				"Radius": 1000
@@ -25,7 +25,7 @@
 		},
 		{
 			"Position" : [0, 1, 0],
-			"Rotation" : [0, 180, 0],
+			"Rotation" : [0, 0, 0],
 			"Shape": {
 				"Type": "Sphere",
 				"Radius": 1
@@ -37,7 +37,7 @@
 		},
 		{
 			"Position" : [-2, 1, 0],
-			"Rotation" : [0, 180, 0],
+			"Rotation" : [0, 0, 0],
 			"Shape": {
 				"Type": "Sphere",
 				"Radius": 1
@@ -54,7 +54,7 @@
 		},
 		{
 			"Position" : [2, 1, 0],
-			"Rotation" : [0, 180, 0],
+			"Rotation" : [0, 0, 0],
 			"Shape": {
 				"Type": "Sphere",
 				"Radius": 1
@@ -64,6 +64,22 @@
 				"Texture": {
 					"Type": "Color",
 					"Color": [0.7, 0.6, 0.5]
+				},
+				"Fuzziness": 0.0
+			}
+		},
+		{
+			"Position" : [-3, 1, -2],
+			"Rotation" : [0, 90, 0],
+			"Shape": {
+				"Type": "Plane",
+				"Dimensions": [2, 2, 0]
+			},
+			"Material": {
+				"Type": "Metal",
+				"Texture": {
+					"Type": "Color",
+					"Color": [0.8, 0.2, 0.2]
 				},
 				"Fuzziness": 0.0
 			}
