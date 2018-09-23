@@ -26,6 +26,8 @@ namespace ParseUtils
 	{
 		EntityData data;
 
+		data.position = ParseVector(config.GetArray("Position"));
+		data.rotation = ParseVector(config.GetArray("Rotation"));
 		data.shapeData = ParseShapeData(config.GetSection("Shape"));
 		data.materialData = ParseMaterialData(config.GetSection("Material"));
 
@@ -37,7 +39,6 @@ namespace ParseUtils
 		ShapeData data;
 
 		data.type = ParseShapeTypeFromString(config.GetStringRequired("Type"));
-		data.position = ParseVector(config.GetArray("Position"));
 		data.radius = config.GetFloat("Radius", 1.0f);
 
 		return data;

@@ -2,13 +2,8 @@
 #define ENTITY_H
 
 #include "Globals.h"
-#include "AABB.h"
+#include "Math.h"
 #include <vector>
-
-namespace math
-{
-	class LCG;
-}
 
 class Ray;
 struct HitInfo;
@@ -20,7 +15,7 @@ class Shape;
 class Entity
 {
 public:
-	Entity(Shape* shape, Material* material);
+	Entity(Shape* shape, Material* material, const Vector3& position = Vector3::zero, const Vector3& rotation = Vector3::zero, const Vector3& scale = Vector3::one);
 	Entity() {}
 	~Entity();
 
@@ -32,6 +27,8 @@ protected:
 	AABB _boundingBox;
 	Material* _material = nullptr;
 	Shape* _shape = nullptr;
+	math::float4x4 _transform;
+	math::float4x4 _inverseTransform;
 };
 
 using VEntity = std::vector<Entity*>;

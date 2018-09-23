@@ -18,15 +18,12 @@ public:
 		Unknown
 	};
 
-	Shape(Type type, const Vector3& center);
+	Shape(Type type);
 	~Shape();
 
 	virtual bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const = 0;
 
 	virtual AABB CreateBoundingBox() const = 0;
-
-protected:
-	Vector3 _center;
 
 private:
 	Type _type = Type::Unknown;

@@ -77,7 +77,7 @@ void ModuleEntities::EntityFactory(const EntityData& data)
 	switch (shapeData.type)
 	{
 	case Shape::Type::Sphere:
-		shape = new Sphere(shapeData.radius, shapeData.position);
+		shape = new Sphere(shapeData.radius);
 		break;
 	case Shape::Type::Unknown:
 		APPLOG("Unknown shape in entity factory!");
@@ -89,7 +89,7 @@ void ModuleEntities::EntityFactory(const EntityData& data)
 		return;
 	}
 
-	_entities.push_back(new Entity(shape, material));
+	_entities.push_back(new Entity(shape, material, data.position, data.rotation));
 }
 
 void ModuleEntities::InitRandomSpheres()

@@ -6,9 +6,13 @@
 #include "Math.h"
 #include "Shape.h"
 
-Entity::Entity(Shape* shape, Material* material) : _shape(shape), _material(material)
+Entity::Entity(Shape* shape, Material* material, const Vector3& position, const Vector3& rotation, const Vector3& scale) : _shape(shape), _material(material)
 {
 	_boundingBox = _shape->CreateBoundingBox();
+	math::float3 rotationEuler = rotation.toFloat3() * DEG_TO_RAD;
+	math::Quat quaternion = math::Quat::FromEulerXYZ(rotationEuler[0], rotationEuler[1], rotationEuler[2]);
+	_transform = math::float4x4::FromTRS(position.toFloat3(), quaternion, scale.toFloat3());
+	_inverseTransform = _transform.Inverted();
 }
 
 Entity::~Entity()
@@ -19,8 +23,11 @@ Entity::~Entity()
 
 bool Entity::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
 {
-	if (_shape->Hit(ray, minDistance, maxDistance, hitInfo))
+	Ray transformedRay = ray * _inverseTransform;
+	if (_shape->Hit(transformedRay, minDistance, maxDistance, hitInfo))
 	{
+		hitInfo.point = _transform.MulPos(hitInfo.point.toFloat3());
+		hitInfo.normal = _transform.MulDir(hitInfo.normal.toFloat3());
 		hitInfo.entity = this;
 		hitInfo.isHit = true;
 		return true;

@@ -7,7 +7,7 @@
 class Sphere : public Shape
 {
 public:
-	Sphere(float radius, const Vector3& center);
+	Sphere(float radius);
 	~Sphere();
 
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;

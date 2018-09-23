@@ -1,8 +1,9 @@
 {
 	"Entities": [{
+			"Position" : [0, -1000, -1],
+			"Rotation" : [0, 180, 0],
 			"Shape": {
 				"Type": "Sphere",
-				"Position": [0, -1000, -1],
 				"Radius": 1000
 			},
 			"Material": {
@@ -23,9 +24,10 @@
 			}
 		},
 		{
+			"Position" : [0, 1, 0],
+			"Rotation" : [0, 180, 0],
 			"Shape": {
 				"Type": "Sphere",
-				"Position": [0, 1, 0],
 				"Radius": 1
 			},
 			"Material": {
@@ -34,9 +36,10 @@
 			}
 		},
 		{
-		"Shape": {
+			"Position" : [-2, 1, 0],
+			"Rotation" : [0, 180, 0],
+			"Shape": {
 				"Type": "Sphere",
-				"Position": [-2, 1, 0],
 				"Radius": 1
 			},
 			"Material": {
@@ -50,9 +53,10 @@
 			}
 		},
 		{
+			"Position" : [2, 1, 0],
+			"Rotation" : [0, 180, 0],
 			"Shape": {
 				"Type": "Sphere",
-				"Position": [2, 1, 0],
 				"Radius": 1
 			},
 			"Material": {

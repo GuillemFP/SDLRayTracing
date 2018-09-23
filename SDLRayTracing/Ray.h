@@ -2,6 +2,7 @@
 #define RAY_H
 
 #include "Vector3.h"
+#include "MathGeoLib\include\Math\float4x4.h"
 
 class Ray
 {
@@ -15,5 +16,10 @@ public:
 	Vector3 pos;
 	Vector3 dir;
 };
+
+inline Ray operator*(const Ray& r, const math::float4x4& m)
+{
+	return Ray(m.MulPos(r.pos.toFloat3()), m.MulDir(r.dir.toFloat3()));
+}
 
 #endif // !RAY_H
