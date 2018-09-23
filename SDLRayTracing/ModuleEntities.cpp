@@ -118,8 +118,8 @@ void ModuleEntities::InitRandomSphere(const Vector3& center, float radius, math:
 	const float metalProb = 0.15f;
 
 	EntityData entityData;
+	entityData.position = center;
 	ShapeData& shapeData = entityData.shapeData;
-	shapeData.position = center;
 	shapeData.radius = radius;
 	shapeData.type = Shape::Type::Sphere;
 
