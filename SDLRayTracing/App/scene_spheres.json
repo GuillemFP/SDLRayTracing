@@ -27,48 +27,51 @@
 			}
 		},
 		{
-			"Position" : [0, 2, 0],
+			"Position" : [0, 1, 0],
 			"Rotation" : [0, 0, 0],
 			"Shape": {
 				"Type": "Sphere",
-				"Radius": 2
-			},
-			"Material": {
-				"Type": "Diffuse",
-				"Texture": {
-					"Type": "Color",
-					"Color": [0.4, 0.4, 0.4]
-				}
-			}
-		},
-		{
-			"Position" : [0, 7, 0],
-			"Rotation" : [0, 0, 0],
-			"Shape": {
-				"Type": "Sphere",
-				"Radius": 2
-			},
-			"Material": {
-				"Type": "Diffuse",
-				"Texture": {
-					"Type": "Color",
-					"Color": [0.4, 0.4, 0.4]
-				}
-			}
-		},
-		{
-			"Position" : [-4, 2, 2],
-			"Rotation" : [0, 0, 0],
-			"Shape": {
-				"Type": "Plane",
-				"Dimensions": [2, 2, 0]
+				"Radius": 1
 			},
 			"Material": {
 				"Type": "DiffuseEmissive",
 				"Texture": {
 					"Type": "Color",
-					"Color": [4, 4, 4]
+					"Color": [4.0, 4.0, 4.0]
 				}
+			}
+		},
+		{
+			"Position" : [-2, 1, 0],
+			"Rotation" : [0, 0, 0],
+			"Shape": {
+				"Type": "Sphere",
+				"Radius": 1
+			},
+			"Material": {
+				"Type": "Diffuse",
+				"Texture": {
+					"Type": "Image",
+					"Path": "Resources/Lenna.png",
+					"Color": [0.4, 0.2, 0.1],
+					"Dimensions": [5, 5, 5]
+				}
+			}
+		},
+		{
+			"Position" : [2, 1, 0],
+			"Rotation" : [0, 0, 0],
+			"Shape": {
+				"Type": "Sphere",
+				"Radius": 1
+			},
+			"Material": {
+				"Type": "Metal",
+				"Texture": {
+					"Type": "Color",
+					"Color": [0.7, 0.6, 0.5]
+				},
+				"Fuzziness": 0.0
 			}
 		}
 	]

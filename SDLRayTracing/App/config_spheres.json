@@ -7,9 +7,9 @@
 		},
 		"ModuleRender": {},
 		"ModuleCamera": {
-			"Position": [-14.0, 2.0, -6.0],
-			"LookAt" : [0.0, 2.0, 0.0],
-			"FocusPoint" : [0.0, 2.0, 0.0],
+			"Position": [2.0, 2.0, -10.0],
+			"LookAt" : [0.0, 0.0, 0.0],
+			"FocusPoint" : [0.0, 0.0, 0.0],
 			"Aperture" : 0.1,
 			"Vertical FOV" : 40,
 			"Aspect Ratio" : 1.5
@@ -19,9 +19,9 @@
 		},
 		"ModuleRayTracing": {
 			"MinDistance": 0.001,
-			"MaxDistance": 10000,
+			"MaxDistance": 1000,
 			"MaxScatters": 50,
-			"SamplesPerPixel": 100,
+			"SamplesPerPixel": 50,
 			"MaxNumberOfThreads": 4
 		}
 	}
