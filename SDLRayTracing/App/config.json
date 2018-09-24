@@ -21,7 +21,7 @@
 			"MinDistance": 0.001,
 			"MaxDistance": 100000,
 			"MaxScatters": 50,
-			"SamplesPerPixel": 50,
+			"SamplesPerPixel": 200,
 			"MaxNumberOfThreads": 4
 		}
 	}
