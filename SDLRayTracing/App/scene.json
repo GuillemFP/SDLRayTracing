@@ -3,71 +3,92 @@
 		"Color": [0.0, 0.0, 0.0]
 	},
 	"Entities": [{
-			"Position" : [0, -1000, -1],
-			"Rotation" : [0, 0, 0],
-			"Shape": {
-				"Type": "Sphere",
-				"Radius": 1000
-			},
-			"Material": {
-				"Type": "Diffuse",
-				"Texture": {
-					"Type": "Checker",
-					"SubTextures": [{
-						"Type": "Color",
-						"Color": [0.2, 0.3, 0.1]
-						},
-						{
-						"Type": "Color",
-						"Color": [0.9, 0.9, 0.9]
-						}
-					],
-					"Dimensions": [5, 5, 5]
-				}
-			}
-		},
-		{
-			"Position" : [0, 2, 0],
-			"Rotation" : [0, 0, 0],
-			"Shape": {
-				"Type": "Sphere",
-				"Radius": 2
-			},
-			"Material": {
-				"Type": "Diffuse",
-				"Texture": {
-					"Type": "Color",
-					"Color": [0.4, 0.4, 0.4]
-				}
-			}
-		},
-		{
-			"Position" : [0, 7, 0],
-			"Rotation" : [0, 0, 0],
-			"Shape": {
-				"Type": "Sphere",
-				"Radius": 2
-			},
-			"Material": {
-				"Type": "Diffuse",
-				"Texture": {
-					"Type": "Color",
-					"Color": [0.4, 0.4, 0.4]
-				}
-			}
-		},
-		{
-			"Position" : [-4, 2, 2],
-			"Rotation" : [0, 0, 0],
+			"Position" : [0, 277.5, 277.5],
+			"Rotation" : [0, 90, 0],
 			"Shape": {
 				"Type": "Plane",
-				"Dimensions": [2, 2, 0]
+				"Dimensions": [555, 555, 0]
+			},
+			"Material": {
+				"Type": "Diffuse",
+				"Texture": {
+					"Type": "Color",
+					"Color": [0.65, 0.05, 0.05]
+				}
+			}
+		},
+		{
+			"Position" : [555, 277.5, 277.5],
+			"Rotation" : [0, -90, 0],
+			"Shape": {
+				"Type": "Plane",
+				"Dimensions": [555, 555, 0]
+			},
+			"Material": {
+				"Type": "Diffuse",
+				"Texture": {
+					"Type": "Color",
+					"Color": [0.12, 0.45, 0.15]
+				}
+			}
+		},
+		{
+			"Position" : [277.5, 0, 277.5],
+			"Rotation" : [-90, 0, 0],
+			"Shape": {
+				"Type": "Plane",
+				"Dimensions": [555, 555, 0]
+			},
+			"Material": {
+				"Type": "Diffuse",
+				"Texture": {
+					"Type": "Color",
+					"Color": [0.73, 0.73, 0.73]
+				}
+			}
+		},
+		{
+			"Position" : [277.5, 555, 277.5],
+			"Rotation" : [90, 0, 0],
+			"Shape": {
+				"Type": "Plane",
+				"Dimensions": [555, 555, 0]
+			},
+			"Material": {
+				"Type": "Diffuse",
+				"Texture": {
+					"Type": "Color",
+					"Color": [0.73, 0.73, 0.73]
+				}
+			}
+		},
+		{
+			"Position" : [277.5, 277.5, 555],
+			"Rotation" : [0, 180, 0],
+			"Shape": {
+				"Type": "Plane",
+				"Dimensions": [555, 555, 0]
+			},
+			"Material": {
+				"Type": "Diffuse",
+				"Texture": {
+					"Type": "Color",
+					"Color": [0.73, 0.73, 0.73]
+				}
+			}
+		},
+		{
+			"Position" : [277.5, 554, 277.5],
+			"Rotation" : [90, 0, 0],
+			"Shape": {
+				"Type": "Plane",
+				"Dimensions": [150, 150, 0]
 			},
 			"Material": {
 				"Type": "DiffuseEmissive",
 				"Texture": {
 					"Type": "Color",
-					"Color": [4, 4, 4]
+					"Color": [15, 15, 15]
 				}
 			}
 		}

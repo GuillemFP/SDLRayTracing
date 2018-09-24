@@ -27,7 +27,7 @@ bool Entity::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& 
 	if (_shape->Hit(transformedRay, minDistance, maxDistance, hitInfo))
 	{
 		hitInfo.point = _transform.MulPos(hitInfo.point.toFloat3());
-		hitInfo.normal = _transform.MulDir(hitInfo.normal.toFloat3());
+		hitInfo.normal = _transform.MulDir(hitInfo.normal.toFloat3()).Normalized();
 		hitInfo.entity = this;
 		hitInfo.isHit = true;
 		return true;

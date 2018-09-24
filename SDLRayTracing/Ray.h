@@ -19,7 +19,7 @@ public:
 
 inline Ray operator*(const math::float4x4& m, const Ray& r)
 {
-	return Ray(m.MulPos(r.pos.toFloat3()), m.MulDir(r.dir.toFloat3()));
+	return Ray(m.MulPos(r.pos.toFloat3()), m.MulDir(r.dir.toFloat3()).Normalized());
 }
 
 #endif // !RAY_H

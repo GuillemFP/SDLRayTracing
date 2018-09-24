@@ -19,9 +19,9 @@
 		},
 		"ModuleRayTracing": {
 			"MinDistance": 0.001,
-			"MaxDistance": 1000000,
+			"MaxDistance": 100000,
 			"MaxScatters": 50,
-			"SamplesPerPixel": 50,
+			"SamplesPerPixel": 100,
 			"MaxNumberOfThreads": 4
 		}
 	}
