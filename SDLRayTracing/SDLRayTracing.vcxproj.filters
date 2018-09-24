@@ -135,6 +135,9 @@
     <ClCompile Include="DiffuseLight.cpp">
       <Filter>Entities\Materials</Filter>
     </ClCompile>
+    <ClCompile Include="Cube.cpp">
+      <Filter>Entities\Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="DiffuseLight.h">
       <Filter>Entities\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Entities\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

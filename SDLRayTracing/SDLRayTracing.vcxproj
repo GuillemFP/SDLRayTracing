@@ -121,6 +121,7 @@
     <ClCompile Include="BvhNode.cpp" />
     <ClCompile Include="CheckerTexture.cpp" />
     <ClCompile Include="Config.cpp" />
+    <ClCompile Include="Cube.cpp" />
     <ClCompile Include="Dielectric.cpp" />
     <ClCompile Include="Diffuse.cpp" />
     <ClCompile Include="DiffuseLight.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="CheckerTexture.h" />
     <ClInclude Include="ColorTexture.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="Dielectric.h" />
     <ClInclude Include="Diffuse.h" />
     <ClInclude Include="DiffuseLight.h" />

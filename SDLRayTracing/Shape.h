@@ -16,6 +16,7 @@ public:
 	{
 		Sphere = 0,
 		Plane,
+		Cube,
 		Unknown
 	};
 
