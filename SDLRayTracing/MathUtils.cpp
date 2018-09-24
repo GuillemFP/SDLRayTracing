@@ -30,7 +30,7 @@ namespace MathUtils
 		return inVector - 2.0f * dot(inVector, normal) * normal;
 	}
 
-	bool PlaneHit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const float planeWidth, const float planeHeight, const float planePosition, const int planeCoord0, const int planeCoord1, const int depthCoord, const bool positiveNormal)
+	bool PlaneHit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const Vector3& planeDimensions, const float planePosition, const int planeCoord0, const int planeCoord1, const int depthCoord, const bool positiveNormal)
 	{
 		const float t = (planePosition - ray.pos.e[depthCoord]) / ray.dir.e[depthCoord];
 		if (t < minDistance || t > maxDistance)
@@ -38,8 +38,8 @@ namespace MathUtils
 
 		const float x = ray.pos.e[planeCoord0] + t * ray.dir.e[planeCoord0];
 		const float y = ray.pos.e[planeCoord1] + t * ray.dir.e[planeCoord1];
-		const float halfWidth = 0.5f * planeWidth;
-		const float halfHeight = 0.5f * planeHeight;
+		const float halfWidth = 0.5f * planeDimensions.e[planeCoord0];
+		const float halfHeight = 0.5f * planeDimensions.e[planeCoord1];
 		if (x < -halfWidth || x > halfWidth || y < -halfHeight || y > halfHeight)
 			return false;
 
@@ -47,8 +47,8 @@ namespace MathUtils
 		hitInfo.distance = t;
 		hitInfo.normal = Vector3::zero;
 		hitInfo.normal.e[depthCoord] = positiveNormal ? 1.0f : -1.0f;
-		hitInfo.u = (x - halfWidth) / planeWidth;
-		hitInfo.v = (y - halfHeight) / planeHeight;
+		hitInfo.u = (x - halfWidth) / planeDimensions.e[planeCoord0];
+		hitInfo.v = (y - halfHeight) / planeDimensions.e[planeCoord1];
 		return true;
 	}
 }

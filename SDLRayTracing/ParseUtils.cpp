@@ -51,6 +51,8 @@ namespace ParseUtils
 			return Shape::Type::Sphere;
 		if (type == "Plane")
 			return Shape::Type::Plane;
+		if (type == "Cube")
+			return Shape::Type::Cube;
 
 		APPLOG("Invalid entity type");
 

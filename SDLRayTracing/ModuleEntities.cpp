@@ -15,6 +15,7 @@
 #include "Shape.h"
 #include "TextureData.h"
 #include "Plane.h"
+#include "Cube.h"
 
 ModuleEntities::ModuleEntities() : Module(MODULEENTITIES_NAME)
 {
@@ -79,16 +80,30 @@ void ModuleEntities::EntityFactory(const EntityData& data)
 	const ShapeData& shapeData = data.shapeData;
 	Shape* shape = nullptr;
 
+	static_assert(Shape::Type::Unknown == 3, "Update shape factory code");
+
 	switch (shapeData.type)
 	{
 	case Shape::Type::Sphere:
+	{
 		shape = new Sphere(shapeData.radius);
 		break;
+	}
 	case Shape::Type::Plane:
+	{
 		shape = new Plane(shapeData.dimensions);
+		break;
+	}
+	case Shape::Type::Cube:
+	{
+		shape = new Cube(shapeData.dimensions);
+		break;
+	}
 	case Shape::Type::Unknown:
+	{
 		APPLOG("Unknown shape in entity factory!");
 		break;
+	}
 	}
 
 	if (!material || !shape)

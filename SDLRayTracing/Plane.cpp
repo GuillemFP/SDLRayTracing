@@ -13,7 +13,7 @@ Plane::~Plane()
 
 bool Plane::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const
 {
-	return MathUtils::PlaneHit(ray, minDistance, maxDistance, hitInfo, _dimensions.x(), _dimensions.y(), 0.0f, 0, 1, 2, true);
+	return MathUtils::PlaneHit(ray, minDistance, maxDistance, hitInfo, _dimensions, 0.0f, 0, 1, 2, true);
 }
 
 AABB Plane::CreateBoundingBox() const
