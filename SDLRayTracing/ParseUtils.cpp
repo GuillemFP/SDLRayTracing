@@ -76,6 +76,8 @@ namespace ParseUtils
 	{
 		if (type == "Diffuse")
 			return Material::Type::Diffuse;
+		if (type == "DiffuseEmissive")
+			return Material::Type::DiffuseEmisive;
 		if (type == "Metal")
 			return Material::Type::Metal;
 		if (type == "Dielectric")

@@ -123,6 +123,7 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="Dielectric.cpp" />
     <ClCompile Include="Diffuse.cpp" />
+    <ClCompile Include="DiffuseLight.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="MathUtils.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="Dielectric.h" />
     <ClInclude Include="Diffuse.h" />
+    <ClInclude Include="DiffuseLight.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityData.h" />
     <ClInclude Include="HitInfo.h" />

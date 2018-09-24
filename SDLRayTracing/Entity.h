@@ -22,6 +22,7 @@ public:
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
 	bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
 	const AABB& GetBoundingBox() const { return _boundingBox; }
+	const Vector3& GetEmissive(const HitInfo& hitInfo) const;
 
 protected:
 	AABB _boundingBox;

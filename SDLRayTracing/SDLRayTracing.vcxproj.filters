@@ -132,6 +132,9 @@
     <ClCompile Include="Plane.cpp">
       <Filter>Entities\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="DiffuseLight.cpp">
+      <Filter>Entities\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -268,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>Entities\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="DiffuseLight.h">
+      <Filter>Entities\Materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

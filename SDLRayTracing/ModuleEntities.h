@@ -30,6 +30,7 @@ public:
 	bool CleanUp();
 
 	bool Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo) const;
+	Vector3 GetSkyboxColor(const HitInfo& hitInfo) const;
 
 	void EntityFactory(const EntityData& data);
 
@@ -60,6 +61,8 @@ public:
 private:
 	void InitRandomSpheres();
 	void InitRandomSphere(const Vector3& center, float radius, math::LCG& randomGenerator);
+
+	Vector3 _skybox = Vector3::zero;
 
 	VEntity _entities;
 

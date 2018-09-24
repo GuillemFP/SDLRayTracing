@@ -13,6 +13,7 @@
 #include "PerlinNoise.h"
 #include "PerlinTexture.h"
 #include "ImageTexture.h"
+#include "DiffuseLight.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image\stb_image.h"
 
@@ -31,12 +32,14 @@ ModuleMaterials::~ModuleMaterials()
 
 Material* ModuleMaterials::LoadMaterial(const MaterialData& data)
 {
-	static_assert(Material::Type::Unknown == 3, "Update material factory code");
+	static_assert(Material::Type::Unknown == 4, "Update material factory code");
 
 	switch (data.type)
 	{
 	case Material::Type::Diffuse:
 		return new Diffuse(TextureFactory(data.textureData));
+	case Material::Type::DiffuseEmisive:
+		return new DiffuseLight(TextureFactory(data.textureData));
 	case Material::Type::Metal:
 		return new Metal(TextureFactory(data.textureData), data.fuzziness);
 	case Material::Type::Dielectric:

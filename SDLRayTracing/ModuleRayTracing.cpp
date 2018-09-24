@@ -53,12 +53,6 @@ namespace
 		return hitInfo.isHit;
 #endif // USE_BVH
 	}
-
-	Vector3 CalculateBackgroundColor(const Ray& ray)
-	{
-		float t = 0.5f * (ray.dir.y() + 1.0f);
-		return (1.0f - t) * Vector3::one + t * Vector3(0.5f, 0.7f, 1.0f);
-	}
 }
 
 ModuleRayTracing::ModuleRayTracing() : Module(MODULERAYTRACING_NAME)
@@ -197,6 +191,7 @@ Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth, const Ent
 	if (isHit)
 	{
 		ScatterInfo scatterInfo;
+		Vector3 emissive = hitInfo.entity->GetEmissive(hitInfo);
 		if (depth < _maxScatters && hitInfo.entity->Scatter(ray, hitInfo, scatterInfo, *_randomGenerator))
 		{
 			Vector3 color = Vector3::zero;
@@ -209,13 +204,13 @@ Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth, const Ent
 				color += scatterInfo.refractionCoeff * CalculateRayColor(scatterInfo.refractedRay, depth + 1, entitiesInfo);
 			}
 
-			return scatterInfo.attenuation * color;
+			return emissive + scatterInfo.attenuation * color;
 		}
 
-		return Vector3::zero;
+		return emissive;
 	}
 	
-	return CalculateBackgroundColor(ray);
+	return App->_entities->GetSkyboxColor(hitInfo);
 }
 
 void ModuleRayTracing::InitFile()

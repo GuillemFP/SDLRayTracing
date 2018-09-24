@@ -27,6 +27,10 @@ ModuleEntities::~ModuleEntities()
 bool ModuleEntities::Init(Config* config)
 {
 	Config entities = Config(ENTITIES_CONFIGFILE);
+	
+	Config skybox = entities.GetSection("Skybox");
+	_skybox = ParseUtils::ParseVector(skybox.GetArray("Color"));
+
 	ConfigArray entitiesArray = entities.GetArray("Entities");
 
 	for (int i = 0; i < entitiesArray.GetArrayLength(); i++)
@@ -93,6 +97,11 @@ void ModuleEntities::EntityFactory(const EntityData& data)
 	}
 
 	_entities.push_back(new Entity(shape, material, data.position, data.rotation));
+}
+
+Vector3 ModuleEntities::GetSkyboxColor(const HitInfo& hitInfo) const
+{
+	return _skybox;
 }
 
 void ModuleEntities::InitRandomSpheres()

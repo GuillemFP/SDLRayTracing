@@ -40,3 +40,8 @@ bool Entity::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatte
 {
 	return _material->Scatter(ray, hitInfo, scatterInfo, randomGenerator);
 }
+
+const Vector3& Entity::GetEmissive(const HitInfo& hitInfo) const
+{
+	return _material->Emitted(hitInfo);
+}
