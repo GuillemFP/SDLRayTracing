@@ -23,7 +23,7 @@
 
 namespace
 {
-	bool HitEntity(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const EntitiesInfo& entitiesInfo)
+	bool HitEntity(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, const EntitiesInfo& entitiesInfo, math::LCG& randomGenerator)
 	{
 #if USE_BVH
 		return entitiesInfo.rootNode->Hit(ray, minDistance, maxDistance, hitInfo);
@@ -33,7 +33,7 @@ namespace
 #if USE_C_ARRAYS
 		for (size_t i = 0; i < entitiesInfo.size; i++)
 		{
-			if (entitiesInfo.entities[i]->Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
+			if (entitiesInfo.entities[i]->Hit(ray, minDistance, currentMaxDistance, currentHitInfo, randomGenerator))
 			{
 				currentMaxDistance = currentHitInfo.distance;
 				hitInfo = currentHitInfo;
@@ -43,7 +43,7 @@ namespace
 		const VEntity& entities = entitiesInfo.entities;
 		for (VEntity::const_iterator it = entities.cbegin(); it != entities.cend(); ++it)
 		{
-			if ((*it)->Hit(ray, minDistance, currentMaxDistance, currentHitInfo))
+			if ((*it)->Hit(ray, minDistance, currentMaxDistance, currentHitInfo, randomGenerator))
 			{
 				currentMaxDistance = currentHitInfo.distance;
 				hitInfo = currentHitInfo;
@@ -177,16 +177,16 @@ Color ModuleRayTracing::CalculatePixelColor(int xPixel, int yPixel, const Entiti
 	Color averagedColor(color / _samplesPerPixel);
 
 #if GAMMA_CORRECTION
-	return Color(sqrt(averagedColor.r), sqrt(averagedColor.g), sqrt(averagedColor.b));
+	return Color(sqrt(averagedColor.r), sqrt(averagedColor.g), sqrt(averagedColor.b)).Capped();
 #else
-	return averagedColor;
+	return averagedColor.Capped();
 #endif
 }
 
 Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth, const EntitiesInfo& entitiesInfo) const
 {
 	HitInfo hitInfo;
-	bool isHit = HitEntity(ray, _minDistance, _maxDistance, hitInfo, entitiesInfo);
+	bool isHit = HitEntity(ray, _minDistance, _maxDistance, hitInfo, entitiesInfo, *_randomGenerator);
 
 	if (isHit)
 	{
@@ -205,6 +205,11 @@ Vector3 ModuleRayTracing::CalculateRayColor(const Ray& ray, int depth, const Ent
 			}
 
 			return emissive + scatterInfo.attenuation * color;
+		}
+
+		if (depth == 0)
+		{
+			return emissive;
 		}
 
 		return emissive;

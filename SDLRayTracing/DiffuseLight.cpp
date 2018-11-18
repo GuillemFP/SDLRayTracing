@@ -10,6 +10,11 @@ DiffuseLight::~DiffuseLight()
 {
 }
 
+bool DiffuseLight::Scatter(const Ray & ray, const HitInfo & hitInfo, ScatterInfo & scatterInfo, math::LCG & randomGenerator) const
+{
+	return false;
+}
+
 Vector3 DiffuseLight::Emitted(const HitInfo & hitInfo) const
 {
 	return _texture->GetColor(hitInfo);

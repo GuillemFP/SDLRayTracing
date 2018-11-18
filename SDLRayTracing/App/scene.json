@@ -82,43 +82,47 @@
 			"Rotation" : [90, 0, 0],
 			"Shape": {
 				"Type": "Plane",
-				"Dimensions": [150, 150, 0]
+				"Dimensions": [300, 300, 0]
 			},
 			"Material": {
 				"Type": "DiffuseEmissive",
 				"Texture": {
 					"Type": "Color",
-					"Color": [15, 15, 15]
+					"Color": [10, 10, 10]
 				}
 			}
 		},
 		{
 			"Position" : [212.5, 82.5, 147.5],
 			"Rotation" : [0, -18, 0],
+			"IsSolid" : false,
+			"Density" : 0.01,
 			"Shape": {
 				"Type": "Cube",
 				"Dimensions": [165, 165, 165]
 			},
 			"Material": {
-				"Type": "Diffuse",
+				"Type": "Isotropic",
 				"Texture": {
 					"Type": "Color",
-					"Color": [0.73, 0.73, 0.73]
+					"Color": [1.0, 1.0, 1.0]
 				}
 			}
 		},
 		{
 			"Position" : [347.5, 165, 377.5],
 			"Rotation" : [0, 15, 0],
+			"IsSolid" : false,
+			"Density" : 0.01,
 			"Shape": {
 				"Type": "Cube",
 				"Dimensions": [165, 330, 165]
 			},
 			"Material": {
-				"Type": "Diffuse",
+				"Type": "Isotropic",
 				"Texture": {
 					"Type": "Color",
-					"Color": [0.73, 0.73, 0.73]
+					"Color": [0.0, 0.0, 0.0]
 				}
 			}
 		}

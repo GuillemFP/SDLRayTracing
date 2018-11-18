@@ -22,6 +22,7 @@ public:
 		DiffuseEmisive,
 		Metal,
 		Dielectric,
+		Isotropic,
 		Unknown
 	};
 
@@ -33,7 +34,7 @@ public:
 		return _type;
 	}
 
-	virtual bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const { return false; }
+	virtual bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const = 0;
 	virtual Vector3 Emitted(const HitInfo& hitInfo) const { return Vector3::zero; }
 
 private:

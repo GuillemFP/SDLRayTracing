@@ -33,20 +33,20 @@ BvhNode::~BvhNode()
 	RELEASE(_secondChild);
 }
 
-bool BvhNode::Hit(const Ray& ray, const float minDistance, const float maxDistance, HitInfo& hitInfo) const
+bool BvhNode::Hit(const Ray& ray, const float minDistance, const float maxDistance, HitInfo& hitInfo, math::LCG& randomGenerator) const
 {
 	if (_boundingBox.Hit(ray, minDistance, maxDistance))
 	{
 		if (!_firstChild && !_secondChild)
 		{
-			return _entity.Hit(ray, minDistance, maxDistance, hitInfo);
+			return _entity.Hit(ray, minDistance, maxDistance, hitInfo, randomGenerator);
 		}
 		else
 		{
 			HitInfo firstChildInfo;
 			HitInfo secondChildInfo;
-			bool firstHit = _firstChild->Hit(ray, minDistance, maxDistance, firstChildInfo);
-			bool secondHit = _secondChild->Hit(ray, minDistance, maxDistance, secondChildInfo);
+			bool firstHit = _firstChild->Hit(ray, minDistance, maxDistance, firstChildInfo, randomGenerator);
+			bool secondHit = _secondChild->Hit(ray, minDistance, maxDistance, secondChildInfo, randomGenerator);
 			if (firstHit && secondHit)
 			{
 				if (firstChildInfo.distance < secondChildInfo.distance)

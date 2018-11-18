@@ -111,7 +111,7 @@ void ModuleEntities::EntityFactory(const EntityData& data)
 		return;
 	}
 
-	_entities.push_back(new Entity(shape, material, data.position, data.rotation));
+	_entities.push_back(new Entity(shape, material, data));
 }
 
 Vector3 ModuleEntities::GetSkyboxColor(const HitInfo& hitInfo) const

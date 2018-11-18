@@ -11,6 +11,9 @@ struct EntityData
 	MaterialData materialData;
 	Vector3 position;
 	Vector3 rotation;
+	Vector3 scale = Vector3::one;
+	bool isSolid = true;
+	float density = 1.0f;
 };
 
 #endif // !ENTITYDATA_H

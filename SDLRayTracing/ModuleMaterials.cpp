@@ -4,6 +4,7 @@
 #include "ColorTexture.h"
 #include "Dielectric.h"
 #include "Diffuse.h"
+#include "Isotropic.h"
 #include "Material.h"
 #include "MaterialData.h"
 #include "Metal.h"
@@ -32,7 +33,7 @@ ModuleMaterials::~ModuleMaterials()
 
 Material* ModuleMaterials::LoadMaterial(const MaterialData& data)
 {
-	static_assert(Material::Type::Unknown == 4, "Update material factory code");
+	static_assert(Material::Type::Unknown == 5, "Update material factory code");
 
 	switch (data.type)
 	{
@@ -44,6 +45,8 @@ Material* ModuleMaterials::LoadMaterial(const MaterialData& data)
 		return new Metal(TextureFactory(data.textureData), data.fuzziness);
 	case Material::Type::Dielectric:
 		return new Dielectric(data.refractiveIndex);
+	case Material::Type::Isotropic:
+		return new Isotropic(TextureFactory(data.textureData));
 	}
 
 	APPLOG("No material");

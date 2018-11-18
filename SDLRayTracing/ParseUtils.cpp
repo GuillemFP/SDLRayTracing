@@ -30,6 +30,8 @@ namespace ParseUtils
 		data.rotation = ParseVector(config.GetArray("Rotation"));
 		data.shapeData = ParseShapeData(config.GetSection("Shape"));
 		data.materialData = ParseMaterialData(config.GetSection("Material"));
+		data.isSolid = config.GetBool("IsSolid", true);
+		data.density = config.GetFloat("Density", 1.0f);
 
 		return data;
 	}
@@ -84,6 +86,8 @@ namespace ParseUtils
 			return Material::Type::Metal;
 		if (type == "Dielectric")
 			return Material::Type::Dielectric;
+		if (type == "Isotropic")
+			return Material::Type::Isotropic;
 
 		APPLOG("Invalid material type");
 

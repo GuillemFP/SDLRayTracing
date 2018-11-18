@@ -11,6 +11,7 @@ public:
 	DiffuseLight(Texture* texture);
 	~DiffuseLight();
 
+	bool Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const;
 	Vector3 Emitted(const HitInfo& hitInfo) const;
 
 private:

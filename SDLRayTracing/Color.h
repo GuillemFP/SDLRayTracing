@@ -12,6 +12,7 @@ public:
 	~Color() = default;
 
 	void SetColor(float r, float g, float b);
+	Color& Capped();
 
 public:
 	float r = 0.0f;

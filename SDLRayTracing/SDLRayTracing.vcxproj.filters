@@ -138,6 +138,9 @@
     <ClCompile Include="Cube.cpp">
       <Filter>Entities\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="Isotropic.cpp">
+      <Filter>Entities\Materials</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Globals.h">
@@ -280,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="Cube.h">
       <Filter>Entities\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Isotropic.h">
+      <Filter>Entities\Materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
