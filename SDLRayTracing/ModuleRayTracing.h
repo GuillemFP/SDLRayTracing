@@ -11,8 +11,6 @@
 #include <iostream>
 #include <fstream>
 
-#include "CudaHelper.cuh"
-
 namespace math
 {
 	class LCG;

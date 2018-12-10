@@ -16,10 +16,6 @@
 #include "Timer.h"
 #include <omp.h>
 #include <algorithm>
-#include <cuda_runtime.h>
-#include <cuda.h>
-#include <curand_kernel.h>
-#include "device_launch_parameters.h"
 
 namespace
 {
