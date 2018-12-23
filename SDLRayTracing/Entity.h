@@ -31,6 +31,7 @@ protected:
 	Shape* _shape = nullptr;
 	math::float4x4 _transform;
 	math::float4x4 _inverseTransform;
+	Vector3 _speed;
 	bool _isSolid = true;
 	float _density = 1.0f;
 };

@@ -23,6 +23,7 @@ bool Diffuse::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatt
 	Vector3 sphereTarget = hitInfo.point + hitInfo.normal + MathUtils::RandomPointInSphere(randomGenerator);
 	scatterInfo.reflectedRay.pos = hitInfo.point;
 	scatterInfo.reflectedRay.dir = normalize(sphereTarget - hitInfo.point);
+	scatterInfo.reflectedRay.time = ray.time;
 	scatterInfo.attenuation = _texture->GetColor(hitInfo);
 
 	return true;

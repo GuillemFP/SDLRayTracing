@@ -21,7 +21,9 @@ bool Isotropic::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& sca
 
 	scatterInfo.reflectedRay.pos = hitInfo.point;
 	scatterInfo.reflectedRay.dir = MathUtils::RandomPointInSphere(randomGenerator).normalized();
+	scatterInfo.reflectedRay.time = ray.time;
 	scatterInfo.attenuation = _texture->GetColor(hitInfo);
 
 	return true;
 }
+                                                                                            

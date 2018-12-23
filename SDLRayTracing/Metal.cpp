@@ -19,6 +19,7 @@ Metal::~Metal()
 bool Metal::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& scatterInfo, math::LCG& randomGenerator) const
 {
 	scatterInfo.reflectedRay.pos = hitInfo.point;
+	scatterInfo.reflectedRay.time = ray.time;                                                    
 
 	Vector3 scatteredRay = MathUtils::ReflectedVector(ray.dir, hitInfo.normal) + _fuzziness * MathUtils::RandomPointInSphere(randomGenerator);
 	scatterInfo.reflectedRay.dir = normalize(scatteredRay);

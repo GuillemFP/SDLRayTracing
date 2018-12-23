@@ -17,6 +17,8 @@ bool ModuleCamera::Init(Config* config)
 	_frustum->SetKind(math::FrustumProjectiveSpace::FrustumSpaceGL, math::FrustumHandedness::FrustumRightHanded);
 
 	_lensRadius = config->GetFloat("Aperture", 0.0f) * 0.5f;
+	_minTime = config->GetFloat("Min Time", 0.0f);
+	_maxTime = config->GetFloat("Max Time", 0.0f);
 	float vFov = config->GetFloat("Vertical FOV", 60.0f);
 	float aspectRatio = config->GetFloat("Aspect Ratio", 1.5f);
 	_frustum->SetVerticalFovAndAspectRatio(vFov * DEG_TO_RAD, aspectRatio);
@@ -68,5 +70,6 @@ Ray ModuleCamera::GenerateRay(float widthFactor, float heightFactor, math::LCG& 
 	Vector3 rayOrigin = _position + _up * randomInDisk.x() + _right * randomInDisk.y();
 
 	Vector3 unitVector = normalize(viewportPosition - rayOrigin);
-	return Ray(rayOrigin, unitVector);
+	const float time = randomGenerator.FloatIncl(_minTime, _maxTime);
+	return Ray(rayOrigin, unitVector, time);
 }

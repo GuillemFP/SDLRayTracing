@@ -12,7 +12,9 @@
 			"FocusPoint" : [278, 278, -700.0],
 			"Aperture" : 0.0,
 			"Vertical FOV" : 40,
-			"Aspect Ratio" : 1.0
+			"Aspect Ratio" : 1.0,
+			"Min Time": 0.0,
+			"Max Time": 2.0
 		},
 		"ModuleEntities": {
 			"Add Random" : false
@@ -21,7 +23,7 @@
 			"MinDistance": 0.001,
 			"MaxDistance": 100000,
 			"MaxScatters": 50,
-			"SamplesPerPixel": 750,
+			"SamplesPerPixel": 50,
 			"MaxNumberOfThreads": 4
 		}
 	}

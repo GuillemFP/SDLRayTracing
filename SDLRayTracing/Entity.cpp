@@ -12,6 +12,7 @@ Entity::Entity(Shape* shape, Material* material, const EntityData& data)
 , _material(material)
 , _isSolid(data.isSolid)
 , _density(data.density)
+, _speed(data.speed)
 {
 	_boundingBox = _shape->CreateBoundingBox();
 	math::float3 rotationEuler = data.rotation.toFloat3() * DEG_TO_RAD;
@@ -28,14 +29,17 @@ Entity::~Entity()
 
 bool Entity::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& hitInfo, math::LCG& randomGenerator) const
 {
+	const Vector3 speedOffset = _speed * ray.time;
+
 	Ray transformedRay = _inverseTransform * ray;
+	transformedRay.pos -= speedOffset;
 
 	if (_isSolid)
 	{
 		// Solid shapes
 		if (_shape->Hit(transformedRay, minDistance, maxDistance, hitInfo))
 		{
-			hitInfo.point = _transform.MulPos(hitInfo.point.toFloat3());
+			hitInfo.point = _transform.MulPos(hitInfo.point.toFloat3()) + speedOffset;
 			hitInfo.normal = _transform.MulDir(hitInfo.normal.toFloat3()).Normalized();
 			hitInfo.entity = this;
 			hitInfo.isHit = true;
@@ -62,7 +66,7 @@ bool Entity::Hit(const Ray& ray, float minDistance, float maxDistance, HitInfo& 
 			if (hitDistance < distanceInBoundary)
 			{
 				hitInfo.distance = info1.distance + hitDistance / transformedRay.dir.length();
-				hitInfo.point = _transform.MulPos(transformedRay.getPoint(hitInfo.distance).toFloat3());
+				hitInfo.point = _transform.MulPos(transformedRay.getPoint(hitInfo.distance).toFloat3()) + speedOffset;
 				hitInfo.normal = Vector3(1.0f, 0.0f, 0.0f);
 				hitInfo.entity = this;
 				hitInfo.isHit = true;

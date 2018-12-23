@@ -38,6 +38,8 @@ private:
 	Vector3 _viewportHeightVector;
 
 	float _lensRadius = 0.0f;
+	float _minTime = 0.0f;
+	float _maxTime = 0.0f;
 };
 
 #endif // !CAMERA_H

@@ -12,6 +12,7 @@ struct EntityData
 	Vector3 position;
 	Vector3 rotation;
 	Vector3 scale = Vector3::one;
+	Vector3 speed;
 	bool isSolid = true;
 	float density = 1.0f;
 };

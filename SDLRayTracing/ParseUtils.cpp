@@ -28,6 +28,7 @@ namespace ParseUtils
 
 		data.position = ParseVector(config.GetArray("Position"));
 		data.rotation = ParseVector(config.GetArray("Rotation"));
+		data.speed = ParseVector(config.GetArray("Speed"), Vector3::zero);
 		data.shapeData = ParseShapeData(config.GetSection("Shape"));
 		data.materialData = ParseMaterialData(config.GetSection("Material"));
 		data.isSolid = config.GetBool("IsSolid", true);

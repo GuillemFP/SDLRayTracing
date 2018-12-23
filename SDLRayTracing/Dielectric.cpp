@@ -74,7 +74,7 @@ bool Dielectric::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& sc
 		if (randomGenerator.Float() >= reflectionCoefficient)
 		{
 			scatterInfo.refracts = true;
-			scatterInfo.refractedRay = Ray(hitInfo.point, refracted);
+			scatterInfo.refractedRay = Ray(hitInfo.point, refracted, ray.time);
 			return true;
 		}
 #else
@@ -82,7 +82,7 @@ bool Dielectric::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& sc
 
 		scatterInfo.refracts = true;
 		scatterInfo.refractionCoeff = 1.0f - reflectionCoefficient;
-		scatterInfo.refractedRay = Ray(hitInfo.point, refracted);
+		scatterInfo.refractedRay = Ray(hitInfo.point, refracted, ray.time);
 		if (scatterInfo.refractionCoeff >= 1.0f)
 		{
 			return true;
@@ -91,7 +91,7 @@ bool Dielectric::Scatter(const Ray& ray, const HitInfo& hitInfo, ScatterInfo& sc
 	}
 
 	scatterInfo.reflects = true;
-	scatterInfo.reflectedRay = Ray(hitInfo.point, MathUtils::ReflectedVector(ray.dir, hitInfo.normal));
+	scatterInfo.reflectedRay = Ray(hitInfo.point, MathUtils::ReflectedVector(ray.dir, hitInfo.normal), ray.time);
 	return true;
 }
 
