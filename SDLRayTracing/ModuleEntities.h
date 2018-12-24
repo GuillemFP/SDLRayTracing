@@ -62,6 +62,8 @@ private:
 	void InitRandomSpheres();
 	void InitRandomSphere(const Vector3& center, float radius, math::LCG& randomGenerator);
 
+	void InitFloor();
+
 	Vector3 _skybox = Vector3::zero;
 
 	VEntity _entities;

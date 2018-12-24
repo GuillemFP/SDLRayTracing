@@ -2,6 +2,7 @@
 #define PARSEUTILS_H
 
 #include "EntityData.h"
+#include "PerlinTexture.h"
 #include "Vector3.h"
 #include "MathGeoLib\include\Math\float3.h"
 
@@ -22,6 +23,7 @@ namespace ParseUtils
 	Material::Type ParseMaterialTypeFromString(const std::string& type);
 
 	TextureData ParseTextureData(const Config& config);
+	PerlinTexture::Type ParsePerlinTextureTypeFromString(const std::string& type);
 	Texture::Type ParseTextureTypeFromString(const std::string& type);
 }
 

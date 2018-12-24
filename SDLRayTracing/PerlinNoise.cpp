@@ -108,3 +108,18 @@ float PerlinNoise::Noise(const Vector3& p) const
 
 	return Interpolation(c, u, v, w);
 }
+
+float PerlinNoise::Turbulence(const Vector3& p, const int depth) const
+{
+	float ret = 0.0f;
+	Vector3 position = p;
+	float weight = 1.0f;
+	for (size_t i = 0; i < depth; i++)
+	{
+		ret += weight * Noise(position);
+		weight *= 0.5f;
+		position *= 2.0f;
+	}
+
+	return fabs(ret);
+}

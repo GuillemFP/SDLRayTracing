@@ -79,7 +79,7 @@ Texture* ModuleMaterials::TextureFactory(const TextureData& data)
 		}
 		case Texture::Type::Perlin:
 		{
-			return new PerlinTexture(new PerlinNoise(*_rng), data.dimensions);
+			return new PerlinTexture(new PerlinNoise(*_rng), data.dimensions, data.depth, data.noiseType);
 		}
 		case Texture::Type::Image:
 		{

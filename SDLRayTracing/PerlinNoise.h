@@ -15,6 +15,7 @@ public:
 	~PerlinNoise();
 
 	float Noise(const Vector3& p) const;
+	float Turbulence(const Vector3& p, const int depth = 1) const;
 
 private:
 	Vector3* _ranvec = nullptr;

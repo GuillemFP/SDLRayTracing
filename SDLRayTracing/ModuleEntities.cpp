@@ -40,9 +40,14 @@ bool ModuleEntities::Init(Config* config)
 		EntityFactory(data);
 	}
 
-	if (config->GetBool("Add Random", false))
+	if (config->GetBool("Add Random Spheres", false))
 	{
 		InitRandomSpheres();
+	}
+
+	if (config->GetBool("Add Random Floor", false))
+	{
+		InitFloor();
 	}
 
 #if USE_C_ARRAYS
@@ -174,4 +179,40 @@ void ModuleEntities::InitRandomSphere(const Vector3& center, float radius, math:
 		materialData.refractiveIndex = 1.0f + 0.5f * randomGenerator.Float();
 	}
 	EntityFactory(entityData);
+}
+
+void ModuleEntities::InitFloor()
+{
+	math::LCG randomGenerator;
+
+	const float boxWidth = 200.0f;
+	const size_t boxesPerSide = 10;
+	const float minPosition = -0.5f * boxWidth * (boxesPerSide - 1);
+
+	EntityData entityData;
+
+	ShapeData& shapeData = entityData.shapeData;
+	shapeData.type = Shape::Type::Cube;
+
+	MaterialData& materialData = entityData.materialData;
+	materialData.type = Material::Type::Diffuse;
+	
+	TextureData& textureData = materialData.textureData;
+	textureData.type = Texture::Type::Color;
+	textureData.color = Vector3(0.48f, 0.83f, 0.53);
+
+	for (size_t i = 0; i < boxesPerSide; i++)
+	{
+		for (size_t j = 0; j < boxesPerSide; j++)
+		{
+			const float x = minPosition + i * boxWidth;
+			const float z = minPosition + j * boxWidth;
+			const float y = 0.0f;
+			const float height = randomGenerator.FloatIncl(0.1, 200.0f);
+
+			entityData.position = Vector3(x, y, z);
+			shapeData.dimensions = Vector3(boxWidth, height, boxWidth);
+			EntityFactory(entityData);
+		}
+	}
 }

@@ -7,7 +7,7 @@
 			"Rotation" : [90, 0, 0],
 			"Shape": {
 				"Type": "Plane",
-				"Dimensions": [400, 400, 0]
+				"Dimensions": [300, 300, 0]
 			},
 			"Material": {
 				"Type": "DiffuseEmissive",
@@ -17,7 +17,7 @@
 				}
 			}
 		},
-				{
+		{
 			"Position" : [0, 300, 0],
 			"Rotation" : [0, 0, 0],
 			"IsSolid" : false,
@@ -107,8 +107,9 @@
 			}
 		},
 		{
-			"Position" : [-50, 300, 0],
+			"Position" : [-100, 300, 0],
 			"Rotation" : [0, 0, 0],
+			"Speed" : [-100, 0, 0],
 			"Shape": {
 				"Type" : "Sphere",
 				"Radius" : 100.0

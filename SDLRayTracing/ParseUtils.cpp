@@ -103,6 +103,8 @@ namespace ParseUtils
 		data.color = ParseVector(config.GetArray("Color"));
 		data.dimensions = ParseVector(config.GetArray("Dimensions"));
 		data.image = config.GetString("Path", "");
+		data.depth = config.GetInt("Depth", 1);
+		data.noiseType = ParsePerlinTextureTypeFromString(config.GetString("Perlin Type", ""));
 		if (config.HasArray("SubTextures"))
 		{
 			ConfigArray subTextures = config.GetArray("SubTextures");
@@ -114,6 +116,14 @@ namespace ParseUtils
 		}
 
 		return data;
+	}
+
+	PerlinTexture::Type ParsePerlinTextureTypeFromString(const std::string & type)
+	{
+		if (type == "Sin")
+			return PerlinTexture::Type::Sin;
+
+		return PerlinTexture::Type::Standard;
 	}
 
 	Texture::Type ParseTextureTypeFromString(const std::string& type)

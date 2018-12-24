@@ -8,10 +8,10 @@
 		"ModuleRender": {},
 		"ModuleCamera": {
 			"Position": [300, 250, -800.0],
-			"LookAt" : [-50.0, 250, 0.0],
-			"FocusPoint" : [-50.0, 250, 0.0],
+			"LookAt" : [-100.0, 250, 0.0],
+			"FocusPoint" : [-100.0, 250, 0.0],
 			"Aperture" : 0.0,
-			"Vertical FOV" : 45,
+			"Vertical FOV" : 60,
 			"Aspect Ratio" : 1.0,
 			"Min Time": 0.0,
 			"Max Time": 1.0
