@@ -12,7 +12,13 @@ This project will probably advance slowly as I'm not full time invested in it.
   <img src="spheres.png" alt="hi" class="inline" width="400"/>
 </p>
 
-Right now, there is small optimizations apart from OpenMP for the main raycasting method. The next step will probably be some spatial optimization to try to gain some speed.
+Recently I added image textures, motion blur, Perlin noise and volumes.
+
+<p align="center">
+  <img src="features.png" alt="hi" class="inline" width="400"/>
+</p>
+
+Optimization wise, the code is still running using OpenMP and has BVH setup. Next step will probably be moving everything to CUDA to gain some more speed.
 
 ### Project information
 
