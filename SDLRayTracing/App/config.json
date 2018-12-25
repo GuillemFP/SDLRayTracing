@@ -2,8 +2,8 @@
 	"Config": {
 		"ModuleInput": {},
 		"ModuleWindow": {
-			"WindowWidth": 300,
-			"WindowHeight": 300
+			"WindowWidth": 400,
+			"WindowHeight": 400
 		},
 		"ModuleRender": {},
 		"ModuleCamera": {
@@ -18,13 +18,13 @@
 		},
 		"ModuleEntities": {
 			"Add Random Spheres" : false,
-			"Add Random Floor" : false
+			"Add Random Floor" : true
 		},
 		"ModuleRayTracing": {
 			"MinDistance": 0.001,
 			"MaxDistance": 100000,
 			"MaxScatters": 50,
-			"SamplesPerPixel": 50,
+			"SamplesPerPixel": 1000,
 			"MaxNumberOfThreads": 4
 		}
 	}

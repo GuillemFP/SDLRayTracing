@@ -79,7 +79,7 @@
 			}
 		},
 		{
-			"Position" : [-100, 135, -300],
+			"Position" : [-100, 150, -300],
 			"Rotation" : [0, 0, 0],
 			"Shape": {
 				"Type" : "Sphere",
